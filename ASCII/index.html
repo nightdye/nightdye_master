@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://nightdye.guokevr.cn/qq/images/night.ico" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="ascii.css">
+    <title>夜染QQ表情&字符生成工具</title>
+</head>
+<body>
+    <div class="main-container">
+        <!-- 头部 -->
+        <div class="header">
+            <h1>夜染QQ表情&字符生成工具</h1>
+            <button id="theme-toggle-button" class="theme-toggle">
+                <span class="theme-text">切换浅色模式</span>
+            </button>
+        </div>
+
+        <!-- Tab 导航 -->
+        <div class="tab-navigation">
+            <button class="tab-button active" data-tab="ascii-unicode">
+                <span>编码转换</span>
+            </button>
+            <button class="tab-button" data-tab="qq-emoji">
+                <span>QQ表情工具</span>
+            </button>
+            <button class="tab-button" data-tab="control-chars">
+                <span>控制字符工具</span>
+            </button>
+        </div>
+
+        <!-- Tab 1: 编码转换 -->
+        <div id="ascii-unicode" class="tab-content">
+            <div class="section">
+                <h2>ASCII 转 Unicode</h2>
+                <input id="asciiInput" type="text" placeholder="请输入 ASCII 字符或数字（空格分隔）">
+                <button id="btnConvertAscii">转换</button>
+                <div class="output" id="asciiOutput"></div>
+                <div class="button-group">
+                    <button class="copy-button" data-copy="ascii">复制结果</button>
+                    <button class="clear-button" data-clear="ascii">清空</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Unicode 转 ASCII</h2>
+                <input id="unicodeInput" type="text" placeholder="请输入 Unicode 字符">
+                <button id="btnConvertUnicode">转换</button>
+                <div class="output" id="unicodeOutput"></div>
+                <div class="button-group">
+                    <button class="copy-button" data-copy="unicode">复制结果</button>
+                    <button class="clear-button" data-clear="unicode">清空</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2: QQ表情工具 -->
+        <div id="qq-emoji" class="tab-content">
+            <div class="section">
+                <h2>生成表情编号并转换</h2>
+                <p><i class="fa-solid fa-circle-info"></i> 聊天时可用，安卓/苹果/电脑皆可</p>
+                <label for="numberSelect">选择表情包:</label>
+                <select id="numberSelect">
+                    <option value="4">加强小黄脸</option>
+                    <option value="6">汪蛋</option>
+                    <option value="7">小纯洁</option>
+                    <option value="11">嗷大喵小表情</option>
+                    <option value="13">经典小黄脸</option>
+                    <option value="14">酷炫文字小表情</option>
+                    <option value="15">小纯洁小表情</option>
+                    <option value="16">暴走漫画小表情</option>
+                    <option value="17">爪子小表情</option>
+                    <option value="18">小黄脸明星范儿</option>
+                    <option value="19">星际迷航</option>
+                    <option value="20">牛牛和爱丽丝</option>
+                    <option value="21">Up喵小表情</option>
+                    <option value="22">冷兔软糖小表情</option>
+                    <option value="23">双十一清空购物车小表情</option>
+                    <option value="24">文字小表情</option>
+                    <option value="25">冷兔小表情</option>
+                    <option value="26">猫咪小表情</option>
+                    <option value="27">愚人节小表情</option>
+                    <option value="28">搞怪小表情</option>
+                    <option value="29">姜小虎小表情</option>
+                    <option value="30">小犬呆呆宝</option>
+                    <option value="31">动物爪子小表情</option>
+                    <option value="32">兔子小表情</option>
+                    <option value="33">王尼玛小表情</option>
+                    <option value="34">欢乐"双旦"节</option>
+                    <option value="35">春节小表情</option>
+                    <option value="36">新春祝福小表情</option>
+                    <option value="37">亲亲小狗子小表情</option>
+                    <option value="38">天使恶魔小表情</option>
+                    <option value="39">聊天框炸弹小表情</option>
+                    <option value="40">甜到牙疼小表情</option>
+                    <option value="41">幺气十足激情四射</option>
+                    <option value="42">魔鬼猫</option>
+                    <option value="43">我是一个小插座</option>
+                    <option value="48">骚动的手</option>
+                    <option value="49">跳动的文字小表情</option>
+                    <option value="50">小肚皮萌萌哒</option>
+                    <option value="51">咸鱼之王</option>
+                    <option value="52">炫彩文字</option>
+                    <option value="53">双十一方块狗</option>
+                    <option value="56">圣诞专属小表情</option>
+                    <option value="57">金猪先生</option>
+                    <option value="58">圣诞节</option>
+                    <option value="60">冷兔宝宝</option>
+                    <option value="62">小肚皮</option>
+                    <option value="63">女神节</option>
+                    <option value="64">女神节小表情</option>
+                    <option value="66">果叽果叽</option>
+                    <option value="67">猫爪小表情</option>
+                    <option value="68">20年的回忆</option>
+                    <option value="69">奋斗吧，汪崽！</option>
+                    <option value="70">软萌jo</option>
+                </select>
+                <label for="countInput">生成数量:</label>
+                <input id="countInput" type="number" placeholder="留空则默认生成全部 (最多40个)" min="1" max="40">
+                <button id="btnGenerateConvert">生成并转换</button>
+                <div class="output" id="numberOutput"></div>
+                <div class="image-preview" id="numberImagePreview"></div>
+                <div class="button-group">
+                    <button class="copy-button" data-copy="number">复制结果</button>
+                    <button class="clear-button" data-clear="number">清空</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>生成单个 QQ 小表情</h2>
+                <label for="singleEmojiFormat">选择生成格式:</label>
+                <select id="singleEmojiFormat">
+                    <option value="nicknamechat">群昵称/群名 (仅安卓)</option>
+                    <option value="chat">聊天可用 (全平台)</option>
+                </select>
+                <label for="singleEmojiName">选择表情名称:</label>
+                <select id="singleEmojiName"></select>
+                <label for="singlePositionNumber">输入位置 (1-40):</label>
+                <input id="singlePositionNumber" type="number" placeholder="请输入 1-40 之间的数字" min="1" max="40">
+                <button id="btnGenerateSingle">生成表情</button>
+                <div class="output" id="singleEmojiOutput"></div>
+                <div class="image-preview" id="singleEmojiImagePreview"></div>
+                <div class="button-group">
+                    <button class="copy-button" data-copy="singleEmoji">复制结果</button>
+                    <button class="clear-button" data-clear="singleEmoji">清空</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>一键生成表情序列</h2>
+                <label for="sequenceEmojiFormat">选择生成格式:</label>
+                <select id="sequenceEmojiFormat">
+                    <option value="nickname">群昵称/群名 (仅安卓)</option>
+                    <option value="chat">聊天可用 (全平台)</option>
+                </select>
+                <label for="startNameSelect">选择起始表情:</label>
+                <select id="startNameSelect"></select>
+                <label for="endNameSelect">选择结束表情:</label>
+                <select id="endNameSelect"></select>
+                <label for="startPositionInput">起始位置 (1-40):</label>
+                <input id="startPositionInput" type="number" placeholder="请输入起始位置" min="1" max="40">
+                <label for="endPositionInput">结束位置 (1-40):</label>
+                <input id="endPositionInput" type="number" placeholder="请输入结束位置" min="1" max="40">
+                <button id="btnGenerateSequence">生成序列</button>
+                <div class="output" id="sequenceOutput"></div>
+                <div class="image-preview" id="sequenceImagePreview"></div>
+                <div class="button-group">
+                    <button class="copy-button" data-copy="sequence">复制结果</button>
+                    <button class="clear-button" data-clear="sequence">清空</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>反向解析 QQ 小表情</h2>
+                <p><i class="fa-solid fa-lightbulb"></i> 支持聊天格式和昵称格式的表情解析</p>
+                <label for="reverseInput">粘贴 QQ 小表情字符串:</label>
+                <input id="reverseInput" type="text" placeholder="例如: <$ÿĀ ď > 或聊天格式表情">
+                <button id="btnReverseEmoji">解析表情</button>
+                <div class="output" id="reverseOutput"></div>
+                <div class="button-group">
+                    <button class="copy-button" data-copy="reverse">复制结果</button>
+                    <button class="clear-button" data-clear="reverse">清空</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 3: 控制字符工具 -->
+        <div id="control-chars" class="tab-content">
+            <div class="section">
+                <h2>直接生成控制字符</h2>
+                <p><i class="fa-solid fa-hand-pointer"></i> 点击按钮可直接复制对应的不可见字符</p>
+                
+                <div class="direct-copy-section">
+                    <span><i class="fa-solid fa-arrow-down"></i> 垂直制表符 (VT): <code>\u000b</code></span>
+                    <button class="copy-button" data-direct-char="vt">复制</button>
+                </div>
+                
+                <div class="direct-copy-section">
+                    <span><i class="fa-solid fa-arrow-right"></i> 右到左隔离符 (RLI): <code>\u2067</code></span>
+                    <button class="copy-button" data-direct-char="rli">复制</button>
+                </div>
+                
+                <p style="margin-top: 20px;"><i class="fa-solid fa-book"></i> <strong>使用示例:</strong></p>
+                <div class="output">
+你好[VT]世界 → 你好
+世界
+
+你好[RLI]~世界[RLI] → 你好世界~
+
+<i class="fa-solid fa-at"></i> 别人@你名字的时候就会变成: "@你好 xxx 世界～"
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>文本插入控制字符</h2>
+                <p><i class="fa-solid fa-keyboard"></i> 在下方输入内容，点击按钮在光标处插入字符占位符</p>
+                
+                <label for="text-inserter-input">输入文本:</label>
+                <textarea id="text-inserter-input" placeholder="例如: xxxx[VT]xxx[VT]xxx"></textarea>
+                
+                <div class="control-char-buttons">
+                    <button data-insert="[VT]">
+                        <i class="fa-solid fa-plus"></i> 插入 VT
+                    </button>
+                    <button data-insert="[RLI]">
+                        <i class="fa-solid fa-plus"></i> 插入 RLI
+                    </button>
+                </div>
+                
+                <button id="btnGenerateText">生成</button>
+                <div class="output" id="text-inserter-output"></div>
+                <div class="button-group">
+                    <button class="copy-button" data-copy="textInserter">复制结果</button>
+                    <button class="clear-button" data-clear="textInserter">清空</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 复制提示 -->
+        <div id="copyAlert" class="copy-alert">
+            <span>已复制到剪贴板!</span>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://cdn.nightdye.cn/loader.js"></script>
+</body>
+</html>

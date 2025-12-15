@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="https://qq.nightdye.cn/qq/images/night.ico" type="image/x-icon">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="./css/styles.css">
+<title>QQ等级计算</title>
+</head>
+
+<body>
+<div class="container">
+  <!-- 头部区域 -->
+  <header class="app-header">
+    <div class="logo-title-container">
+      <img src="https://qq.nightdye.cn/qq/images/night_logo_1.png" class="app-logo" id="appLogo">
+      <h1 class="title">QQ等级计算</h1>
+    </div>
+    <nav class="nav-bar">
+      <a class="nav-btn theme-switch"><i class="fa-solid fa-palette"></i> 切换主题</a>
+      <a class="nav-btn" href="ranking.html"><i class="fa-solid fa-ranking-star"></i> 等级排行</a>
+      <a class="nav-btn" href="../qq/index.html"><i class="fa-solid fa-house"></i> 返回主页</a>
+    </nav>
+  </header>
+
+  <!-- QQ信息查询卡片 -->
+  <section class="card qq-query-card">
+    <div class="card-header">
+      <span class="card-icon"><i class="fa-solid fa-user"></i></span>
+      <span class="card-title">QQ信息</span>
+    </div>
+    <div class="card-body">
+      <div class="qq-input-row">
+        <input type="number" id="qqNumber" placeholder="输入QQ号" class="qq-input">
+        <button class="fetch-btn" id="fetchQQBtn"><i class="fa-solid fa-search"></i> 获取</button>
+      </div>
+      <div id="qqInfo" class="qq-info-display" style="display: none;">
+        <img id="qqAvatar" src="" alt="QQ头像" class="qq-avatar">
+        <div class="qq-details">
+          <span id="qqNickname" class="qq-nickname"></span>
+          <span id="qqNumber2" class="qq-number-display"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 等级样式设置卡片 -->
+  <section class="card style-card">
+    <div class="card-header">
+      <span class="card-icon"><i class="fa-solid fa-palette"></i></span>
+      <span class="card-title">显示样式</span>
+    </div>
+    <div class="card-body">
+      <div class="style-row">
+        <div class="style-item">
+          <label for="levelTitle">等级称号</label>
+          <select id="levelTitle">
+            <option value="normal" data-image="https://tianquan.gtimg.cn/bigVipLevelBadge/item/1/cdn/275.png">普通等级称号</option> 
+            <option value="dragon" data-image="https://tianquan.gtimg.cn/bigVipLevelBadge/item/2/cdn/275.png">龙年等级称号</option>
+            <option value="s1" data-image="https://tianquan.gtimg.cn/bigVipLevelBadge/item/4/cdn/275.png">S1等级称号</option>
+            <option value="x5" data-image="https://tianquan.gtimg.cn/bigVipLevelBadge/item/5/cdn/275.png">X5等级称号</option>
+            <option value="star" data-image="https://tianquan.gtimg.cn/bigVipLevelBadge/item/6/cdn/275.png">星等级称号</option>
+            <option value="b9" data-image="https://tianquan.gtimg.cn/bigVipLevelBadge/item/8/cdn/275.png">大会9等级称号</option>
+            <option value="newdragon" data-image="https://tianquan.gtimg.cn/bigVipLevelBadge/item/9/cdn/275.png">S5龙等级称号</option>
+            <option value="snake" data-image="https://tianquan.gtimg.cn/bigVipLevelBadge/item/10/cdn/275.png">蛇年等级称号</option>
+            <option value="dmg" data-image="https://tianquan.gtimg.cn/bigVipLevelBadge/item/12/cdn/275.png">大满贯等级称号</option>
+            <option value="syx" data-image="https://tianquan.gtimg.cn/bigVipLevelBadge/item/15/cdn/275.png">闪耀星等级称号</option>
+            <option value="fhcq" data-image="https://tianquan.gtimg.cn/bigVipLevelBadge/item/16/cdn/275.png">凤凰传奇等级称号</option>
+            <option value="mdcg" data-image="https://tianquan.gtimg.cn/bigVipLevelBadge/item/17/cdn/275.png">马到成功等级称号</option>
+          </select>
+        </div>
+        <div class="style-item">
+          <label for="iconStyle">图标样式</label>
+          <select id="iconStyle">
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 等级计算卡片 -->
+  <section class="card calc-card">
+    <div class="card-header">
+      <span class="card-icon"><i class="fa-solid fa-calculator"></i></span>
+      <span class="card-title">等级计算</span>
+    </div>
+    <div class="card-body">
+      <!-- 当前等级 -->
+      <div class="level-input-group">
+        <div class="level-input-header">
+          <label for="currentLevel"><i class="fa-solid fa-star"></i> 当前等级</label>
+          <span id="activeDays" class="active-days-badge"></span>
+        </div>
+        <input type="number" id="currentLevel" placeholder="例如: 10" class="level-input">
+        <div id="currentLevelIcons" class="level-icons-display"></div>
+      </div>
+
+      <!-- 目标等级 -->
+      <div class="level-input-group">
+        <div class="level-input-header">
+          <label for="targetLevel"><i class="fa-solid fa-bullseye"></i> 目标等级</label>
+          <span id="targetActiveDays" class="active-days-badge"></span>
+        </div>
+        <input type="number" id="targetLevel" placeholder="例如: 20" class="level-input">
+        <div id="targetLevelIcons" class="level-icons-display"></div>
+      </div>
+
+      <!-- 日活跃天数 -->
+      <div class="level-input-group">
+        <div class="level-input-header">
+          <label for="dailyActive"><i class="fa-solid fa-fire"></i> 日活跃天数</label>
+          <a href="https://club.vip.qq.com/card?from=ctyerror" class="help-link" target="_blank"><i class="fa-solid fa-circle-question"></i> 查看活跃</a>
+        </div>
+        <input type="number" id="dailyActive" placeholder="例如: 2" class="level-input">
+      </div>
+
+      <button class="calc-btn" id="calcBtn">开始计算</button>
+      
+      <div id="result" class="result-box" style="display: none;"></div>
+    </div>
+  </section>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script src="https://cdn.nightdye.cn/loader.js"></script>
+</body>
+</html>

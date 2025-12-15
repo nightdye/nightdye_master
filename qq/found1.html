@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <link rel="shortcut icon" href="https://qq.nightdye.cn/qq/images/night.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+    <link rel="stylesheet" href="./css/found.css">
+    <title>QQ查找工具</title>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <img id="clean" src="https://qq.nightdye.cn/qq/images/night_logo_1.png" alt="Logo" data-tooltip="点击清除缓存">
+            <div class="header-content">
+                <h1>QQ查找工具</h1>
+                <div class="header-buttons">
+                    <a class="btn btn-primary theme-switch">切换主题</a>
+                    <a class="btn btn-secondary author-qq-button" href="./index.html">返回主页</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="tool-card">
+            <div class="card-header">
+                <h2><i class="fas fa-wand-magic-sparkles"></i> 功能选择</h2>
+                <p>选择你需要的功能，输入相关号码即可快速执行</p>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-list-check"></i>
+                    选择操作类型
+                </label>
+                <div class="qq-container">
+                    <select id="actionSelect" class="qq-select">
+                        <optgroup label="基础功能" data-icon="fa-bullseye">
+                            <option value="qqCard" data-icon="fa-address-card">打开QQ名片</option>
+                            <option value="qq" data-icon="fa-comment">发送消息</option>
+                            <option value="qqGroup" data-icon="fa-users">打开QQ群</option>
+                        </optgroup>
+                        <optgroup label="头像相关" data-icon="fa-user">
+                            <option value="qqtx" data-icon="fa-image">查看头像</option>
+                            <option value="qqtx2" data-icon="fa-images">查看头像2</option>
+                            <option value="qqtx3" data-icon="fa-people-group">查看Q群头像</option>
+                        </optgroup>
+                        <optgroup label="空间相关" data-icon="fa-house">
+                            <option value="zoneqq" data-icon="fa-globe">查看QQ空间</option>
+                            <option value="qqfriends" data-icon="fa-user-group">好友线索查看</option>
+                        </optgroup>
+                        <optgroup label="群功能" data-icon="fa-star">
+                            <option value="qqGroup2" data-icon="fa-ranking-star">Q群信用星级查询</option>
+                            <option value="qqbshf" data-icon="fa-rotate">Q群聊标识恢复</option>
+                            <option value="qqlevelup" data-icon="fa-arrow-up">Q群人数升级</option>
+                            <option value="qqluckylogo" data-icon="fa-font">QQ群聊字符查看</option>
+                            <option value="qqGroup1" data-icon="fa-bolt">QQ群能量值排行</option>
+                            <option value="qqybh" data-icon="fa-envelope">QQ一笔画红包</option>
+                        </optgroup>
+                        <optgroup label="个性化" data-icon="fa-palette">
+                            <option value="qqdsp" data-icon="fa-video">打开QQ短视频资料卡</option>
+                            <option value="qqCard1" data-icon="fa-heart">QQ亲密度标识</option>
+                            <option value="qqlogo" data-icon="fa-font">QQ私聊字符查看</option>
+                            <option value="qqzb" data-icon="fa-shirt">QQ装扮查看</option>
+                        </optgroup>
+                        <optgroup label="PK功能" data-icon="fa-trophy">
+                            <option value="qqCard2" data-icon="fa-id-badge">QQ账号信息PK</option>
+                            <option value="qqCard3" data-icon="fa-crown">QQ特权PK</option>
+                            <option value="qqCard6" data-icon="fa-medal">QQ铭牌PK</option>
+                            <option value="qqhz" data-icon="fa-gem">QQ黄钻PK</option>
+                        </optgroup>
+                        <optgroup label="礼物相关" data-icon="fa-gift">
+                            <option value="qqCard5" data-icon="fa-gifts">QQ礼物墙查看</option>
+                            <option value="qqlw" data-icon="fa-box-open">QQ礼物查看</option>
+                            <option value="qqdzlw" data-icon="fa-wand-magic-sparkles">QQ定制礼物查看</option>
+                        </optgroup>
+                        <optgroup label="收藏展示" data-icon="fa-box-archive">
+                            <option value="qqmp" data-icon="fa-id-card">QQ铭牌查看</option>
+                            <option value="qqCard4" data-icon="fa-paw">QQ新奇物种抽取</option>
+                            <option value="qqjk" data-icon="fa-clone">QQ集卡查看</option>
+                            <option value="qqtj" data-icon="fa-book">QQ图鉴查看</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-keyboard"></i>
+                    输入号码
+                </label>
+                <div class="input-wrapper">
+                    <i class="fas fa-hashtag"></i>
+                    <input type="text" id="qqInput" class="qq-input" placeholder="请输入QQ号码" inputmode="numeric">
+                </div>
+            </div>
+
+            <a id="executeBtn" class="qq-button">
+                <i class="fas fa-arrow-right-to-bracket"></i>
+                执行操作
+            </a>
+
+            <div class="feature-tags">
+                <span class="feature-tag"><i class="fas fa-bolt"></i> 快速响应</span>
+                <span class="feature-tag"><i class="fas fa-shield-halved"></i> 安全可靠</span>
+                <span class="feature-tag"><i class="fas fa-mobile-screen"></i> 移动适配</span>
+            </div>
+        </div>
+
+        <div class="tool-card">
+            <div class="card-header">
+                <h2><i class="fas fa-rocket"></i> 快捷操作</h2>
+                <p>常用功能一键直达</p>
+            </div>
+            <div class="quick-actions">
+                <div class="quick-action-btn" data-action="qqCard">
+                    <i class="fas fa-id-card"></i>
+                    <span>名片</span>
+                </div>
+                <div class="quick-action-btn" data-action="qq">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>消息</span>
+                </div>
+                <div class="quick-action-btn" data-action="qqtx">
+                    <i class="fas fa-image"></i>
+                    <span>头像</span>
+                </div>
+                <div class="quick-action-btn" data-action="zoneqq">
+                    <i class="fas fa-globe"></i>
+                    <span>空间</span>
+                </div>
+                <div class="quick-action-btn" data-action="qqGroup">
+                    <i class="fas fa-users"></i>
+                    <span>群组</span>
+                </div>
+                <div class="quick-action-btn" data-action="qqCard5">
+                    <i class="fas fa-gift"></i>
+                    <span>礼物墙</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>by <a href="https://qm.qq.com/q/6MbA3nVWKY">夜染</a></p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://cdn.nightdye.cn/loader.js"></script>
+</body>
+</html>

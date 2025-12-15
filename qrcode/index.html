@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>夜染二维码生成器</title>
+        <link rel="shortcut icon" href="https://nightdye.guokevr.cn/qq/images/night.ico" type="image/x-icon">
+        <link rel="stylesheet" href="qrcode.css">
+    </head>
+    <body>
+        <!--头部-->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img id="clean" class="logo" src="https://nightdye.guokevr.cn/qq/images/night_logo_1.png" alt="夜染 Logo"/>
+                    <span class="site-title">夜染二维码生成器</span>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-icon" id="btn-theme" title="切换主题">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="btn-icon" id="btn-help" title="使用帮助">
+                        <i class="fas fa-question-circle"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <!--主内容区-->
+        <main class="main-container">
+            <!--左侧-配置面板-->
+            <section class="config-section">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-sliders-h"></i>
+                        <h2 class="card-title">二维码配置</h2>
+                    </div>
+                    <!--类型选择标签-->
+                    <div class="tabs" role="tablist">
+                        <button class="tab-btn active" data-type="text" role="tab">
+                            <i class="fas fa-font"></i>
+                            <span>文本</span>
+                        </button>
+                        <button class="tab-btn" data-type="url" role="tab">
+                            <i class="fas fa-link"></i>
+                            <span>网址</span>
+                        </button>
+                        <button class="tab-btn" data-type="wifi" role="tab">
+                            <i class="fas fa-wifi"></i>
+                            <span>WiFi</span>
+                        </button>
+                        <button class="tab-btn" data-type="vcard" role="tab">
+                            <i class="fas fa-address-card"></i>
+                            <span>名片</span>
+                        </button>
+                        <button class="tab-btn" data-type="email" role="tab">
+                            <i class="fas fa-envelope"></i>
+                            <span>邮件</span>
+                        </button>
+                        <button class="tab-btn" data-type="sms" role="tab">
+                            <i class="fas fa-comment-sms"></i>
+                            <span>短信</span>
+                        </button>
+                    </div>
+                    <!--文本/网址输入-->
+                    <div id="form-text" class="form-section">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-edit"></i>
+                                <span>输入内容</span>
+                                <span class="required">*</span>
+                            </label>
+                            <textarea id="text-input" class="form-textarea" placeholder="请输入文本内容或网址..." rows="3"></textarea>
+                        </div>
+                    </div>
+                    <!--WiFi输入-->
+                    <div id="form-wifi" class="form-section hidden">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-broadcast-tower"></i>
+                                <span>WiFi名称(SSID)</span>
+                                <span class="required">*</span>
+                            </label>
+                            <input type="text" id="wifi-ssid" class="form-input" placeholder="输入 WiFi 名称"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-key"></i>
+                                <span>密码</span>
+                            </label>
+                            <input type="text" id="wifi-password" class="form-input" placeholder="输入密码（可留空）"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>加密方式</span>
+                            </label>
+                            <select id="wifi-encryption" class="form-select">
+                                <option value="WPA">WPA/WPA2</option>
+                                <option value="WEP">WEP</option>
+                                <option value="nopass">无密码</option>
+                            </select>
+                        </div>
+                        <div class="switch-wrapper">
+                            <span class="switch-label">隐藏网络</span>
+                            <div class="switch" id="wifi-hidden"></div>
+                        </div>
+                    </div>
+                    <!--名片输入-->
+                    <div id="form-vcard" class="form-section hidden">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-user"></i>
+                                <span>姓名</span>
+                                <span class="required">*</span>
+                            </label>
+                            <input type="text" id="vcard-name" class="form-input" placeholder="输入姓名"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-building"></i>
+                                <span>公司</span>
+                            </label>
+                            <input type="text" id="vcard-org" class="form-input" placeholder="输入公司名称"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-briefcase"></i>
+                                <span>职位</span>
+                            </label>
+                            <input type="text" id="vcard-title" class="form-input" placeholder="输入职位"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-phone"></i>
+                                <span>电话</span>
+                            </label>
+                            <input type="tel" id="vcard-phone" class="form-input" placeholder="输入电话号码"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-envelope"></i>
+                                <span>邮箱</span>
+                            </label>
+                            <input type="email" id="vcard-email" class="form-input" placeholder="输入邮箱地址"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-globe"></i>
+                                <span>网站</span>
+                            </label>
+                            <input type="url" id="vcard-url" class="form-input" placeholder="输入网站地址"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>地址</span>
+                            </label>
+                            <input type="text" id="vcard-address" class="form-input" placeholder="输入地址"/>
+                        </div>
+                    </div>
+                    <!--邮件输入-->
+                    <div id="form-email" class="form-section hidden">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-at"></i>
+                                <span>收件人邮箱</span>
+                                <span class="required">*</span>
+                            </label>
+                            <input type="email" id="email-to" class="form-input" placeholder="输入收件人邮箱"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-heading"></i>
+                                <span>邮件主题</span>
+                            </label>
+                            <input type="text" id="email-subject" class="form-input" placeholder="输入邮件主题"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-align-left"></i>
+                                <span>邮件内容</span>
+                            </label>
+                            <textarea id="email-body" class="form-textarea" placeholder="输入邮件内容" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <!--短信输入-->
+                    <div id="form-sms" class="form-section hidden">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>手机号码</span>
+                                <span class="required">*</span>
+                            </label>
+                            <input type="tel" id="sms-phone" class="form-input" placeholder="输入手机号码"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-comment"></i>
+                                <span>短信内容</span>
+                            </label>
+                            <textarea id="sms-message" class="form-textarea" placeholder="输入短信内容" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <!--样式设置-折叠面板-->
+                    <div class="collapse-panel open">
+                        <div class="collapse-header">
+                            <div class="collapse-title">
+                                <i class="fas fa-palette"></i>
+                                <span>样式设置</span>
+                            </div>
+                            <i class="fas fa-chevron-down collapse-icon"></i>
+                        </div>
+                        <div class="collapse-content">
+                            <div class="collapse-inner">
+                                <!--前景色-->
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <i class="fas fa-fill-drip"></i>
+                                        <span>二维码颜色</span>
+                                    </label>
+                                    <div class="color-picker-wrapper">
+                                        <input type="color" id="foreground-color" class="color-picker" value="#000000"/>
+                                        <input type="text" id="foreground-value" class="color-value" value="#000000" maxlength="7"/>
+                                    </div>
+                                    <div class="color-presets" id="fg-presets">
+                                        <div class="color-preset active" style="background: #000000;" data-color="#000000" title="黑色"></div>
+                                        <div class="color-preset" style="background: #7c3aed;" data-color="#7c3aed" title="紫色"></div>
+                                        <div class="color-preset" style="background: #2563eb;" data-color="#2563eb" title="蓝色"></div>
+                                        <div class="color-preset" style="background: #059669;" data-color="#059669" title="绿色"></div>
+                                        <div class="color-preset" style="background: #dc2626;" data-color="#dc2626" title="红色"></div>
+                                        <div class="color-preset" style="background: #d97706;" data-color="#d97706" title="橙色"></div>
+                                        <div class="color-preset" style="background: #db2777;" data-color="#db2777" title="品红"></div>
+                                        <div class="color-preset" style="background: #374151;" data-color="#374151" title="深灰"></div>
+                                    </div>
+                                </div>
+                                <!--尺寸-->
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <i class="fas fa-expand-arrows-alt"></i>
+                                        <span>尺寸大小</span>
+                                    </label>
+                                    <div class="size-options">
+                                        <div class="size-option" data-size="128">128</div>
+                                        <div class="size-option" data-size="256">256</div>
+                                        <div class="size-option active" data-size="512">512</div>
+                                        <div class="size-option" data-size="1024">1024</div>
+                                        <div class="size-option" data-size="2048">2048</div>
+                                    </div>
+                                </div>
+                                <!--容错等级-->
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <i class="fas fa-shield-alt"></i>
+                                        <span>容错等级</span>
+                                    </label>
+                                    <div class="error-levels">
+                                        <div class="error-level" data-level="L">
+                                            <div class="error-level-value">L</div>
+                                            <div class="error-level-label">7%</div>
+                                        </div>
+                                        <div class="error-level" data-level="M">
+                                            <div class="error-level-value">M</div>
+                                            <div class="error-level-label">15%</div>
+                                        </div>
+                                        <div class="error-level" data-level="Q">
+                                            <div class="error-level-value">Q</div>
+                                            <div class="error-level-label">25%</div>
+                                        </div>
+                                        <div class="error-level active" data-level="H">
+                                            <div class="error-level-value">H</div>
+                                            <div class="error-level-label">30%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--边距-->
+                                <div class="form-group">
+                                    <div class="slider-wrapper">
+                                        <div class="slider-header">
+                                            <label class="form-label" style="margin: 0;">
+                                                <i class="fas fa-arrows-alt-h"></i>
+                                                <span>边距</span>
+                                            </label>
+                                            <span class="slider-value" id="margin-value">2</span>
+                                        </div>
+                                        <input type="range" class="slider" id="qr-margin" min="0" max="10" value="2"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--图片设置-折叠面板-->
+                    <div class="collapse-panel">
+                        <div class="collapse-header">
+                            <div class="collapse-title">
+                                <i class="fas fa-images"></i>
+                                <span>图片设置</span>
+                            </div>
+                            <i class="fas fa-chevron-down collapse-icon"></i>
+                        </div>
+                        <div class="collapse-content">
+                            <div class="collapse-inner">
+                                <!--背景图-->
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <i class="fas fa-image"></i>
+                                        <span>背景图片</span>
+                                    </label>
+                                    <div class="file-upload" id="bg-upload">
+                                        <input type="file" id="bg-input" accept="image/*"/>
+                                        <i class="fas fa-cloud-upload-alt file-upload-icon"></i>
+                                        <div class="file-upload-text">点击或拖拽上传背景图</div>
+                                        <div class="file-upload-hint">支持JPG、PNG、GIF格式</div>
+                                        <div class="file-preview">
+                                            <img class="file-preview-img" id="bg-preview" src="" alt="背景预览"/>
+                                            <button class="file-remove" id="bg-remove" type="button">
+                                                <i class="fas fa-times"></i>
+                                                <span>移除</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Logo-->
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <i class="fas fa-star"></i>
+                                        <span>中心Logo</span>
+                                    </label>
+                                    <div class="file-upload" id="logo-upload">
+                                        <input type="file" id="logo-input" accept="image/*"/>
+                                        <i class="fas fa-cloud-upload-alt file-upload-icon"></i>
+                                        <div class="file-upload-text">点击或拖拽上传Logo</div>
+                                        <div class="file-upload-hint">建议使用透明背景的PNG图片</div>
+                                        <div class="file-preview">
+                                            <img class="file-preview-img" id="logo-preview" src="" alt="Logo预览"/>
+                                            <button class="file-remove" id="logo-remove" type="button">
+                                                <i class="fas fa-times"></i>
+                                                <span>移除</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Logo大小-->
+                                <div class="form-group">
+                                    <div class="slider-wrapper">
+                                        <div class="slider-header">
+                                            <label class="form-label" style="margin: 0;">
+                                                <i class="fas fa-search-plus"></i>
+                                                <span>Logo大小</span>
+                                            </label>
+                                            <span class="slider-value" id="logo-size-value">20%</span>
+                                        </div>
+                                        <input type="range" class="slider" id="logo-size" min="10" max="35" value="20"/>
+                                    </div>
+                                </div>
+                                <!--Logo圆角-->
+                                <div class="switch-wrapper">
+                                    <span class="switch-label">Logo圆形显示</span>
+                                    <div class="switch active" id="logo-round"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--操作按钮-->
+                    <div class="btn-group">
+                        <button class="btn btn-primary" id="btn-generate">
+                            <i class="fas fa-qrcode"></i>
+                            <span>生成二维码</span>
+                        </button>
+                        <button class="btn btn-secondary" id="btn-reset">
+                            <i class="fas fa-undo"></i>
+                            <span>重置</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <!--右侧-预览区域-->
+            <section class="preview-section">
+                <div class="card preview-card">
+                    <div class="card-header">
+                        <i class="fas fa-eye"></i>
+                        <h2 class="card-title">预览</h2>
+                    </div>
+                    <div class="preview-area" id="preview-area">
+                        <div class="loading-overlay" id="loading-overlay">
+                            <div class="loading-spinner"></div>
+                        </div>
+                        <div class="preview-placeholder" id="preview-placeholder">
+                            <i class="fas fa-qrcode"></i>
+                            <p>填写内容后点击"生成二维码"</p>
+                        </div>
+                        <canvas id="qrcode-canvas" class="hidden"></canvas>
+                    </div>
+                    <div class="preview-toolbar">
+                        <div class="preview-info" id="preview-info">
+                            <div class="preview-info-item">
+                                <i class="fas fa-ruler-combined"></i>
+                                <span id="info-size">512×512</span>
+                            </div>
+                            <div class="preview-info-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <span id="info-level">容错H</span>
+                            </div>
+                        </div>
+                        <div class="preview-actions">
+                            <button class="btn btn-success" id="btn-download-png" disabled>
+                                <i class="fas fa-download"></i>
+                                <span>PNG</span>
+                            </button>
+                            <button class="btn btn-secondary" id="btn-download-svg" disabled>
+                                <i class="fas fa-file-code"></i>
+                                <span>SVG</span>
+                            </button>
+                            <button class="btn-icon" id="btn-copy" title="复制到剪贴板" disabled>
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!--历史记录-->
+                    <div class="history-section">
+                        <div class="collapse-panel">
+                            <div class="collapse-header">
+                                <div class="collapse-title">
+                                    <i class="fas fa-history"></i>
+                                    <span>历史记录</span>
+                                </div>
+                                <div class="collapse-actions">
+                                    <button class="btn-clear-history" id="btn-clear-history" title="清除历史">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                    <i class="fas fa-chevron-down collapse-icon"></i>
+                                </div>
+                            </div>
+                            <div class="collapse-content">
+                                <div class="collapse-inner">
+                                    <div class="history-grid" id="history-grid">
+                                        <div class="history-empty">暂无历史记录</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <div id="toast-container"></div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.1/qrcode.min.js"></script>
+        <script src="https://cdn.nightdye.cn/loader.js"></script>
+    </body>
+</html>

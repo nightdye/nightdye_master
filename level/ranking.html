@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="https://qq.nightdye.cn/qq/images/night.ico" type="image/x-icon">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="./css/styles.css">
+<title>QQ等级排行榜</title>
+</head>
+
+<body>
+<div class="container">
+  <div class="logo-title-container-rank">
+    <a>
+      <img src="https://qq.nightdye.cn/qq/images/night_logo_1.png" width="80" height="80" style="border-radius: 50%;" id="rankingLogo">
+    </a>
+    <h1 class="title">QQ等级排行榜</h1>
+  </div>
+
+  <div class="control-bar">
+    <a class="theme-switch">切换主题</a>
+    <button id="toolsBtn" class="tools-btn">
+      <i class="fa-solid fa-sliders"></i>
+      <span>筛选与添加</span>
+    </button>
+    <a class="nav-link" href="index.html">返回等级计算</a>
+  </div>
+
+  <!-- 工具模态框 -->
+  <div class="tools-modal-overlay" id="toolsModalOverlay">
+    <div class="tools-modal">
+      <div class="tools-modal-header">
+        <h3><i class="fa-solid fa-sliders"></i> 筛选与添加</h3>
+        <button class="tools-modal-close" id="toolsModalClose">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="tools-modal-body">
+        <!-- 添加QQ部分 -->
+        <div class="tools-section">
+          <div class="tools-section-title">
+            <i class="fa-solid fa-user-plus"></i>
+            <span>添加QQ到排行榜</span>
+          </div>
+          <div class="add-qq-body">
+            <input type="text" id="addQQInput" class="add-qq-input" placeholder="输入QQ号 (5-10位)" maxlength="10">
+            <button id="addQQBtn" class="add-qq-btn">
+              <i class="fa-solid fa-plus"></i> 添加
+            </button>
+          </div>
+          <div id="addQQResult" class="add-qq-result"></div>
+        </div>
+
+        <!-- 分隔线 -->
+        <div class="tools-divider"></div>
+
+        <!-- 筛选部分 -->
+        <div class="tools-section">
+          <div class="tools-section-title">
+            <i class="fa-solid fa-filter"></i>
+            <span>筛选条件</span>
+          </div>
+          <div class="filter-bar-modal">
+            <div class="filter-item">
+              <label>QQ位数</label>
+              <select id="qqLengthFilter" class="filter-select">
+                <option value="">全部</option>
+                <option value="5">5位QQ</option>
+                <option value="6">6位QQ</option>
+                <option value="7">7位QQ</option>
+                <option value="8">8位QQ</option>
+                <option value="9">9位QQ</option>
+                <option value="10">10位QQ</option>
+              </select>
+            </div>
+            <div class="filter-item">
+              <label>等级筛选</label>
+              <select id="levelFilter" class="filter-select">
+                <option value="">全部等级</option>
+                <option value="64" data-level="64">64级 (皇冠)</option>
+                <option value="128" data-level="128">128级 (双皇冠)</option>
+                <option value="192" data-level="192">192级 (三皇冠)</option>
+                <option value="256" data-level="256">256级 (时光企鹅)</option>
+              </select>
+            </div>
+          </div>
+          <button id="filterConfirmBtn" class="filter-confirm-btn-modal">
+            <i class="fa-solid fa-check"></i> 应用筛选
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ranking-container">
+    
+    <!-- 统计卡片 -->
+    <div class="stats-card">
+      <div class="stat-item">
+        <div class="stat-value" id="totalUsersCount">0</div>
+        <div class="stat-label">已收录用户</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-value highlight" id="fullLevelCount">0</div>
+        <div class="stat-label">时光企鹅用户</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-value stat-time" id="lastUpdateTime">--</div>
+        <div class="stat-label">最后更新</div>
+      </div>
+    </div>
+    
+    <!-- 更新提示 -->
+    <div class="update-notice">
+      <i class="fa-solid fa-clock"></i> 每晚 23点30分 自动更新排行数据
+    </div>
+    
+    <!-- 筛选结果计数 -->
+    <div class="filter-result-count" id="filterResultCount">
+      共找到 <strong id="filterCount">0</strong> 位用户
+    </div>
+
+    <!-- 搜索栏 -->
+    <div class="search-wrapper">
+      <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      <input type="text" id="searchInput" class="search-input" placeholder="搜索 QQ 号或昵称...">
+      <button id="clearSearch" class="clear-btn" style="display:none;"><i class="fa-solid fa-xmark"></i></button>
+      <button id="searchConfirmBtn" class="search-confirm-btn">
+        <i class="fa-solid fa-search"></i> 搜索
+      </button>
+    </div>
+
+    <!-- 列表容器 -->
+    <div class="ranking-list" id="rankingList">
+      <div class="loading-spinner">
+        <i class="fa-solid fa-spinner fa-spin"></i> 加载中...
+      </div>
+    </div>
+
+    <!-- 分页器 -->
+    <div class="pagination-wrapper" id="paginationContainer">
+      <div class="pagination-main">
+        <button class="page-btn" id="prevPageBtn" disabled>
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <div class="page-numbers" id="pageNumbers"></div>
+        <button class="page-btn" id="nextPageBtn">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <span class="page-info" id="pageInfo">第 1 / 1 页</span>
+      </div>
+      <div class="pagination-jump">
+        <span class="page-jump-label">跳转到</span>
+        <input type="number" id="pageJumpInput" class="page-jump-input" min="1" placeholder="页码">
+        <button id="pageJumpBtn" class="page-jump-btn">GO</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 悬浮按钮组 -->
+<div class="fab-container">
+  <button class="fab-btn" id="scrollTopBtn" title="回到顶部"><i class="fa-solid fa-arrow-up"></i></button>
+  <button class="fab-btn" id="scrollBottomBtn" title="去到底部"><i class="fa-solid fa-arrow-down"></i></button>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script src="https://cdn.nightdye.cn/loader.js"></script>
+</body>
+</html>

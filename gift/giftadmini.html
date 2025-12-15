@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.nightdye.cn/login/auth.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://qq.nightdye.cn/qq/images/night.ico" type="image/x-icon">
+    <title>QQ礼物数据管理</title>
+    <style>
+*{margin:0;padding:0;box-sizing:border-box}:root{--primary:#6366f1;--primary-dark:#4f46e5;--primary-light:#818cf8;--primary-glow:rgba(99,102,241,0.4);--accent:#8b5cf6;--accent-light:#a78bfa;--dark-bg:#0f1219;--dark-secondary:#161b26;--dark-card:#1c2333;--dark-border:#2d3748;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--success-color:#10b981;--error-color:#ef4444;--warning-color:#f59e0b;--info-color:#3b82f6}body{font-family:'Noto Sans SC','Microsoft YaHei',-apple-system,sans-serif;background:var(--dark-bg);min-height:100vh;color:var(--text-primary);line-height:1.6}body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 20% 0%,rgba(99,102,241,0.15) 0%,transparent 50%),radial-gradient(ellipse at 80% 100%,rgba(139,92,246,0.1) 0%,transparent 50%);pointer-events:none;z-index:0}.container{position:relative;z-index:10;max-width:800px;margin:0 auto;padding:30px 20px}.header{text-align:center;margin-bottom:30px;padding:30px;background:linear-gradient(135deg,var(--dark-card) 0%,var(--dark-secondary) 100%);border-radius:16px;border:1px solid var(--dark-border);position:relative;overflow:hidden}.header::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent),var(--primary-light))}.header h1{font-size:24px;font-weight:700;color:var(--text-primary);display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px}.header h1 i{color:var(--primary-light);filter:drop-shadow(0 0 8px var(--primary-glow))}.header p{color:var(--text-secondary);font-size:14px}.card{background:var(--dark-card);border:1px solid var(--dark-border);border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 4px 20px rgba(0,0,0,0.25)}.card-title{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:600;color:var(--text-primary);margin-bottom:20px;padding-bottom:15px;border-bottom:1px solid var(--dark-border)}.card-title i{color:var(--primary-light);font-size:18px}.card-title .sample-btn{margin-left:auto;padding:6px 12px;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);border-radius:6px;color:var(--primary-light);font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.2s ease}.card-title .sample-btn:active{transform:scale(0.95);background:rgba(99,102,241,0.25)}@media (hover:hover){.card-title .sample-btn:hover{background:rgba(99,102,241,0.25);border-color:var(--primary)}}.tabs{display:flex;gap:6px;margin-bottom:20px;background:rgba(0,0,0,0.2);padding:5px;border-radius:10px}.tab{flex:1;padding:10px 16px;background:transparent;border:none;border-radius:8px;color:var(--text-secondary);font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s ease}.tab.active{background:var(--primary);color:#fff;box-shadow:0 2px 10px var(--primary-glow)}.tab:active:not(.active){background:rgba(99,102,241,0.1)}@media (hover:hover){.tab:not(.active):hover{background:rgba(99,102,241,0.1);color:var(--text-primary)}}.tab-content{display:none}.tab-content.active{display:block;animation:fadeIn 0.2s ease}@keyframes fadeIn{from{opacity:0}to{opacity:1}}.format-hint{padding:14px;background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.2);border-radius:8px;margin-bottom:16px;font-size:13px;color:var(--text-secondary);line-height:1.8}.format-hint strong{color:var(--primary-light);display:flex;align-items:center;gap:6px;margin-bottom:6px}.format-hint code{background:rgba(0,0,0,0.3);padding:2px 8px;border-radius:4px;font-family:'Consolas','Monaco',monospace;font-size:12px;color:var(--accent-light)}.textarea-container{position:relative}textarea{width:100%;min-height:160px;padding:14px;background:rgba(0,0,0,0.25);border:1px solid var(--dark-border);border-radius:8px;color:var(--text-primary);font-size:13px;font-family:'Consolas','Monaco',monospace;line-height:1.6;resize:vertical;transition:all 0.2s ease}textarea::placeholder{color:var(--text-secondary);opacity:0.5}textarea:focus{outline:none;border-color:var(--primary);background:rgba(99,102,241,0.05);box-shadow:0 0 0 3px rgba(99,102,241,0.15)}.upload-zone{border:2px dashed var(--dark-border);border-radius:12px;padding:40px 20px;text-align:center;cursor:pointer;transition:all 0.2s ease;position:relative}.upload-zone input[type="file"]{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}.upload-zone i{font-size:42px;color:var(--primary);margin-bottom:12px;display:block;opacity:0.8}.upload-zone p{color:var(--text-primary);font-size:14px;margin-bottom:6px}.upload-zone span{color:var(--text-secondary);font-size:12px}.upload-zone:active{transform:scale(0.99)}@media (hover:hover){.upload-zone:hover{border-color:var(--primary);background:rgba(99,102,241,0.05)}.upload-zone:hover i{opacity:1}}.upload-zone.dragover{border-color:var(--accent);background:rgba(139,92,246,0.1)}.file-info{display:flex;align-items:center;gap:12px;padding:14px;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.25);border-radius:8px;margin-top:16px}.file-info>i{font-size:24px;color:var(--primary-light)}.file-info-text{flex:1}.file-info-name{font-weight:600;color:var(--text-primary);font-size:14px}.file-info-size{font-size:12px;color:var(--text-secondary)}.file-info-remove{width:32px;height:32px;background:rgba(239,68,68,0.15);border:none;border-radius:6px;color:var(--error-color);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s ease}.file-info-remove:active{transform:scale(0.9);background:rgba(239,68,68,0.25)}@media (hover:hover){.file-info-remove:hover{background:rgba(239,68,68,0.25)}}.btn-group{display:flex;gap:10px;flex-wrap:wrap}.btn{flex:1;min-width:110px;padding:12px 18px;border:none;border-radius:8px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:transform 0.15s ease,box-shadow 0.15s ease}.btn-primary{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;box-shadow:0 4px 12px var(--primary-glow)}.btn-secondary{background:rgba(255,255,255,0.08);color:var(--text-primary);border:1px solid var(--dark-border)}.btn-success{background:linear-gradient(135deg,#059669,#10b981);color:#fff;box-shadow:0 4px 12px rgba(16,185,129,0.3)}.btn-danger{background:linear-gradient(135deg,#dc2626,#ef4444);color:#fff;box-shadow:0 4px 12px rgba(239,68,68,0.3)}.btn:active:not(:disabled){transform:scale(0.97)}.btn-primary:active:not(:disabled){box-shadow:0 2px 6px var(--primary-glow)}@media (hover:hover){.btn-primary:hover:not(:disabled){box-shadow:0 6px 20px var(--primary-glow);transform:translateY(-2px)}.btn-secondary:hover:not(:disabled){background:rgba(255,255,255,0.12);border-color:var(--primary)}.btn-success:hover:not(:disabled){box-shadow:0 6px 18px rgba(16,185,129,0.4);transform:translateY(-2px)}.btn-danger:hover:not(:disabled){box-shadow:0 6px 18px rgba(239,68,68,0.4);transform:translateY(-2px)}.btn:active:not(:disabled){transform:translateY(0) scale(0.98)}}.btn:disabled{opacity:0.5;cursor:not-allowed;transform:none !important;box-shadow:none !important}.stats-bar{display:flex;gap:12px;margin-bottom:20px}.stat-item{flex:1;padding:16px 12px;background:rgba(0,0,0,0.2);border:1px solid var(--dark-border);border-radius:10px;text-align:center}.stat-item:nth-child(1){border-top:2px solid var(--primary)}.stat-item:nth-child(2){border-top:2px solid var(--success-color)}.stat-item:nth-child(3){border-top:2px solid var(--warning-color)}.stat-value{font-size:26px;font-weight:700;color:var(--text-primary)}.stat-label{font-size:12px;color:var(--text-secondary);margin-top:4px;display:flex;align-items:center;justify-content:center;gap:6px}.preview-section{border-top:1px solid var(--dark-border);padding-top:20px}.preview-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px}.preview-count{font-size:14px;color:var(--text-secondary);display:flex;align-items:center;gap:8px}.preview-count i{color:var(--primary-light)}.preview-count span{color:var(--primary-light);font-weight:600}.preview-list{max-height:400px;overflow-y:auto;border:1px solid var(--dark-border);border-radius:10px;background:rgba(0,0,0,0.15)}.preview-item{display:flex;align-items:center;padding:14px;border-bottom:1px solid var(--dark-border);gap:14px;transition:background 0.2s ease}.preview-item:last-child{border-bottom:none}@media (hover:hover){.preview-item:hover{background:rgba(99,102,241,0.05)}}.preview-item img{width:50px;height:50px;border-radius:8px;object-fit:cover;background:var(--dark-border);flex-shrink:0}.preview-item-info{flex:1;min-width:0}.preview-item-name{font-weight:600;color:var(--text-primary);font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.preview-item-desc{font-size:12px;color:var(--text-secondary);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.preview-item-meta{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}.preview-item-meta span{font-size:11px;padding:3px 8px;border-radius:4px;background:rgba(255,255,255,0.08);color:var(--text-secondary)}.preview-item-meta .price{background:rgba(245,158,11,0.15);color:var(--warning-color)}.preview-item-meta .free{background:rgba(16,185,129,0.15);color:var(--success-color)}.preview-item-meta .id{background:rgba(99,102,241,0.15);color:var(--primary-light)}.log-container{max-height:220px;overflow-y:auto;background:rgba(0,0,0,0.3);border-radius:8px;padding:14px;font-family:'Consolas','Monaco',monospace;font-size:12px}.log-entry{padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;gap:10px;align-items:flex-start}.log-entry:last-child{border-bottom:none}.log-time{color:var(--text-secondary);white-space:nowrap;opacity:0.7}.log-info{color:var(--info-color)}.log-success{color:var(--success-color)}.log-error{color:var(--error-color)}.log-warning{color:var(--warning-color)}::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:var(--dark-secondary);border-radius:3px}::-webkit-scrollbar-thumb{background:var(--dark-border);border-radius:3px}::-webkit-scrollbar-thumb:hover{background:var(--primary)}@media (max-width:600px){.container{padding:20px 15px}.header{padding:24px 20px}.header h1{font-size:20px}.card{padding:20px}.tabs{flex-wrap:wrap}.tab{min-width:calc(50% - 3px)}.btn-group{flex-direction:column}.btn{min-width:100%}.stats-bar{flex-direction:column;gap:10px}.preview-header{flex-direction:column;align-items:stretch}.preview-item{flex-wrap:wrap}.preview-item img{width:44px;height:44px}.stat-value{font-size:22px}}::selection{background:var(--primary);color:#fff}.loading{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.3);border-radius:50%;border-top-color:#fff;animation:spin 0.8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+    </style>
+</head>
+<body>
+    <div class="container" id="main-content" style="display: none;">
+        <div class="header">
+            <h1><i class="fas fa-gift"></i>QQ礼物数据管理</h1>
+            <p>批量导入礼物数据到数据库</p>
+        </div>
+
+        <!-- 数据输入 -->
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-keyboard"></i>
+                数据输入
+                <button class="sample-btn" id="sampleBtn">
+                    <i class="fas fa-flask"></i> 加载示例
+                </button>
+            </div>
+
+            <div class="tabs">
+                <button class="tab active" data-tab="text">
+                    <i class="fas fa-align-left"></i> 文本格式
+                </button>
+                <button class="tab" data-tab="json">
+                    <i class="fas fa-code"></i> JSON格式
+                </button>
+                <button class="tab" data-tab="file">
+                    <i class="fas fa-file-upload"></i> 上传文件
+                </button>
+            </div>
+
+            <!-- 文本格式 -->
+            <div id="tab-text" class="tab-content active">
+                <div class="format-hint">
+                    <strong><i class="fas fa-info-circle"></i> 支持格式：</strong><br>
+                    <code>链接 礼物名字：xxx 礼物描述：xxx 礼物价格：xxx 礼物原始价格：xxx 礼物预览图链接：xxx</code><br>
+                    每行一条记录，自动解析 gift_id
+                </div>
+                <div class="textarea-container">
+                    <textarea id="textInput" placeholder="粘贴礼物数据，每行一条记录...
+
+示例：
+https://h5.qzone.qq.com/v2/vip/giftv2/giftSendPage?gift=217976 礼物名字：圆月 礼物描述：祝愿你我一切安好~ 礼物价格：0 礼物原始价格：0 礼物预览图链接：https://qzonestyle.gtimg.cn/qzone/space_item/material/xxx.png"></textarea>
+                </div>
+            </div>
+
+            <!-- JSON格式 -->
+            <div id="tab-json" class="tab-content">
+                <div class="format-hint">
+                    <strong><i class="fas fa-info-circle"></i> JSON 数组格式：</strong><br>
+                    <code>[{"gift_id": 123, "name": "名称", "description": "描述", "price": 0, "image_url": "链接"}]</code>
+                </div>
+                <div class="textarea-container">
+                    <textarea id="jsonInput" placeholder="粘贴JSON格式数据..."></textarea>
+                </div>
+            </div>
+
+            <!-- 文件上传 -->
+            <div id="tab-file" class="tab-content">
+                <div class="format-hint">
+                    <strong><i class="fas fa-info-circle"></i> 支持文件格式：</strong><br>
+                    <code>.txt</code> 文件（文本格式数据）或 <code>.json</code> 文件（JSON格式数据）
+                </div>
+                
+                <div class="upload-zone" id="uploadZone">
+                    <input type="file" id="fileInput" accept=".txt,.json">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>点击或拖拽文件到此处上传</p>
+                    <span>支持 .txt 和 .json 文件</span>
+                </div>
+
+                <div id="fileInfo" class="file-info" style="display: none;">
+                    <i class="fas fa-file-alt"></i>
+                    <div class="file-info-text">
+                        <div class="file-info-name" id="fileName"></div>
+                        <div class="file-info-size" id="fileSize"></div>
+                    </div>
+                    <button class="file-info-remove" id="removeFile" title="移除文件">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="btn-group" style="margin-top: 16px;">
+                <button class="btn btn-secondary" id="parseBtn">
+                    <i class="fas fa-search"></i> 解析预览
+                </button>
+                <button class="btn btn-secondary" id="clearBtn">
+                    <i class="fas fa-trash-alt"></i> 清空
+                </button>
+            </div>
+        </div>
+
+        <!-- 预览区域 -->
+        <div class="card" id="previewCard" style="display: none;">
+            <div class="card-title">
+                <i class="fas fa-eye"></i>
+                数据预览
+            </div>
+            
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-value" id="statTotal">0</div>
+                    <div class="stat-label"><i class="fas fa-box"></i> 总数量</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="statFree">0</div>
+                    <div class="stat-label"><i class="fas fa-hand-holding-heart"></i> 免费礼物</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="statPaid">0</div>
+                    <div class="stat-label"><i class="fas fa-coins"></i> 付费礼物</div>
+                </div>
+            </div>
+
+            <div class="preview-section">
+                <div class="preview-header">
+                    <span class="preview-count">
+                        <i class="fas fa-list"></i> 共 <span id="previewCount">0</span> 条数据
+                    </span>
+                    <button class="btn btn-primary" id="submitBtn">
+                        <i class="fas fa-rocket"></i> 提交到数据库
+                    </button>
+                </div>
+                <div class="preview-list" id="previewList"></div>
+            </div>
+        </div>
+
+        <!-- 日志区域 -->
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-terminal"></i>
+                操作日志
+            </div>
+            <div class="log-container" id="logContainer">
+                <div class="log-entry">
+                    <span class="log-time">[系统]</span>
+                    <span class="log-info"><i class="fas fa-check-circle"></i> 准备就绪，请粘贴数据开始导入</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.nightdye.cn/loader.js"></script>
+    <script>
+        NightAuth.protectPage();
+        document.getElementById('main-content').style.display = 'block';
+
+        // 状态框控制函数示例
+        function showStatus(message, type = 'info') {
+            const box = document.getElementById('statusBox');
+            const content = document.getElementById('statusContent');
+            const icon = box.querySelector('i');
+            
+            const icons = {
+                info: 'fas fa-info-circle',
+                success: 'fas fa-check-circle',
+                error: 'fas fa-times-circle',
+                warning: 'fas fa-exclamation-triangle'
+            };
+            
+            box.className = 'status-box show ' + type;
+            icon.className = icons[type];
+            content.textContent = message;
+        }
+    </script>
+</body>
+</html>

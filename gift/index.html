@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="https://nightdye.guokevr.cn/qq/images/night.ico" type="image/x-icon"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="./css/gift.css">
+  <title>QQ礼物-夜染汇总</title>
+</head>
+
+<body class="gftheme-default">
+  <!-- 加载提示 -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+    <span class="loading-text"><i class="fas fa-gift fa-spin"></i> 正在加载礼物数据...</span>
+  </div>
+
+  <!-- 头部 -->
+  <header>
+    <div class="header-content">
+      <div class="logo-title">
+        <img id="clean" src="https://nightdye.guokevr.cn/qq/images/night_logo_1.png" class="site-logo" alt="夜染Logo" title="点击清除本地缓存" />
+        <div class="title-and-button">
+          <span class="site-title">夜染礼物商城</span>
+          <a class="author-qq-button" href="https://nightdye.guokevr.cn/qq/n.html" target="_blank" rel="noopener noreferrer">作者QQ</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+<!-- 搜索栏 -->
+<div class="search-bar-wrapper">
+  <div class="modal-controls search-bar">
+    <div class="search-wrapper">
+      <input type="text" id="searchInput" placeholder="礼物名称、描述或ID">
+      <button type="button" id="searchBtn" class="search-btn" title="搜索">
+          <i class="fas fa-search"></i>
+      </button>
+    </div>
+    <button type="button" id="openFilterBtn" title="打开筛选设置" aria-label="打开筛选设置">
+      <i class="fas fa-sliders-h"></i>
+    </button>
+  </div>
+  <div class="gift-count" id="giftCount">礼物数量: 0</div>
+</div>
+
+  <!-- 漂浮按钮 -->
+  <div class="float-buttons">
+    <button type="button" id="backToTopBtn" title="返回顶部" style="display: none;">↑</button>
+    <button type="button" id="backToBottomBtn" title="前往底部" style="display: none;">↓</button>
+  </div>
+
+  <!-- 筛选弹窗 -->
+  <div class="modal" id="filterModal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>筛选与设置</h2>
+        <button type="button" class="close-modal-btn" id="closeModalBtn" aria-label="关闭">&times;</button>
+      </div>
+
+      <div class="modal-controls">
+        <div class="filter-group">
+          <label for="priceFilter">价格筛选</label>
+          <select id="priceFilter">
+            <option value="all">全部价格</option>
+            <option value="free">免费(0元)</option>
+            <option value="low">低价(1-12元)</option>
+            <option value="mid">中价(18-50元)</option>
+            <option value="high">高价(>50元)</option>
+            <option value="custom">自定义价格</option>
+          </select>
+        </div>
+
+        <div id="customPriceInputs" class="custom-price-inputs" style="display: none;">
+          <input type="number" id="customMin" placeholder="最低价" min="0" step="0.1" />
+          <span class="price-separator">-</span>
+          <input type="number" id="customMax" placeholder="最高价" min="0" step="0.1" />
+        </div>
+
+        <div class="filter-group">
+          <label for="sortOrder">排序方式</label>
+          <select id="sortOrder">
+            <option value="default">默认排序</option>
+            <option value="timeAsc">时间由早到晚</option>
+            <option value="timeDesc">时间由晚到早</option>
+            <option value="priceAsc">价格升序</option>
+            <option value="priceDesc">价格降序</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="gfthemeSelector">切换主题</label>
+          <select id="gfthemeSelector">
+            <option value="gftheme-default">默认主题</option>
+            <option value="gftheme-pastel">浅色主题</option>
+            <option value="gftheme-dark">深色主题</option>
+          </select>
+        </div>
+
+        <div class="filter-actions">
+          <button type="button" id="toggleViewBtn">切换列表/宫格</button>
+          <button type="button" id="resetFiltersBtn">重置选项</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 礼物容器 -->
+  <main>
+    <div class="container" id="giftContainer"></div>
+  </main>
+
+  <!-- 加载更多按钮 -->
+  <div class="load-more-wrapper">
+    <button type="button" id="loadMoreBtn" style="display: none;">
+      加载更多 (剩余 <span id="remainingCount">0</span> 件)
+    </button>
+  </div>
+
+  <!-- 底部 -->
+  <footer>&copy; 2025 夜染礼物展示</footer>
+
+  <!-- JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+  <script src="https://cdn.nightdye.cn/loader.js"></script>
+</body>
+</html>

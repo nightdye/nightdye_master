@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
+  <link rel="shortcut icon" href="https://nightdye.guokevr.cn/qq/images/night.ico" type="image/x-icon">
+  <link rel="stylesheet" href="kx.css">
+  <title>细体字转换器</title>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+        <img src="https://nightdye.guokevr.cn/qq/images/night_logo_1.png" alt="Logo" class="logo">
+      <h1>细体字转换器</h1>
+    </header>
+    
+    <main>
+      <p>选择一个汉字部首，或手动输入单个汉字进行转换。</p>
+      
+      <select id="radicalSelect" aria-label="选择部首"></select>
+      
+      <div class="manual-input-container">
+        <input type="text" id="manualInput" placeholder="在此处手动输入单个汉字" maxlength="1">
+      </div>
+      
+      <div class="result" id="resultLabel" title="点击可选中"></div>
+      
+      <div class="buttons">
+        <button id="convertBtn">转换</button>
+        <button id="generateBtn">选择生成</button>
+        <button id="randomBtn">随机</button>
+        <button id="copyBtn" class="copy-btn">复制</button>
+        <button id="exampleBtn" class="example-btn">查看示例图片</button>
+      </div>
+    </main>
+  </div>
+  
+  <footer>
+      <p>&copy; 2025 夜染之梦 · 细体生成</p>
+  </footer>
+
+  <div class="alert-overlay" id="alertOverlay">
+    <div class="alert-box">
+      <p id="alertMessage"></p>
+      <button id="alertCloseBtn">关闭</button>
+    </div>
+  </div>
+
+  <div class="image-preview-overlay" id="imagePreviewOverlay">
+      <div class="image-preview-box">
+          <img src="kx.png" alt="示例图片" id="zoomedImage">
+      </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+  <script src="https://cdn.nightdye.cn/loader.js"></script>
+</body>
+</html>
