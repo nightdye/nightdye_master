@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QQ装扮工具</title>
+    <link rel="shortcut icon" href="https://qq.nightdye.cn/qq/images/night.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <img src="https://qq.nightdye.cn/qq/images/night_logo_1.png" alt="NightDye Logo" class="site-logo">
+            <h1>QQ装扮工具</h1>
+            <p>查询 / 设置 / Cookie管理</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="query"><i class="fas fa-search"></i> 编号查询</button>
+            <button class="tab-btn" data-tab="library"><i class="fas fa-images"></i> 装扮库</button>
+            <button class="tab-btn" data-tab="setting"><i class="fas fa-cog"></i> 装扮设置</button>
+            <button class="tab-btn" data-tab="cookie"><i class="fas fa-cookie-bite"></i> Cookie</button>
+        </div>
+
+        <!-- 编号查询面板 -->
+        <div class="tab-panel active" id="panel-query">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-hashtag"></i>
+                    <h2>装扮编号查询</h2>
+                </div>
+                <div class="form-group">
+                    <label>编号ID</label>
+                    <input type="number" id="actNumInput" placeholder="输入装扮编号" min="1">
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" id="btnQueryInfo"><i class="fas fa-info-circle"></i> 查询信息</button>
+                    <button class="btn btn-secondary" id="btnQueryBuy"><i class="fas fa-users"></i> 购买历史</button>
+                </div>
+                <div class="results-container" id="queryResults" style="display:none;">
+                    <div class="results-header"><span><i class="fas fa-list"></i> 查询结果</span></div>
+                    <div class="results-list" id="queryResultsList"></div>
+                </div>
+            </div>
+
+            <!-- 活动列表卡片区 -->
+            <div class="card" id="actListCard">
+                <div class="card-header">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h2>活动列表</h2>
+                </div>
+                <div class="list-grid" id="actListGrid">
+                    <div class="loading-placeholder"><i class="fas fa-spinner fa-spin"></i> 加载活动数据...</div>
+                </div>
+                <div class="list-pagination" id="actListPagination"></div>
+            </div>
+        </div>
+
+        <!-- 装扮库面板 -->
+        <div class="tab-panel" id="panel-library">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-images"></i>
+                    <h2>装扮库</h2>
+                </div>
+                <div class="library-filters">
+                    <div class="filter-row">
+                        <select id="libraryCategory" class="filter-select">
+                            <option value="">全部分类</option>
+                        </select>
+                        <div class="search-box">
+                            <input type="text" id="librarySearch" placeholder="搜索ID或名称...">
+                            <button class="search-btn" id="btnLibrarySearch"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                    <div class="library-stats" id="libraryStats">加载中...</div>
+                </div>
+                <div class="library-grid" id="libraryGrid">
+                    <div class="loading-placeholder"><i class="fas fa-spinner fa-spin"></i> 加载装扮数据...</div>
+                </div>
+                <div class="library-pagination" id="libraryPagination"></div>
+            </div>
+        </div>
+
+        <!-- 装扮设置面板 -->
+        <div class="tab-panel" id="panel-setting">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-palette"></i>
+                    <h2>装扮设置</h2>
+                </div>
+
+                <div class="form-group">
+                    <label>选择功能</label>
+                    <select id="settingType" class="form-select">
+                        <optgroup label="会员CK功能">
+                            <option value="setSVIPDiamond">超会钻</option>
+                            <option value="setBigClubDiamond">大会钻</option>
+                            <option value="setBadge">大会徽章</option>
+                            <option value="setHonorTitle">荣誉称号</option>
+                            <option value="setCoupleSV">情侣SV钻</option>
+                            <option value="setNameplate">SVIP铭牌</option>
+                            <option value="setBigNameplate">大会员铭牌</option>
+                            <option value="setQIDStyle">QID样式</option>
+                            <option value="setVIPMedal">会员勋章</option>
+                            <option value="setCustomNameplate">定制铭牌</option>
+                        </optgroup>
+                        <optgroup label="空间CK功能">
+                            <option value="setLevelIcon">等级图标</option>
+                            <option value="setLevelTitle">等级称号</option>
+                            <option value="setYellowDiamond">黄钻图标</option>
+                            <option value="setCoupleStyle">情侣钻石样式</option>
+                            <option value="setCardNameplate">集卡铭牌</option>
+                        </optgroup>
+                    </select>
+                    <div class="cookie-type-hint" id="settingCookieHint"><i class="fas fa-crown"></i> 使用会员CK</div>
+                </div>
+
+                <div class="form-group" id="inputGroup1">
+                    <label id="inputLabel1">ID</label>
+                    <input type="number" id="settingInput1" placeholder="输入ID" min="0">
+                </div>
+
+                <!-- 图片预览区域 -->
+                <div class="image-preview-container" id="imagePreview" style="display:none;"></div>
+
+                <div class="form-group" id="inputGroup2" style="display:none;">
+                    <label id="inputLabel2">会员类型</label>
+                    <input type="number" id="settingInput2" placeholder="0-普通 1-SVIP 2-年费SVIP" min="0" value="0">
+                </div>
+
+                <div class="query-mode">
+                    <label class="radio-label">
+                        <input type="radio" name="settingMode" value="single" checked>
+                        <span>单次设置</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="settingMode" value="batch">
+                        <span>批量设置</span>
+                    </label>
+                </div>
+
+                <div class="form-group batch-range" style="display:none;">
+                    <div class="range-inputs">
+                        <div class="range-item">
+                            <label>起始ID</label>
+                            <input type="number" id="batchStart" placeholder="1" min="1">
+                        </div>
+                        <span class="range-separator">-</span>
+                        <div class="range-item">
+                            <label>结束ID</label>
+                            <input type="number" id="batchEnd" placeholder="100" min="1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-primary" id="btnSetItem"><i class="fas fa-check"></i> 执行设置</button>
+                    <button class="btn btn-secondary" id="btnClearSettingResults"><i class="fas fa-trash"></i> 清空结果</button>
+                </div>
+
+                <div class="results-container" id="settingResults" style="display:none;">
+                    <div class="results-header">
+                        <span><i class="fas fa-list"></i> 设置结果</span>
+                        <span class="results-stats" id="settingStats"></span>
+                    </div>
+                    <div class="results-list" id="settingResultsList"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cookie管理面板 -->
+        <div class="tab-panel" id="panel-cookie">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-key"></i>
+                    <h2>Cookie管理</h2>
+                </div>
+                <div class="form-group">
+                    <label>Cookie类型</label>
+                    <div class="cookie-type-tabs">
+                        <button class="cookie-type-btn active" data-type="vip"><i class="fas fa-crown"></i> 会员CK</button>
+                        <button class="cookie-type-btn" data-type="qzone"><i class="fas fa-star"></i> 空间CK</button>
+                    </div>
+                    <div class="cookie-type-hint" id="cookieTypeHint">用于: 编号查询、等级图标、超会钻、大会钻、徽章、荣誉称号等</div>
+                </div>
+
+                <!-- 扫码登录区域 -->
+                <div class="qrlogin-section">
+                    <div class="qrlogin-header">
+                        <span><i class="fas fa-qrcode"></i> 扫码获取Cookie</span>
+                    </div>
+                    <div class="qrlogin-actions">
+                        <button class="btn btn-sm btn-primary qr-btn" id="btnGetQrCode"><i class="fas fa-sync-alt"></i> 获取二维码</button>
+                    </div>
+                    <div class="qrlogin-content" id="qrloginContent" style="display:none;">
+                        <div class="qrcode-wrapper">
+                            <img id="qrcodeImg" src="" alt="QQ扫码登录">
+                            <div class="qrcode-mask" id="qrcodeMask" style="display:none;">
+                                <i class="fas fa-check-circle"></i>
+                                <span id="qrcodeMaskText">已扫码</span>
+                            </div>
+                        </div>
+                        <div class="qrlogin-status" id="qrloginStatus">请使用QQ扫描二维码</div>
+                    </div>
+                </div>
+
+                <div class="divider"><span>或 手动输入</span></div>
+
+                <div class="info-row">
+                    <span class="info-label"><i class="fas fa-signal"></i> 状态</span>
+                    <span class="info-value" id="cookieStatus">未检测</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label"><i class="fas fa-clock"></i> 更新时间</span>
+                    <span class="info-value" id="cookieUpdateTime">-</span>
+                </div>
+                <div class="form-group">
+                    <label id="cookieInputLabel">QQ会员Cookie</label>
+                    <textarea id="cookieInput" placeholder="粘贴Cookie...需包含p_skey"></textarea>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-success" id="btnTestCookie"><i class="fas fa-flask"></i> 测试</button>
+                    <button class="btn btn-warning" id="btnSaveCookie"><i class="fas fa-save"></i> 保存</button>
+                </div>
+                <div class="status-box" id="cookieStatusBox">
+                    <i class="fas fa-info-circle"></i>
+                    <div class="status-content" id="cookieStatusContent"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="toast" id="toast">
+            <i class="fas fa-info-circle"></i>
+            <span id="toastMessage"></span>
+        </div>
+
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <span class="footer-author"><i class="fas fa-moon"></i> 夜染</span>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="../../js/zb/script.js"></script>
+</body>
+</html>
