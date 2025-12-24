@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QQ装扮工具</title>
     <link rel="shortcut icon" href="https://qq.nightdye.cn/qq/images/night.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -95,27 +94,22 @@
                 <div class="form-group">
                     <label>选择功能</label>
                     <select id="settingType" class="form-select">
-                        <optgroup label="会员CK功能">
-                            <option value="setSVIPDiamond">超会钻</option>
-                            <option value="setBigClubDiamond">大会钻</option>
-                            <option value="setBadge">大会徽章</option>
-                            <option value="setHonorTitle">荣誉称号</option>
-                            <option value="setCoupleSV">情侣SV钻</option>
-                            <option value="setNameplate">SVIP铭牌</option>
-                            <option value="setBigNameplate">大会员铭牌</option>
-                            <option value="setQIDStyle">QID样式</option>
-                            <option value="setVIPMedal">会员勋章</option>
-                            <option value="setCustomNameplate">定制铭牌</option>
-                        </optgroup>
-                        <optgroup label="空间CK功能">
-                            <option value="setLevelIcon">等级图标</option>
-                            <option value="setLevelTitle">等级称号</option>
-                            <option value="setYellowDiamond">黄钻图标</option>
-                            <option value="setCoupleStyle">情侣钻石样式</option>
-                            <option value="setCardNameplate">集卡铭牌</option>
-                        </optgroup>
+                        <option value="setSVIPDiamond">超会钻</option>
+                        <option value="setBigClubDiamond">大会钻</option>
+                        <option value="setBadge">大会徽章</option>
+                        <option value="setHonorTitle">荣誉称号</option>
+                        <option value="setCoupleSV">情侣SV钻</option>
+                        <option value="setNameplate">SVIP铭牌</option>
+                        <option value="setBigNameplate">大会员铭牌</option>
+                        <option value="setQIDStyle">QID样式</option>
+                        <option value="setVIPMedal">会员勋章</option>
+                        <option value="setCustomNameplate">定制铭牌</option>
+                        <option value="setLevelIcon">等级图标</option>
+                        <option value="setLevelTitle">等级称号</option>
+                        <option value="setYellowDiamond">黄钻图标</option>
+                        <option value="setCoupleStyle">情侣钻石样式</option>
+                        <option value="setCardNameplate">集卡铭牌</option>
                     </select>
-                    <div class="cookie-type-hint" id="settingCookieHint"><i class="fas fa-crown"></i> 使用会员CK</div>
                 </div>
 
                 <div class="form-group" id="inputGroup1">
@@ -184,7 +178,9 @@
                         <button class="cookie-type-btn active" data-type="vip"><i class="fas fa-crown"></i> 会员CK</button>
                         <button class="cookie-type-btn" data-type="qzone"><i class="fas fa-star"></i> 空间CK</button>
                     </div>
-                    <div class="cookie-type-hint" id="cookieTypeHint">用于: 编号查询、等级图标、超会钻、大会钻、徽章、荣誉称号等</div>
+                    <div class="cookie-type-hint" id="cookieTypeHint">
+                        <i class="fas fa-info-circle"></i> 装扮设置时会自动匹配合适的Cookie，若主Cookie失败会尝试备用Cookie
+                    </div>
                 </div>
 
                 <!-- 扫码登录区域 -->
