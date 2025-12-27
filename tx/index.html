@@ -74,6 +74,7 @@
         .btn-outline{background:transparent;border:2px solid var(--primary-color);color:var(--primary-color)}
         .btn-outline:active{background:var(--primary-color);color:#fff}
         body.dark-mode .btn-outline{border-color:var(--primary-color);color:var(--primary-color)}
+        body.dark-mode .btn-outline:active{background:var(--primary-color);color:#fff}
         .btn-sm{padding:8px 12px;font-size:12px}
         .btn-row{display:flex;gap:var(--spacing-sm)}
         .btn-row .btn{flex:1}
@@ -122,17 +123,17 @@
         @media (hover:hover){
             .app-logo:hover{transform:scale(1.05)}
             .nav-btn:hover{background:var(--primary-hover)}
-            body.dark-mode .nav-btn:hover{background:var(--primary-color);color:#1a1d23}
+            body.dark-mode .nav-btn:hover{background:var(--primary-color);color:#fff}
             .btn:hover{background:var(--primary-hover)}
             .btn-secondary:hover{background:var(--secondary-hover)}
             .btn-warning:hover{background:#e68a00}
             .btn-info:hover{background:var(--secondary-hover)}
             .btn-outline:hover{background:var(--primary-color);color:#fff}
-            body.dark-mode .btn:hover{background:var(--primary-hover);color:#1a1d23}
-            body.dark-mode .btn-secondary:hover{background:#4fc3f7;color:#1a1d23}
-            body.dark-mode .btn-warning:hover{background:#ffb74d;color:#1a1d23}
-            body.dark-mode .btn-info:hover{background:#4fc3f7;color:#1a1d23}
-            body.dark-mode .btn-outline:hover{background:var(--primary-color);color:#1a1d23}
+            body.dark-mode .btn:hover{background:var(--primary-hover);color:#fff}
+            body.dark-mode .btn-secondary:hover{background:#4fc3f7;color:#fff}
+            body.dark-mode .btn-warning:hover{background:#ffb74d;color:#fff}
+            body.dark-mode .btn-info:hover{background:#4fc3f7;color:#fff}
+            body.dark-mode .btn-outline:hover{background:var(--primary-color);color:#fff}
         }
         @media (min-width:768px){
             .container{max-width:640px;margin:var(--spacing-lg) auto;padding:var(--spacing-xl);border-radius:var(--radius-lg);min-height:auto;box-shadow:var(--shadow-md)}
