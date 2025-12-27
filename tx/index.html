@@ -122,12 +122,17 @@
         @media (hover:hover){
             .app-logo:hover{transform:scale(1.05)}
             .nav-btn:hover{background:var(--primary-hover)}
-            body.dark-mode .nav-btn:hover{background:var(--primary-color);color:#000}
+            body.dark-mode .nav-btn:hover{background:var(--primary-color);color:#1a1d23}
             .btn:hover{background:var(--primary-hover)}
             .btn-secondary:hover{background:var(--secondary-hover)}
             .btn-warning:hover{background:#e68a00}
             .btn-info:hover{background:var(--secondary-hover)}
             .btn-outline:hover{background:var(--primary-color);color:#fff}
+            body.dark-mode .btn:hover{background:var(--primary-hover);color:#1a1d23}
+            body.dark-mode .btn-secondary:hover{background:#4fc3f7;color:#1a1d23}
+            body.dark-mode .btn-warning:hover{background:#ffb74d;color:#1a1d23}
+            body.dark-mode .btn-info:hover{background:#4fc3f7;color:#1a1d23}
+            body.dark-mode .btn-outline:hover{background:var(--primary-color);color:#1a1d23}
         }
         @media (min-width:768px){
             .container{max-width:640px;margin:var(--spacing-lg) auto;padding:var(--spacing-xl);border-radius:var(--radius-lg);min-height:auto;box-shadow:var(--shadow-md)}
