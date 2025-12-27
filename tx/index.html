@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://qq.nightdye.cn/qq/images/night.ico" type="image/x-icon">
+    <title>QQ头像上传工具</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <style>
+        /* Select2 Custom Styles */
+        .select2-container--default .select2-selection--single{height:42px;padding:6px 12px;border:1px solid var(--border-color);border-radius:var(--radius-sm);background:var(--bg-secondary);font-size:14px}
+        .select2-container--default .select2-selection--single .select2-selection__rendered{line-height:28px;color:var(--text-primary);padding-left:0}
+        .select2-container--default .select2-selection--single .select2-selection__arrow{height:40px}
+        .select2-container--default .select2-selection--single .select2-selection__placeholder{color:var(--text-muted)}
+        .select2-dropdown{border:1px solid var(--border-color);border-radius:var(--radius-sm);background:var(--bg-secondary);box-shadow:var(--shadow-md)}
+        .select2-container--default .select2-results__option--highlighted[aria-selected]{background:var(--primary-color)}
+        .select2-container--default .select2-results__option{padding:10px 12px;color:var(--text-primary)}
+        .select2-container--default .select2-search--dropdown .select2-search__field{border:1px solid var(--border-color);border-radius:var(--radius-sm);padding:8px 12px}
+        body.dark-mode .select2-container--default .select2-selection--single{background:var(--bg-primary);border-color:var(--border-color)}
+        body.dark-mode .select2-dropdown{background:var(--bg-card);border-color:var(--border-color)}
+        body.dark-mode .select2-container--default .select2-search--dropdown .select2-search__field{background:var(--bg-primary);border-color:var(--border-color);color:var(--text-primary)}
+        body.dark-mode .select2-container--default .select2-results__option{background:var(--bg-card)}
+        body.dark-mode .select2-container--default .select2-results__option--highlighted[aria-selected]{background:var(--primary-color)}
+        :root{--primary-color:#4CAF50;--primary-hover:#45a049;--primary-active:#2a832d;--secondary-color:#2196F3;--secondary-hover:#1976D2;--bg-primary:#f5f7fa;--bg-secondary:#fff;--bg-card:#fff;--text-primary:#333;--text-secondary:#666;--text-muted:#888;--border-color:#e8e8e8;--shadow-sm:0 2px 8px rgba(0,0,0,0.04);--shadow-md:0 4px 12px rgba(0,0,0,0.08);--radius-sm:8px;--radius-md:12px;--radius-lg:16px;--spacing-xs:6px;--spacing-sm:10px;--spacing-md:16px;--spacing-lg:24px;--spacing-xl:32px;--success-bg:#e8f5e9;--success-color:#2e7d32;--error-bg:#ffebee;--error-color:#c62828;--warning-color:#FF9800;--info-color:#2196F3;--transition-fast:0.2s ease}
+        body.dark-mode{--bg-primary:#1a1d23;--bg-secondary:#242830;--bg-card:#2a2f38;--text-primary:#e8e8e8;--text-secondary:#aaa;--text-muted:#777;--border-color:#3a3f48;--primary-color:#00ADB5;--primary-hover:#00CED1;--primary-active:#009DAE;--secondary-color:#00ADB5;--shadow-sm:0 2px 8px rgba(0,0,0,0.2);--shadow-md:0 4px 12px rgba(0,0,0,0.25);--success-bg:rgba(0,173,181,0.15);--success-color:#00CED1;--error-bg:rgba(255,82,82,0.15);--error-color:#ff5252}
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:var(--bg-primary);color:var(--text-primary);line-height:1.6;min-height:100vh}
+        a{text-decoration:none}
+        .container{width:100%;max-width:100%;margin:0 auto;padding:var(--spacing-md);background:var(--bg-secondary);min-height:100vh}
+
+        /* Header */
+        .app-header{margin-bottom:var(--spacing-lg)}
+        .logo-title-container{display:flex;align-items:center;gap:var(--spacing-md);margin-bottom:var(--spacing-md)}
+        .app-logo{width:48px;height:48px;border-radius:50%;cursor:pointer;box-shadow:-8px 5px 10px rgba(0,0,0,0.5);transition:transform var(--transition-fast)}
+        .app-logo:active{transform:scale(0.95)}
+        body.dark-mode .app-logo{box-shadow:-8px 5px 10px rgba(0,173,181,0.75)}
+        .title{font-size:20px;font-weight:700;margin:0}
+        body.dark-mode .title{color:var(--primary-color)}
+        .nav-bar{display:flex;gap:var(--spacing-sm);flex-wrap:wrap}
+        .nav-btn{flex:1;min-width:0;padding:10px 12px;font-size:13px;font-weight:500;border-radius:var(--radius-sm);background:var(--primary-color);color:#fff;cursor:pointer;border:none;transition:all var(--transition-fast);display:flex;align-items:center;justify-content:center;gap:6px}
+        .nav-btn:active{background:var(--primary-active)}
+        body.dark-mode .nav-btn{background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-color)}
+
+        /* Card */
+        .card{background:var(--bg-card);border-radius:var(--radius-md);border:1px solid var(--border-color);margin-bottom:var(--spacing-md);overflow:hidden}
+        .card-header{display:flex;align-items:center;gap:var(--spacing-sm);padding:10px var(--spacing-md);background:var(--bg-primary);border-bottom:1px solid var(--border-color)}
+        body.dark-mode .card-header{background:rgba(0,173,181,0.08)}
+        .card-icon{width:26px;height:26px;background:rgba(76,175,80,0.1);border-radius:6px;display:flex;align-items:center;justify-content:center}
+        .card-icon i{color:var(--primary-color);font-size:13px}
+        body.dark-mode .card-icon{background:rgba(0,173,181,0.15)}
+        .card-title{font-size:14px;font-weight:600}
+        .card-body{padding:var(--spacing-md)}
+
+        /* Form */
+        .form-row{display:flex;gap:var(--spacing-sm);margin-bottom:var(--spacing-md)}
+        .form-row:last-child{margin-bottom:0}
+        .form-group{flex:1;margin-bottom:var(--spacing-md)}
+        .form-group:last-child{margin-bottom:0}
+        .form-group.small{flex:0 0 120px}
+        .form-label{display:block;font-size:12px;font-weight:500;color:var(--text-secondary);margin-bottom:4px}
+        body.dark-mode .form-label{color:var(--text-primary)}
+        .form-input,.form-select{width:100%;padding:10px 12px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-size:14px;background:var(--bg-secondary);color:var(--text-primary);transition:border-color var(--transition-fast)}
+        .form-input:focus,.form-select:focus{outline:none;border-color:var(--primary-color)}
+        body.dark-mode .form-input,body.dark-mode .form-select{background:var(--bg-primary);border-color:var(--border-color)}
+        .form-hint{font-size:11px;color:var(--text-muted);margin-top:4px}
+
+        /* Button */
+        .btn{padding:10px 16px;background:var(--primary-color);color:#fff;border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;transition:all var(--transition-fast);display:inline-flex;align-items:center;justify-content:center;gap:6px}
+        .btn:active{background:var(--primary-active)}
+        .btn-block{width:100%}
+        .btn-secondary{background:var(--secondary-color)}
+        .btn-warning{background:var(--warning-color)}
+        .btn-info{background:var(--info-color)}
+        .btn-outline{background:transparent;border:2px solid var(--primary-color);color:var(--primary-color)}
+        .btn-outline:active{background:var(--primary-color);color:#fff}
+        body.dark-mode .btn-outline{border-color:var(--primary-color);color:var(--primary-color)}
+        .btn-sm{padding:8px 12px;font-size:12px}
+        .btn-row{display:flex;gap:var(--spacing-sm)}
+        .btn-row .btn{flex:1}
+
+        /* Actions Grid */
+        .actions-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--spacing-sm)}
+        .actions-grid .btn{padding:12px 10px;font-size:12px}
+
+        /* Result Box */
+        .result-box{margin-top:var(--spacing-md);padding:12px;border-radius:var(--radius-sm);font-size:13px;display:none}
+        .result-box.visible{display:block}
+        .result-box.success{background:var(--success-bg);color:var(--success-color);border:1px solid var(--success-color)}
+        .result-box.error{background:var(--error-bg);color:var(--error-color);border:1px solid var(--error-color)}
+        .result-box.info{background:rgba(33,150,243,0.1);color:var(--info-color);border:1px solid var(--info-color)}
+        body.dark-mode .result-box.success{background:rgba(0,173,181,0.1);border-color:var(--primary-color)}
+        body.dark-mode .result-box.info{background:rgba(0,173,181,0.1);border-color:var(--primary-color);color:var(--primary-color)}
+
+        /* File Input */
+        .file-input-wrapper{position:relative;overflow:hidden;width:100%}
+        .file-input-wrapper input[type=file]{position:absolute;left:0;top:0;opacity:0;cursor:pointer;width:100%;height:100%}
+        .file-input-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border:2px dashed var(--border-color);border-radius:var(--radius-md);background:var(--bg-primary);color:var(--text-secondary);font-size:13px;cursor:pointer;transition:all var(--transition-fast)}
+        .file-input-btn:hover{border-color:var(--primary-color);color:var(--primary-color)}
+        body.dark-mode .file-input-btn{background:var(--bg-card)}
+
+        /* Preview */
+        .preview-container{margin-top:var(--spacing-md);text-align:center}
+        .preview-img{max-width:160px;max-height:160px;border-radius:var(--radius-sm);border:2px solid var(--border-color);display:none}
+        .preview-img.visible{display:inline-block}
+        body.dark-mode .preview-img{border-color:var(--primary-color)}
+
+        /* History Grid */
+        .history-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--spacing-sm);margin-top:var(--spacing-md)}
+        .history-item{position:relative;aspect-ratio:1;border-radius:var(--radius-sm);overflow:hidden;border:2px solid transparent;cursor:pointer;transition:all var(--transition-fast)}
+        .history-item:hover{border-color:var(--primary-color)}
+        .history-item.selected{border-color:var(--primary-color);box-shadow:0 0 0 2px var(--primary-color)}
+        .history-item img{width:100%;height:100%;object-fit:cover}
+        .history-item .delete-btn{position:absolute;top:2px;right:2px;width:20px;height:20px;background:rgba(0,0,0,0.6);color:#fff;border:none;border-radius:50%;font-size:12px;cursor:pointer;opacity:0;transition:opacity var(--transition-fast)}
+        .history-item:hover .delete-btn{opacity:1}
+        .history-empty{grid-column:1/-1;text-align:center;color:var(--text-muted);font-size:13px;padding:var(--spacing-lg)}
+
+        /* Saved Keys Select */
+        .key-select-row{display:flex;gap:var(--spacing-sm);margin-bottom:var(--spacing-sm)}
+        .key-select-row .form-select{flex:1}
+        .key-select-row .btn{flex:0 0 auto}
+
+        @media (hover:hover){
+            .app-logo:hover{transform:scale(1.05)}
+            .nav-btn:hover{background:var(--primary-hover)}
+            body.dark-mode .nav-btn:hover{background:var(--primary-color);color:#000}
+            .btn:hover{background:var(--primary-hover)}
+            .btn-secondary:hover{background:var(--secondary-hover)}
+            .btn-warning:hover{background:#e68a00}
+            .btn-info:hover{background:var(--secondary-hover)}
+            .btn-outline:hover{background:var(--primary-color);color:#fff}
+        }
+        @media (min-width:768px){
+            .container{max-width:640px;margin:var(--spacing-lg) auto;padding:var(--spacing-xl);border-radius:var(--radius-lg);min-height:auto;box-shadow:var(--shadow-md)}
+            .app-logo{width:52px;height:52px}
+            .title{font-size:22px}
+            .nav-btn{flex:none;padding:10px 18px;font-size:13px}
+            .card{margin-bottom:var(--spacing-lg)}
+            .actions-grid{grid-template-columns:repeat(3,1fr)}
+            .history-grid{grid-template-columns:repeat(5,1fr)}
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header class="app-header">
+        <div class="logo-title-container">
+            <img src="https://qq.nightdye.cn/qq/images/night_logo_1.png" class="app-logo" id="appLogo">
+            <h1 class="title">QQ头像上传工具</h1>
+        </div>
+        <nav class="nav-bar">
+            <a class="nav-btn theme-switch"><i class="fa-solid fa-palette"></i> 切换主题</a>
+            <a class="nav-btn" href="https://qq.nightdye.cn"><i class="fa-solid fa-house"></i> 返回主页</a>
+        </nav>
+    </header>
+
+    <!-- 账号选择 -->
+    <section class="card">
+        <div class="card-header">
+            <span class="card-icon"><i class="fa-solid fa-user"></i></span>
+            <span class="card-title">账号与Key</span>
+        </div>
+        <div class="card-body">
+            <div class="key-select-row">
+                <select class="form-select" id="savedKeysSelect">
+                    <option value="">-- 选择已保存的账号 --</option>
+                </select>
+                <button class="btn btn-outline btn-sm" id="openKeyToolBtn"><i class="fa-solid fa-key"></i> 获取Key</button>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">QQ号</label>
+                    <input type="text" id="qq" class="form-input" placeholder="输入QQ号">
+                </div>
+                <div class="form-group small">
+                    <label class="form-label">群号(可选)</label>
+                    <input type="text" id="group" class="form-input" placeholder="群操作">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Key密钥 <span style="font-weight:normal;color:var(--text-muted)">(明文显示)</span></label>
+                <input type="text" id="key" class="form-input" placeholder="从工具获取或手动粘贴" style="font-family:monospace;font-size:12px">
+            </div>
+            <div class="btn-row">
+                <button class="btn btn-outline btn-sm" id="saveKeyBtn"><i class="fa-solid fa-save"></i> 保存账号</button>
+                <button class="btn btn-outline btn-sm" id="deleteKeyBtn"><i class="fa-solid fa-trash"></i> 删除账号</button>
+            </div>
+            <div id="keyToolResult" class="result-box"></div>
+        </div>
+    </section>
+
+    <!-- 选择图片 -->
+    <section class="card">
+        <div class="card-header">
+            <span class="card-icon"><i class="fa-solid fa-image"></i></span>
+            <span class="card-title">选择图片</span>
+        </div>
+        <div class="card-body">
+            <div class="file-input-wrapper">
+                <div class="file-input-btn">
+                    <i class="fa-solid fa-cloud-upload-alt"></i>
+                    <span id="fileInputText">点击选择图片或拖拽到此处</span>
+                </div>
+                <input type="file" id="image" accept="image/*">
+            </div>
+            <p class="form-hint">头像 ≤ 3MB | 动态头像 ≤ 5MB (动图) | 名片/群 ≤ 2MB</p>
+            <div class="preview-container">
+                <img id="preview" class="preview-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- 上传操作 -->
+    <section class="card">
+        <div class="card-header">
+            <span class="card-icon"><i class="fa-solid fa-upload"></i></span>
+            <span class="card-title">上传操作</span>
+        </div>
+        <div class="card-body">
+            <div class="actions-grid">
+                <button class="btn" data-type="avatar"><i class="fa-solid fa-user-circle"></i> 头像</button>
+                <button class="btn btn-secondary" data-type="world"><i class="fa-solid fa-globe"></i> 动态头像</button>
+                <button class="btn btn-warning" data-type="card"><i class="fa-solid fa-id-card"></i> 名片背景</button>
+                <button class="btn btn-info" data-type="group_avatar"><i class="fa-solid fa-users"></i> 群头像</button>
+                <button class="btn btn-info" data-type="group_cover"><i class="fa-solid fa-panorama"></i> 群封面</button>
+            </div>
+            <div id="result" class="result-box"></div>
+        </div>
+    </section>
+
+    <!-- 历史记录 -->
+    <section class="card">
+        <div class="card-header">
+            <span class="card-icon"><i class="fa-solid fa-clock-rotate-left"></i></span>
+            <span class="card-title">上传历史</span>
+        </div>
+        <div class="card-body">
+            <div class="history-grid" id="historyGrid">
+                <div class="history-empty">暂无上传历史</div>
+            </div>
+            <button class="btn btn-outline btn-block" id="uploadHistoryBtn" style="margin-top:var(--spacing-md);display:none">
+                <i class="fa-solid fa-upload"></i> 使用选中图片上传
+            </button>
+        </div>
+    </section>
+
+    <!-- 工具 -->
+    <section class="card">
+        <div class="card-header">
+            <span class="card-icon"><i class="fa-solid fa-wrench"></i></span>
+            <span class="card-title">工具</span>
+        </div>
+        <div class="card-body">
+            <div class="btn-row">
+                <button class="btn btn-outline" id="testApiBtn"><i class="fa-solid fa-plug"></i> 测试API</button>
+                <button class="btn btn-outline" id="clearHistoryBtn"><i class="fa-solid fa-broom"></i> 清空历史</button>
+            </div>
+        </div>
+    </section>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/zh-CN.min.js"></script>
+<script src="https://cdn.nightdye.cn/loader.js"></script>
+</body>
+</html>
