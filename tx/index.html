@@ -56,7 +56,6 @@
         .form-row:last-child{margin-bottom:0}
         .form-group{flex:1;margin-bottom:var(--spacing-md)}
         .form-group:last-child{margin-bottom:0}
-        .form-group.small{flex:0 0 120px}
         .form-label{display:block;font-size:12px;font-weight:500;color:var(--text-secondary);margin-bottom:4px}
         body.dark-mode .form-label{color:var(--text-primary)}
         .form-input,.form-select{width:100%;padding:10px 12px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-size:14px;background:var(--bg-secondary);color:var(--text-primary);transition:border-color var(--transition-fast)}
@@ -100,10 +99,22 @@
         body.dark-mode .file-input-btn{background:var(--bg-card)}
 
         /* Preview */
-        .preview-container{margin-top:var(--spacing-md);text-align:center}
+        .preview-container{margin-top:var(--spacing-md);text-align:center;position:relative;display:inline-block}
+        .preview-wrapper{position:relative;display:inline-block}
         .preview-img{max-width:160px;max-height:160px;border-radius:var(--radius-sm);border:2px solid var(--border-color);display:none}
         .preview-img.visible{display:inline-block}
         body.dark-mode .preview-img{border-color:var(--primary-color)}
+        .preview-close{position:absolute;top:-8px;right:-8px;width:24px;height:24px;background:rgba(0,0,0,0.6);color:#fff;border:none;border-radius:50%;font-size:14px;cursor:pointer;opacity:0;transition:opacity var(--transition-fast);display:flex;align-items:center;justify-content:center;z-index:1}
+        .preview-wrapper:hover .preview-close{opacity:1}
+        .preview-close.always-show{opacity:1}
+
+        /* Current Avatar Preview */
+        .current-avatar-section{display:flex;align-items:center;gap:var(--spacing-md);margin-bottom:var(--spacing-md);padding:var(--spacing-sm);background:var(--bg-primary);border-radius:var(--radius-sm)}
+        .current-avatar{width:64px;height:64px;border-radius:50%;border:2px solid var(--border-color);object-fit:cover;display:none}
+        .current-avatar.visible{display:block}
+        body.dark-mode .current-avatar{border-color:var(--primary-color)}
+        .current-avatar-info{flex:1;font-size:13px;color:var(--text-secondary)}
+        .current-avatar-label{font-weight:500;color:var(--text-primary);margin-bottom:2px}
 
         /* History Grid */
         .history-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--spacing-sm);margin-top:var(--spacing-md)}
@@ -166,6 +177,13 @@
             <span class="card-title">账号与Key</span>
         </div>
         <div class="card-body">
+            <div class="current-avatar-section" id="currentAvatarSection" style="display:none">
+                <img id="currentAvatar" class="current-avatar" alt="当前头像">
+                <div class="current-avatar-info">
+                    <div class="current-avatar-label">当前头像</div>
+                    <div id="currentAvatarQQ"></div>
+                </div>
+            </div>
             <div class="key-select-row">
                 <select class="form-select" id="savedKeysSelect">
                     <option value="">-- 选择已保存的账号 --</option>
@@ -177,13 +195,13 @@
                     <label class="form-label">QQ号</label>
                     <input type="text" id="qq" class="form-input" placeholder="输入QQ号">
                 </div>
-                <div class="form-group small">
-                    <label class="form-label">群号(可选)</label>
-                    <input type="text" id="group" class="form-input" placeholder="群操作">
+                <div class="form-group">
+                    <label class="form-label">群号 (可选)</label>
+                    <input type="text" id="group" class="form-input" placeholder="群头像/封面时填写">
                 </div>
             </div>
             <div class="form-group">
-                <label class="form-label">Key密钥 <span style="font-weight:normal;color:var(--text-muted)">(明文显示)</span></label>
+                <label class="form-label">Key密钥</label>
                 <input type="text" id="key" class="form-input" placeholder="从工具获取或手动粘贴" style="font-family:monospace;font-size:12px">
             </div>
             <div class="btn-row">
@@ -201,16 +219,19 @@
             <span class="card-title">选择图片</span>
         </div>
         <div class="card-body">
-            <div class="file-input-wrapper">
+            <div class="file-input-wrapper" id="fileInputWrapper">
                 <div class="file-input-btn">
                     <i class="fa-solid fa-cloud-upload-alt"></i>
-                    <span id="fileInputText">点击选择图片或拖拽到此处</span>
+                    <span id="fileInputText">点击选择、拖拽或粘贴图片</span>
                 </div>
                 <input type="file" id="image" accept="image/*">
             </div>
-            <p class="form-hint">头像 ≤ 3MB | 动态头像 ≤ 5MB (动图) | 名片/群 ≤ 2MB</p>
-            <div class="preview-container">
-                <img id="preview" class="preview-img">
+            <p class="form-hint">头像 ≤ 3MB | 动态头像 ≤ 5MB (动图) | 名片/群 ≤ 2MB | 支持Ctrl+V粘贴</p>
+            <div class="preview-container" style="width:100%">
+                <div class="preview-wrapper">
+                    <img id="preview" class="preview-img">
+                    <button class="preview-close" id="previewClose" title="清除图片">&times;</button>
+                </div>
             </div>
         </div>
     </section>
@@ -224,7 +245,7 @@
         <div class="card-body">
             <div class="actions-grid">
                 <button class="btn" data-type="avatar"><i class="fa-solid fa-user-circle"></i> 头像</button>
-                <button class="btn btn-secondary" data-type="world"><i class="fa-solid fa-globe"></i> 动态头像</button>
+                <button class="btn btn-secondary" data-type="world"><i class="fa-solid fa-circle-play"></i> 动态头像</button>
                 <button class="btn btn-warning" data-type="card"><i class="fa-solid fa-id-card"></i> 名片背景</button>
                 <button class="btn btn-info" data-type="group_avatar"><i class="fa-solid fa-users"></i> 群头像</button>
                 <button class="btn btn-info" data-type="group_cover"><i class="fa-solid fa-panorama"></i> 群封面</button>
@@ -237,15 +258,12 @@
     <section class="card">
         <div class="card-header">
             <span class="card-icon"><i class="fa-solid fa-clock-rotate-left"></i></span>
-            <span class="card-title">上传历史</span>
+            <span class="card-title">上传历史 <span style="font-weight:normal;color:var(--text-muted);font-size:12px">(点击填充到上传区域)</span></span>
         </div>
         <div class="card-body">
             <div class="history-grid" id="historyGrid">
                 <div class="history-empty">暂无上传历史</div>
             </div>
-            <button class="btn btn-outline btn-block" id="uploadHistoryBtn" style="margin-top:var(--spacing-md);display:none">
-                <i class="fa-solid fa-upload"></i> 使用选中图片上传
-            </button>
         </div>
     </section>
 

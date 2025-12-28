@@ -27,8 +27,21 @@
         </header>
         <!--主内容区-->
         <main class="main-container">
+            <!--模式切换-->
+            <div class="mode-switch-container">
+                <div class="mode-switch">
+                    <button class="mode-btn active" data-mode="generate">
+                        <i class="fas fa-qrcode"></i>
+                        <span>生成二维码</span>
+                    </button>
+                    <button class="mode-btn" data-mode="decode">
+                        <i class="fas fa-search"></i>
+                        <span>解码二维码</span>
+                    </button>
+                </div>
+            </div>
             <!--左侧-配置面板-->
-            <section class="config-section">
+            <section class="config-section" id="generate-section">
                 <div class="card">
                     <div class="card-header">
                         <i class="fas fa-sliders-h"></i>
@@ -374,6 +387,96 @@
                     </div>
                 </div>
             </section>
+            <!--解码功能区域-->
+            <section class="decode-section hidden" id="decode-section">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-search"></i>
+                        <h2 class="card-title">二维码解码</h2>
+                    </div>
+                    <div class="decode-content">
+                        <!--上传区域-->
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-image"></i>
+                                <span>上传二维码图片</span>
+                            </label>
+                            <div class="file-upload decode-upload" id="decode-upload">
+                                <input type="file" id="decode-file-input" accept="image/*"/>
+                                <i class="fas fa-cloud-upload-alt file-upload-icon"></i>
+                                <div class="file-upload-text">点击上传或拖拽图片到这里</div>
+                                <div class="file-upload-hint">支持粘贴图片 (Ctrl+V)</div>
+                                <div class="file-preview">
+                                    <img class="file-preview-img" id="decode-preview" src="" alt="二维码预览"/>
+                                    <button class="file-remove" id="decode-remove" type="button">
+                                        <i class="fas fa-times"></i>
+                                        <span>移除</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="divider-text">
+                            <span>或</span>
+                        </div>
+                        <!--URL输入-->
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-link"></i>
+                                <span>二维码图片链接</span>
+                            </label>
+                            <div class="url-input-wrapper">
+                                <input type="text" id="decode-url-input" class="form-input" placeholder="输入二维码图片URL..."/>
+                                <button class="btn btn-secondary url-load-btn" id="decode-url-btn">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!--解码按钮-->
+                        <div class="btn-group decode-btn-group">
+                            <button class="btn btn-primary" id="btn-decode">
+                                <i class="fas fa-search"></i>
+                                <span>解码</span>
+                            </button>
+                            <button class="btn btn-secondary" id="btn-decode-reset">
+                                <i class="fas fa-undo"></i>
+                                <span>重置</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!--解码结果-->
+                <div class="card decode-result-card">
+                    <div class="card-header">
+                        <i class="fas fa-file-alt"></i>
+                        <h2 class="card-title">解码结果</h2>
+                    </div>
+                    <div class="decode-result-content">
+                        <div class="decode-placeholder" id="decode-placeholder">
+                            <i class="fas fa-qrcode"></i>
+                            <p>上传或粘贴二维码图片进行解码</p>
+                        </div>
+                        <div class="decode-result hidden" id="decode-result">
+                            <div class="decode-result-type" id="decode-result-type">
+                                <i class="fas fa-tag"></i>
+                                <span>文本</span>
+                            </div>
+                            <div class="decode-result-text">
+                                <textarea id="decode-result-textarea" class="form-textarea" readonly rows="5"></textarea>
+                            </div>
+                            <div class="decode-result-actions">
+                                <button class="btn btn-primary" id="btn-copy-result">
+                                    <i class="fas fa-copy"></i>
+                                    <span>复制内容</span>
+                                </button>
+                                <button class="btn btn-success hidden" id="btn-open-url">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    <span>打开链接</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <!--右侧-预览区域-->
             <section class="preview-section">
                 <div class="card preview-card">
@@ -445,6 +548,7 @@
         </main>
         <div id="toast-container"></div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.1/qrcode.min.js"></script>
+        <script src="https://cdn.nightdye.cn/qrcode/jsQR.min.js"></script>
         <script src="https://cdn.nightdye.cn/loader.js"></script>
     </body>
 </html>
