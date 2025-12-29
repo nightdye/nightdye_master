@@ -1866,3 +1866,76 @@ body::after {
     background: rgba(0, 255, 242, 0.1);
     color: var(--cyan-primary);
 }
+
+/* ============ 用户信息卡片 ============ */
+.user-info-card {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 212, 200, 0.05) 100%);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    border-radius: 12px;
+    animation: fadeIn 0.3s ease;
+}
+
+.user-info-card.show {
+    display: block;
+}
+
+.user-info-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+}
+
+.user-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid var(--success-color);
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+.user-basic {
+    flex: 1;
+}
+
+.user-nick {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.user-qq {
+    font-size: 14px;
+    color: var(--cyan-primary);
+    font-weight: 500;
+}
+
+.user-cookie-preview {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--dark-border);
+    border-radius: 8px;
+    padding: 12px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 11px;
+    color: var(--text-secondary);
+    word-break: break-all;
+    max-height: 80px;
+    overflow-y: auto;
+    line-height: 1.6;
+}
+
+.user-cookie-preview .cookie-key {
+    color: var(--cyan-primary);
+    font-weight: 600;
+}
+
+.user-cookie-preview .cookie-value {
+    color: var(--success-color);
+}
+
