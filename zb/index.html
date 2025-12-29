@@ -183,23 +183,57 @@
                     </div>
                 </div>
 
-                <!-- 扫码登录区域 -->
+                <!-- 登录获取Cookie区域 -->
                 <div class="qrlogin-section">
                     <div class="qrlogin-header">
-                        <span><i class="fas fa-qrcode"></i> 扫码获取Cookie</span>
+                        <span><i class="fas fa-sign-in-alt"></i> 获取Cookie</span>
                     </div>
-                    <div class="qrlogin-actions">
-                        <button class="btn btn-sm btn-primary qr-btn" id="btnGetQrCode"><i class="fas fa-sync-alt"></i> 获取二维码</button>
+
+                    <!-- 登录方式切换 -->
+                    <div class="login-mode-tabs">
+                        <button class="login-mode-btn active" data-mode="qrcode">
+                            <i class="fas fa-qrcode"></i> 扫码登录
+                        </button>
+                        <button class="login-mode-btn" data-mode="urlscheme">
+                            <i class="fas fa-link"></i> 链接登录
+                        </button>
                     </div>
-                    <div class="qrlogin-content" id="qrloginContent" style="display:none;">
-                        <div class="qrcode-wrapper">
-                            <img id="qrcodeImg" src="" alt="QQ扫码登录">
-                            <div class="qrcode-mask" id="qrcodeMask" style="display:none;">
-                                <i class="fas fa-check-circle"></i>
-                                <span id="qrcodeMaskText">已扫码</span>
-                            </div>
+
+                    <!-- 扫码模式 -->
+                    <div class="login-mode-panel" id="qrcodePanel">
+                        <div class="qrlogin-actions">
+                            <button class="btn btn-sm btn-primary qr-btn" id="btnGetQrCode"><i class="fas fa-sync-alt"></i> 获取二维码</button>
                         </div>
-                        <div class="qrlogin-status" id="qrloginStatus">请使用QQ扫描二维码</div>
+                        <div class="qrlogin-content" id="qrloginContent" style="display:none;">
+                            <div class="qrcode-wrapper">
+                                <img id="qrcodeImg" src="" alt="QQ扫码登录">
+                                <div class="qrcode-mask" id="qrcodeMask" style="display:none;">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span id="qrcodeMaskText">已扫码</span>
+                                </div>
+                            </div>
+                            <div class="qrlogin-status" id="qrloginStatus">请使用QQ扫描二维码</div>
+                        </div>
+                    </div>
+
+                    <!-- URL Scheme 模式 -->
+                    <div class="login-mode-panel" id="urlschemePanel" style="display:none;">
+                        <div class="urlscheme-steps">
+                            <div class="step-row"><span class="step-num">1</span> 点击复制授权链接</div>
+                            <div class="step-row"><span class="step-num">2</span> 在手机浏览器打开，QQ弹出授权</div>
+                            <div class="step-row"><span class="step-num">3</span> 确认后复制跳转URL到下方</div>
+                        </div>
+                        <div class="urlscheme-actions">
+                            <button class="btn btn-sm btn-primary" id="btnCopyAuthUrl"><i class="fas fa-copy"></i> 复制授权链接</button>
+                        </div>
+                        <div class="auth-url-display" id="authUrlDisplay" style="display:none;">
+                            <code id="authUrlText"></code>
+                        </div>
+                        <div class="jump-url-input">
+                            <textarea id="jumpUrlInput" placeholder="粘贴授权后跳转的URL...&#10;格式: https://ssl.ptlogin2.qq.com/jump?..."></textarea>
+                            <button class="btn btn-sm btn-success" id="btnParseJumpUrl"><i class="fas fa-sign-in-alt"></i> 获取Cookie</button>
+                        </div>
+                        <div class="urlscheme-status" id="urlschemeStatus"></div>
                     </div>
                 </div>
 
