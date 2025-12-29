@@ -1783,8 +1783,22 @@ body::after {
     flex-shrink: 0;
 }
 
-.urlscheme-actions {
+.urlscheme-generate {
+    display: flex;
+    gap: 10px;
     margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+.urlscheme-generate .jump-btn {
+    text-decoration: none;
+    display: inline-flex;
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 5px rgba(0, 255, 136, 0.3); }
+    50% { box-shadow: 0 0 20px rgba(0, 255, 136, 0.6); }
 }
 
 .auth-url-display {

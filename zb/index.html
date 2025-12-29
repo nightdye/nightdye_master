@@ -219,18 +219,16 @@
                     <!-- URL Scheme 模式 -->
                     <div class="login-mode-panel" id="urlschemePanel" style="display:none;">
                         <div class="urlscheme-steps">
-                            <div class="step-row"><span class="step-num">1</span> 点击复制授权链接</div>
-                            <div class="step-row"><span class="step-num">2</span> 在手机浏览器打开，QQ弹出授权</div>
-                            <div class="step-row"><span class="step-num">3</span> 确认后复制跳转URL到下方</div>
+                            <div class="step-row"><span class="step-num">1</span> 点击生成链接，然后跳转授权</div>
+                            <div class="step-row"><span class="step-num">2</span> QQ确认登录后，复制跳转的URL</div>
+                            <div class="step-row"><span class="step-num">3</span> 粘贴到下方获取Cookie</div>
                         </div>
-                        <div class="urlscheme-actions">
-                            <button class="btn btn-sm btn-primary" id="btnCopyAuthUrl"><i class="fas fa-copy"></i> 复制授权链接</button>
-                        </div>
-                        <div class="auth-url-display" id="authUrlDisplay" style="display:none;">
-                            <code id="authUrlText"></code>
+                        <div class="urlscheme-generate">
+                            <button class="btn btn-sm btn-primary" id="btnGenerateAuthUrl"><i class="fas fa-link"></i> 生成授权链接</button>
+                            <a class="btn btn-sm btn-success jump-btn" id="btnJumpToAuth" style="display:none;"><i class="fas fa-external-link-alt"></i> 点击跳转授权</a>
                         </div>
                         <div class="jump-url-input">
-                            <textarea id="jumpUrlInput" placeholder="粘贴授权后跳转的URL...&#10;格式: https://ssl.ptlogin2.qq.com/jump?..."></textarea>
+                            <textarea id="jumpUrlInput" placeholder="授权成功后，复制浏览器地址栏的URL粘贴到这里..."></textarea>
                             <button class="btn btn-sm btn-success" id="btnParseJumpUrl"><i class="fas fa-sign-in-alt"></i> 获取Cookie</button>
                         </div>
                         <div class="urlscheme-status" id="urlschemeStatus"></div>
