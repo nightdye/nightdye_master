@@ -706,7 +706,7 @@ body::after {
 /* 装扮卡片网格 - 宫格视图 */
 .library-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 18px;
     min-height: 200px;
 }
@@ -1417,6 +1417,10 @@ body::after {
 }
 
 /* ============ 通用列表项样式 ============ */
+.list-filters {
+    margin-bottom: 16px;
+}
+
 .list-grid {
     display: flex;
     flex-direction: column;
@@ -1820,10 +1824,25 @@ body::after {
 @media (max-width: 400px) {
     .library-grid {
         grid-template-columns: 1fr;
+        gap: 10px;
     }
 
     .zb-card-img {
-        height: 140px;
+        height: 120px;
+        padding: 16px;
+    }
+
+    .zb-card-info {
+        padding: 12px 14px;
+    }
+
+    .zb-card-actions {
+        padding: 10px;
+    }
+
+    .zb-action-btn {
+        font-size: 11px;
+        padding: 10px 8px;
     }
 }
 

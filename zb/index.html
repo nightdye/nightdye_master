@@ -50,6 +50,12 @@
                     <i class="fas fa-calendar-alt"></i>
                     <h2>活动列表</h2>
                 </div>
+                <div class="list-filters">
+                    <div class="search-box">
+                        <input type="text" id="actListSearch" placeholder="搜索ID或名称...">
+                        <button class="search-btn" id="btnActListSearch"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
                 <div class="list-grid" id="actListGrid">
                     <div class="loading-placeholder"><i class="fas fa-spinner fa-spin"></i> 加载活动数据...</div>
                 </div>
@@ -185,7 +191,7 @@
                         <button class="cookie-type-btn" data-type="qzone"><i class="fas fa-star"></i> 空间CK</button>
                     </div>
                     <div class="cookie-type-hint" id="cookieTypeHint">
-                        <i class="fas fa-info-circle"></i> 装扮设置时会自动匹配合适的Cookie，若主Cookie失败会尝试备用Cookie
+                        <i class="fas fa-info-circle"></i> 装扮设置时会自动匹配合适的Cookie，若会员Cookie失败会尝试空间Cookie
                     </div>
                 </div>
 
@@ -201,7 +207,7 @@
                             <i class="fas fa-qrcode"></i> 扫码登录
                         </button>
                         <button class="login-mode-btn" data-mode="urlscheme">
-                            <i class="fas fa-link"></i> 链接登录
+                            <i class="fas fa-link"></i> 跳转登录
                         </button>
                     </div>
 
