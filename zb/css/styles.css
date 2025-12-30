@@ -656,17 +656,117 @@ body::after {
     transform: translateY(0) scale(0.97);
 }
 
-.library-stats {
-    font-size: 12px;
-    color: var(--text-secondary);
+/* 工具栏 */
+.library-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 10px 0;
 }
 
+.library-stats {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+/* 视图切换 */
+.view-switcher {
+    display: flex;
+    gap: 6px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.view-btn {
+    width: 36px;
+    height: 32px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--text-secondary);
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.view-btn:hover {
+    color: var(--cyan-primary);
+    background: rgba(0, 255, 242, 0.1);
+}
+
+.view-btn.active {
+    background: linear-gradient(135deg, #1a5c58 0%, #0d3d3a 100%);
+    border-color: var(--cyan-dark);
+    color: var(--cyan-primary);
+}
+
+/* 装扮卡片网格 - 宫格视图 */
 .library-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
     gap: 18px;
     min-height: 200px;
+}
+
+/* 列表视图 */
+.library-grid.list-view {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.library-grid.list-view .zb-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.library-grid.list-view .zb-card-img {
+    width: 80px;
+    height: 80px;
+    min-width: 80px;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 8px;
+}
+
+.library-grid.list-view .zb-card-info {
+    flex: 1;
+    padding: 12px;
+    border-top: none;
+    border-left: 1px solid var(--dark-border);
+    background: transparent;
+}
+
+.library-grid.list-view .zb-card-id {
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+
+.library-grid.list-view .zb-card-name {
+    font-size: 13px;
+    white-space: normal;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.library-grid.list-view .zb-card-actions {
+    flex-direction: column;
+    padding: 10px 14px;
+    gap: 6px;
+    border-top: none;
+    border-left: 1px solid var(--dark-border);
+    min-width: 100px;
+}
+
+.library-grid.list-view .zb-action-btn {
+    padding: 8px 12px;
 }
 
 .loading-placeholder {
@@ -676,6 +776,7 @@ body::after {
     color: var(--text-secondary);
 }
 
+/* 商品卡片样式 */
 .zb-card {
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid var(--dark-border);
@@ -685,12 +786,28 @@ body::after {
     position: relative;
 }
 
+/* 分类标签 */
+.zb-card-category {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    padding: 4px 10px;
+    background: rgba(0, 255, 242, 0.9);
+    color: var(--dark-bg);
+    font-size: 10px;
+    font-weight: 700;
+    border-radius: 4px;
+    z-index: 2;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
 .zb-card-img {
     width: 100%;
-    height: 120px;
+    height: 130px;
     object-fit: contain;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 255, 242, 0.03) 100%);
-    padding: 16px;
+    padding: 20px;
     transition: transform var(--transition-normal);
 }
 
