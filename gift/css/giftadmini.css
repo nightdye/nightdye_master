@@ -132,8 +132,7 @@ body::before {
     font-size: 18px
 }
 
-.card-title .extra-btn {
-    margin-left: auto;
+.extra-btn {
     padding: 6px 12px;
     background: rgba(99, 102, 241, 0.15);
     border: 1px solid rgba(99, 102, 241, 0.3);
@@ -147,13 +146,17 @@ body::before {
     transition: all 0.2s ease
 }
 
-.card-title .extra-btn:active {
+.card-title .extra-btn {
+    margin-left: auto
+}
+
+.extra-btn:active {
     transform: scale(0.95);
     background: rgba(99, 102, 241, 0.25)
 }
 
 @media (hover:hover) {
-    .card-title .extra-btn:hover {
+    .extra-btn:hover {
         background: rgba(99, 102, 241, 0.25);
         border-color: var(--primary)
     }
