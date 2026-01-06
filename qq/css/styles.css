@@ -896,14 +896,33 @@ mark {
     }
 
     /* 分类标签横向滚动优化 - 带边框容器 */
+    .category-tags-wrapper {
+        position: relative;
+        margin-bottom: 20px;
+    }
+
+    /* 右侧渐变遮罩 - 暗示可滑动 */
+    .category-tags-wrapper::after {
+        content: '';
+        position: absolute;
+        right: 1px;
+        top: 1px;
+        bottom: 1px;
+        width: 40px;
+        background: linear-gradient(to right, transparent, var(--bg-light));
+        border-radius: 0 11px 11px 0;
+        pointer-events: none;
+        z-index: 1;
+    }
+
     .category-tags {
         display: flex;
         flex-wrap: nowrap;
         gap: 10px;
         overflow-x: auto;
         overflow-y: hidden;
-        padding: 12px 15px;
-        margin-bottom: 20px;
+        padding: 12px 45px 12px 15px;
+        margin-bottom: 0;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
         -ms-overflow-style: none;
