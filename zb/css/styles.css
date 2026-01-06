@@ -83,11 +83,6 @@ body::after {
     transition: transform var(--transition-normal), box-shadow var(--transition-normal);
 }
 
-.site-logo:hover {
-    transform: scale(1.05) rotate(-3deg);
-    box-shadow: -10px 8px 25px rgba(0, 173, 181, 0.8);
-}
-
 .page-header h1 {
     font-size: 28px;
     font-weight: 700;
@@ -180,11 +175,6 @@ body::after {
     border: 2px solid var(--cyan-primary);
     opacity: 0.5;
     transition: opacity var(--transition-normal);
-}
-
-.card:hover::before,
-.card:hover::after {
-    opacity: 0.8;
 }
 
 .card::before {
@@ -690,11 +680,6 @@ body::after {
     align-items: center;
     justify-content: center;
     transition: all var(--transition-fast);
-}
-
-.view-btn:hover {
-    color: var(--cyan-primary);
-    background: rgba(0, 255, 242, 0.1);
 }
 
 .view-btn.active {
@@ -1545,6 +1530,24 @@ body::after {
 
 /* ============ Hover效果 - 仅桌面端（合并所有hover） ============ */
 @media (hover: hover) {
+    /* Logo */
+    .site-logo:hover {
+        transform: scale(1.05) rotate(-3deg);
+        box-shadow: -10px 8px 25px rgba(0, 173, 181, 0.8);
+    }
+
+    /* 卡片角标 */
+    .card:hover::before,
+    .card:hover::after {
+        opacity: 0.8;
+    }
+
+    /* 视图切换按钮 */
+    .view-btn:hover {
+        color: var(--cyan-primary);
+        background: rgba(0, 255, 242, 0.1);
+    }
+
     /* 选项卡 */
     .tab-btn:hover:not(.active) {
         background: var(--dark-secondary);

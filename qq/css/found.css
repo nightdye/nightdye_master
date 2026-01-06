@@ -603,6 +603,34 @@ footer a {
         border-color: var(--primary);
         transform: translateY(-2px)
     }
+
+    [data-tooltip] {
+        position: relative
+    }
+
+    [data-tooltip]::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: calc(100% + 8px);
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 0.5rem 0.75rem;
+        background: var(--text-dark);
+        color: var(--bg);
+        font-size: 0.75rem;
+        border-radius: 6px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.2s ease;
+        z-index: 1000;
+        pointer-events: none
+    }
+
+    [data-tooltip]:hover::after {
+        opacity: 1;
+        visibility: visible
+    }
 }
 
 @media (max-width:600px) {
@@ -680,35 +708,5 @@ footer a {
 
     .quick-actions {
         grid-template-columns: repeat(2, 1fr)
-    }
-}
-
-@media (hover:hover) and (pointer:fine) {
-    [data-tooltip] {
-        position: relative
-    }
-
-    [data-tooltip]::after {
-        content: attr(data-tooltip);
-        position: absolute;
-        bottom: calc(100% + 8px);
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 0.5rem 0.75rem;
-        background: var(--text-dark);
-        color: var(--bg);
-        font-size: 0.75rem;
-        border-radius: 6px;
-        white-space: nowrap;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.2s ease;
-        z-index: 1000;
-        pointer-events: none
-    }
-
-    [data-tooltip]:hover::after {
-        opacity: 1;
-        visibility: visible
     }
 }

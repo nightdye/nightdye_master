@@ -155,13 +155,6 @@ body::before {
     background: rgba(99, 102, 241, 0.25)
 }
 
-@media (hover:hover) {
-    .extra-btn:hover {
-        background: rgba(99, 102, 241, 0.25);
-        border-color: var(--primary)
-    }
-}
-
 .tabs {
     display: flex;
     gap: 6px;
@@ -198,13 +191,6 @@ body::before {
 
 .tab:active:not(.active) {
     background: rgba(99, 102, 241, 0.1)
-}
-
-@media (hover:hover) {
-    .tab:not(.active):hover {
-        background: rgba(99, 102, 241, 0.1);
-        color: var(--text-primary)
-    }
 }
 
 .tab-content {
@@ -359,6 +345,16 @@ textarea:focus {
 }
 
 @media (hover:hover) {
+    .extra-btn:hover {
+        background: rgba(99, 102, 241, 0.25);
+        border-color: var(--primary)
+    }
+
+    .tab:not(.active):hover {
+        background: rgba(99, 102, 241, 0.1);
+        color: var(--text-primary)
+    }
+
     .upload-zone:hover {
         border-color: var(--primary);
         background: rgba(99, 102, 241, 0.05)
