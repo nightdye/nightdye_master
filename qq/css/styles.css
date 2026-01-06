@@ -299,8 +299,6 @@ main {
 
 .category-container.view-list .link {
     margin-bottom: 0;
-    word-break: break-word;
-    overflow-wrap: break-word;
 }
 
 /* ==================== 链接容器样式 ==================== */
@@ -375,6 +373,8 @@ main {
     border-radius: 6px;
     text-decoration: none;
     transition: all 0.2s;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .link:last-child {
