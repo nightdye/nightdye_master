@@ -346,16 +346,10 @@ main {
 
 .category-content {
     padding: 15px;
-    transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.3s ease;
-    max-height: 2000px;
-    opacity: 1;
 }
 
 .link-container.collapsed .category-content {
-    max-height: 0;
-    padding: 0 15px;
-    opacity: 0;
-    overflow: hidden;
+    display: none;
 }
 
 .link-container.collapsed .collapse-icon {
