@@ -214,13 +214,15 @@ header h1 {
     height: 24px;
     background: var(--bg-hover);
     border-radius: 50%;
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     font-size: 16px;
     color: var(--text-light);
     transition: all 0.2s;
+    visibility: hidden;
+    opacity: 0;
 }
 
 .search-clear:active {
