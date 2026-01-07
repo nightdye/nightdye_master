@@ -2124,6 +2124,28 @@ body::after {
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* CF图标样式 */
+.cf-icon {
+    width: 28px;
+    height: 28px;
+    filter: grayscale(100%) brightness(0.6);
+    transition: all 0.3s ease;
+}
+
+.cf-icon.active {
+    filter: none;
+    animation: cf-glow 0.5s ease;
+}
+
+@keyframes cf-glow {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8)); }
+    100% { transform: scale(1); }
 }
 
 .switch-desc {
