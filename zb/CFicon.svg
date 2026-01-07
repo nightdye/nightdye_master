@@ -52,8 +52,7 @@
   <!-- 顶部高光 (随圆环缩小) -->
   <ellipse cx="512" cy="360" rx="180" ry="90" fill="white" opacity="0.12" />
 
-  <!-- === 你的路径 (CF Logo) === -->
-  <!-- 去掉了 stroke，增加了 strongDropShadow 投影，文字宽度约810，背景宽720，实现破框效果 -->
+  <!-- strongDropShadow 投影，文字宽度约810，背景宽720，实现破框效果 -->
   <path 
     fill="url(#goldGradient)" 
     stroke="none" 
