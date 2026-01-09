@@ -239,6 +239,32 @@ main {
     margin-bottom: 1.25rem
 }
 
+.form-group+.form-group {
+    padding-top: 0.25rem
+}
+
+#qqInput2Wrapper {
+    animation: slideDown 0.3s ease;
+    margin-top: -0.25rem
+}
+
+#qqInput2Wrapper .input-wrapper>i {
+    color: var(--primary)
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+        transform: translateY(-8px)
+    }
+    to {
+        opacity: 1;
+        max-height: 100px;
+        transform: translateY(0)
+    }
+}
+
 .form-label {
     display: flex;
     align-items: center;
@@ -342,12 +368,31 @@ main {
 .select2-container--default .select2-selection--single .select2-selection__arrow {
     height: 100%;
     right: 12px;
-    top: 0
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center
 }
 
 .select2-container--default .select2-selection--single .select2-selection__arrow b {
-    border-color: var(--text-light) transparent transparent transparent;
-    border-width: 6px 5px 0 5px
+    border: none;
+    margin: 0;
+    position: relative;
+    top: 0;
+    left: 0
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow b::before {
+    content: '\f107';
+    font-family: 'Font Awesome 7 Free';
+    font-weight: 900;
+    color: var(--primary);
+    font-size: 1rem;
+    transition: transform 0.2s ease
+}
+
+.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b::before {
+    transform: rotate(180deg)
 }
 
 .select2-container--default.select2-container--open .select2-selection--single {
@@ -704,9 +749,5 @@ footer a {
     .header-content {
         flex-direction: column;
         align-items: flex-start
-    }
-
-    .quick-actions {
-        grid-template-columns: repeat(2, 1fr)
     }
 }

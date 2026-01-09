@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -5,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <link rel="shortcut icon" href="https://qq.nightdye.cn/qq/images/night.ico" type="image/x-icon">
-    <link rel="stylesheet" href="./css/found.css">
+    <link rel="stylesheet" href="css/found.css">
     <title>QQ查找工具</title>
 </head>
 <body>
@@ -49,6 +50,7 @@
                         <optgroup label="空间相关" data-icon="fa-house">
                             <option value="zoneqq" data-icon="fa-globe">查看QQ空间</option>
                             <option value="qqfriends" data-icon="fa-user-group">好友线索查看</option>
+                            <option value="qqMutualFriends">共同好友数量</option>
                         </optgroup>
                         <optgroup label="群功能" data-icon="fa-star">
                             <option value="qqGroup2" data-icon="fa-ranking-star">Q群信用星级查询</option>
@@ -95,6 +97,17 @@
                     <input type="text" id="qqInput" class="qq-input" placeholder="请输入QQ号码" inputmode="numeric">
                 </div>
             </div>
+        
+            <div class="form-group" id="qqInput2Wrapper" style="display: none;">
+                <label class="form-label">
+                    <i class="fas fa-user-group"></i>
+                    对方号码
+                </label>
+                <div class="input-wrapper">
+                    <i class="fas fa-at"></i>
+                    <input type="text" id="qqInput2" class="qq-input" placeholder="请输入对方QQ号码" inputmode="numeric">
+                </div>
+            </div>
 
             <a id="executeBtn" class="qq-button">
                 <i class="fas fa-arrow-right-to-bracket"></i>
@@ -137,6 +150,18 @@
                 <div class="quick-action-btn" data-action="qqCard5">
                     <i class="fas fa-gift"></i>
                     <span>礼物墙</span>
+                </div>
+                <div class="quick-action-btn" data-action="qqmp">
+                    <i class="fas fa-id-badge"></i>
+                    <span>铭牌</span>
+                </div>
+                <div class="quick-action-btn" data-action="qqzb">
+                    <i class="fas fa-shirt"></i>
+                    <span>装扮</span>
+                </div>
+                <div class="quick-action-btn" data-action="qqfriends">
+                    <i class="fas fa-user-group"></i>
+                    <span>好友</span>
                 </div>
             </div>
         </div>
