@@ -55,7 +55,12 @@
 }
 
 html {
-    scroll-behavior: smooth
+    scroll-behavior: smooth;
+    scrollbar-width: none
+}
+
+html::-webkit-scrollbar {
+    display: none
 }
 
 body {
@@ -366,20 +371,16 @@ main {
 }
 
 .select2-container--default .select2-selection--single .select2-selection__arrow {
-    height: 100%;
+    height: auto;
     right: 12px;
-    top: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center
+    top: 50%;
+    transform: translateY(-50%)
 }
 
 .select2-container--default .select2-selection--single .select2-selection__arrow b {
     border: none;
     margin: 0;
-    position: relative;
-    top: 0;
-    left: 0
+    position: static
 }
 
 .select2-container--default .select2-selection--single .select2-selection__arrow b::before {
@@ -431,7 +432,12 @@ main {
 
 .select2-results__options {
     max-height: 280px;
-    overflow-y: auto
+    overflow-y: auto;
+    scrollbar-width: none
+}
+
+.select2-results__options::-webkit-scrollbar {
+    display: none
 }
 
 .select2-container--default .select2-results__option {
