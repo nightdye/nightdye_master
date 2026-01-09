@@ -392,17 +392,25 @@ mark {
 /* ==================== 加载状态 ==================== */
 .loading-state,
 .error-state {
-    text-align: center;
-    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    padding: 40px 20px;
     color: var(--text-light);
-    font-size: 1.1rem;
+    font-size: 1rem;
+    gap: 15px;
 }
 
-.loading-state i,
+.loading-state i {
+    font-size: 2.5rem;
+    color: var(--primary);
+}
+
 .error-state i {
-    font-size: 2rem;
-    margin-bottom: 10px;
-    display: block;
+    font-size: 2.5rem;
+    color: #e74c3c;
 }
 
 .error-state {

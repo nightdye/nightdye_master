@@ -724,12 +724,6 @@ textarea:focus {
     align-items: end
 }
 
-@media (max-width:600px) {
-    .auto-update-form {
-        grid-template-columns: 1fr
-    }
-}
-
 .cookie-section {
     margin-bottom: 20px
 }
@@ -826,7 +820,12 @@ textarea:focus {
     background: var(--primary)
 }
 
+/* ============ 响应式设计 ============ */
 @media (max-width:600px) {
+    .auto-update-form {
+        grid-template-columns: 1fr
+    }
+
     .container {
         padding: 20px 15px
     }

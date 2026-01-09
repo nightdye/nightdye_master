@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.nightdye.cn/login/auth.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://qq.nightdye.cn/qq/images/night.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/leveladmin.css">
+    <title>QQ等级排行榜管理</title>
+</head>
+<body>
+    <div class="container" id="main-content" style="display: none;">
+        <div class="header">
+            <div class="header-logo">
+                <img src="https://nightdye.guokevr.cn/qq/images/night_logo_1.png" alt="Logo">
+            </div>
+            <h1><i class="fas fa-crown"></i>QQ等级排行榜管理</h1>
+            <p>批量更新和管理等级数据</p>
+        </div>
+
+        <!-- 统计信息 -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-value" id="statTotal">0</div>
+                <div class="stat-label"><i class="fas fa-users"></i> 收录用户</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="statPenguin">0</div>
+                <div class="stat-label"><i class="fas fa-star"></i> 时光企鹅</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="statPending">0</div>
+                <div class="stat-label"><i class="fas fa-clock"></i> 待更新</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="statLastUpdate">-</div>
+                <div class="stat-label"><i class="fas fa-sync"></i> 最后更新</div>
+            </div>
+        </div>
+
+        <!-- 选项卡 -->
+        <div class="tabs">
+            <button class="tab active" data-tab="overview"><i class="fas fa-chart-pie"></i> 概览</button>
+            <button class="tab" data-tab="auto"><i class="fas fa-sync-alt"></i> 批量更新</button>
+            <button class="tab" data-tab="cookie"><i class="fas fa-cookie"></i> Cookie</button>
+        </div>
+
+        <!-- 概览页 -->
+        <div class="card tab-panel active" id="panel-overview">
+            <div class="card-title">
+                <i class="fas fa-trophy"></i>
+                排行榜概览
+                <button class="extra-btn" id="refreshStats">
+                    <i class="fas fa-sync-alt"></i> 刷新
+                </button>
+            </div>
+            <div class="overview-grid">
+                <div class="overview-item">
+                    <div class="overview-icon"><i class="fas fa-database"></i></div>
+                    <div class="overview-info">
+                        <div class="overview-label">数据库记录</div>
+                        <div class="overview-value" id="overviewTotal">-</div>
+                    </div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-icon penguin"><i class="fas fa-crown"></i></div>
+                    <div class="overview-info">
+                        <div class="overview-label">时光企鹅 (256级)</div>
+                        <div class="overview-value" id="overviewPenguin">-</div>
+                    </div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-icon update"><i class="fas fa-calendar-check"></i></div>
+                    <div class="overview-info">
+                        <div class="overview-label">最后更新时间</div>
+                        <div class="overview-value" id="overviewLastUpdate">-</div>
+                    </div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-icon pending"><i class="fas fa-list-alt"></i></div>
+                    <div class="overview-info">
+                        <div class="overview-label">待更新队列</div>
+                        <div class="overview-value" id="overviewPending">-</div>
+                    </div>
+                </div>
+            </div>
+            <div class="format-hint" style="margin-top:16px">
+                <strong><i class="fas fa-info-circle"></i> 说明：</strong>
+                排行榜数据通过定时任务每日自动更新，也可以在"批量更新"页面手动触发更新。
+            </div>
+        </div>
+
+        <!-- 批量更新页 -->
+        <div class="card tab-panel" id="panel-auto" style="display:none">
+            <div class="card-title">
+                <i class="fas fa-robot"></i>
+                批量更新等级数据
+                <span class="extra-btn" id="autoStatus" style="background:rgba(16,185,129,0.15);border-color:rgba(16,185,129,0.3);color:var(--success-color)">
+                    <i class="fas fa-circle"></i> 就绪
+                </span>
+            </div>
+
+            <div class="format-hint">
+                <strong><i class="fas fa-info-circle"></i> 说明：</strong>
+                从数据库读取所有QQ号，批量查询最新等级信息并更新到数据库。需要先在Cookie页面设置有效的会员Cookie。
+            </div>
+
+            <div class="auto-update-section">
+                <div class="form-group" style="display:flex;gap:10px;align-items:end;flex-wrap:wrap">
+                    <div style="flex:1;min-width:120px">
+                        <label>并发数</label>
+                        <input type="number" id="concurrency" value="30" min="5" max="50" step="5">
+                    </div>
+                    <div style="flex:1;min-width:120px">
+                        <label>批次延迟 (ms)</label>
+                        <input type="number" id="batchDelay" value="200" min="100" max="1000" step="50">
+                    </div>
+                    <div style="flex:1;min-width:120px">
+                        <label>
+                            <input type="checkbox" id="autoRetry" checked style="width:auto;margin-right:6px">
+                            自动重试失败项
+                        </label>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" id="startBatchUpdate">
+                        <i class="fas fa-play"></i> 开始更新
+                    </button>
+                    <button class="btn btn-danger" id="stopBatchUpdate" style="display:none">
+                        <i class="fas fa-stop"></i> 停止
+                    </button>
+                </div>
+            </div>
+
+            <!-- 进度条 -->
+            <div id="batchProgress" class="auto-update-section" style="display:none">
+                <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+                    <span id="batchProgressText">进度: 0/0</span>
+                    <span id="batchStatsText">成功: 0 | 失败: 0</span>
+                </div>
+                <div style="height:8px;background:var(--dark-border);border-radius:4px;overflow:hidden">
+                    <div id="batchProgressBar" style="height:100%;background:linear-gradient(90deg,var(--primary),var(--accent));width:0%;transition:width 0.3s"></div>
+                </div>
+            </div>
+
+            <!-- 实时日志 -->
+            <div class="auto-update-section" style="padding:0">
+                <div style="padding:12px 16px;border-bottom:1px solid var(--dark-border);display:flex;align-items:center;justify-content:space-between">
+                    <span style="font-weight:600;font-size:13px"><i class="fas fa-scroll"></i> 实时日志</span>
+                    <button class="extra-btn" id="clearAutoLog" style="padding:4px 8px;font-size:11px">
+                        <i class="fas fa-eraser"></i> 清空
+                    </button>
+                </div>
+                <div id="autoLogContainer" class="log-container" style="max-height:300px;border-radius:0 0 8px 8px"></div>
+            </div>
+        </div>
+
+        <!-- Cookie管理页 -->
+        <div class="card tab-panel" id="panel-cookie" style="display:none">
+            <div class="card-title">
+                <i class="fas fa-key"></i>
+                会员Cookie管理
+                <button class="extra-btn" id="btnQrLogin">
+                    <i class="fa-solid fa-palette"></i> 获取Cookie
+                </button>
+            </div>
+
+            <div class="cookie-section">
+                <div class="cookie-info" id="cookieInfo">
+                    <i class="fas fa-user-circle"></i>
+                    <div class="cookie-info-text">
+                        <div class="cookie-info-qq" id="cookieQQ">未设置Cookie</div>
+                        <div class="cookie-info-time" id="cookieTime">-</div>
+                    </div>
+                </div>
+
+                <!-- 登录面板 -->
+                <div id="qrloginContainer" class="qrlogin-container">
+                    <div class="mode-tabs">
+                        <button class="mode-tab active" data-mode="qrcode"><i class="fas fa-qrcode"></i> 扫码登录</button>
+                        <button class="mode-tab" data-mode="urlscheme"><i class="fas fa-link"></i> 跳转登录</button>
+                    </div>
+
+                    <!-- 扫码登录 -->
+                    <div id="qrcodeMode" class="login-mode">
+                        <div class="qrcode-wrapper">
+                            <div id="qrcodeContent" class="qrcode-content" style="display:none">
+                                <img id="qrcodeImg" src="" alt="QR Code">
+                                <div id="qrcodeMask" class="qrcode-mask" style="display:none">
+                                    <span id="qrcodeMaskText">已扫码</span>
+                                </div>
+                            </div>
+                            <div class="qrcode-placeholder" id="qrcodePlaceholder">
+                                <i class="fas fa-qrcode"></i>
+                                <span>点击下方按钮获取二维码</span>
+                            </div>
+                        </div>
+                        <div class="qrcode-btn-wrapper">
+                            <button class="btn btn-primary" id="btnGetQrCode" style="flex:1">
+                                <i class="fas fa-sync-alt"></i> 获取二维码
+                            </button>
+                        </div>
+                        <div id="qrloginStatus" class="qrlogin-status">请先获取二维码</div>
+                    </div>
+
+                    <!-- 跳转登录 -->
+                    <div id="urlschemeMode" class="login-mode" style="display:none">
+                        <div class="format-hint" style="margin-bottom:12px">
+                            <strong><i class="fas fa-info-circle"></i> 使用说明：</strong>
+                            1. 点击"生成授权链接" → 2. 点击"跳转授权"在QQ中登录 → 3. 复制跳转后的URL粘贴解析
+                        </div>
+                        <div class="btn-group" style="margin-bottom:12px">
+                            <button class="btn btn-primary" id="btnGenerateAuthUrl">
+                                <i class="fas fa-magic"></i> 生成授权链接
+                            </button>
+                            <a class="btn btn-success" id="btnJumpToAuth" href="#" target="_blank" style="display:none;text-decoration:none">
+                                <i class="fas fa-external-link-alt"></i> 跳转授权
+                            </a>
+                        </div>
+                        <div class="form-group" style="margin-bottom:12px">
+                            <label>跳转后的URL</label>
+                            <input type="text" id="jumpUrlInput" placeholder="登录成功后，复制浏览器地址栏的URL粘贴到这里...">
+                        </div>
+                        <button class="btn btn-primary" id="btnParseJumpUrl" style="width:100%">
+                            <i class="fas fa-check"></i> 解析URL获取Cookie
+                        </button>
+                        <div id="urlschemeStatus" class="urlscheme-status"></div>
+                    </div>
+                </div>
+
+                <div class="format-hint">
+                    <strong><i class="fas fa-info-circle"></i> 说明：</strong>
+                    批量更新功能需要有效的会员Cookie才能查询等级信息。可以扫码登录或手动粘贴Cookie。
+                </div>
+
+                <div class="form-group">
+                    <label>会员Cookie</label>
+                    <textarea id="cookieInput" rows="4" placeholder="粘贴会员Cookie，必须包含p_skey..."></textarea>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-primary" id="testCookieBtn">
+                        <i class="fas fa-vial"></i> 测试Cookie
+                    </button>
+                    <button class="btn btn-success" id="saveCookieBtn">
+                        <i class="fas fa-save"></i> 保存Cookie
+                    </button>
+                    <button class="btn btn-secondary" id="loadRemoteCookieBtn">
+                        <i class="fas fa-cloud-download-alt"></i> 加载远程
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 日志区域 -->
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-terminal"></i>
+                操作日志
+            </div>
+            <div class="log-container" id="logContainer">
+                <div class="log-entry">
+                    <span class="log-time">[系统]</span>
+                    <span class="log-info"><i class="fas fa-check-circle"></i> 准备就绪</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.nightdye.cn/loader.js"></script>
+    <script>
+        NightAuth.protectPage();
+        document.getElementById('main-content').style.display = 'block';
+    </script>
+</body>
+</html>
