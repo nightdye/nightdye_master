@@ -145,20 +145,7 @@
                     </select>
                 </div>
 
-                <div class="form-group" id="inputGroup1">
-                    <label id="inputLabel1">ID</label>
-                    <input type="number" id="settingInput1" placeholder="输入ID" min="0">
-                </div>
-
-                <!-- 图片预览区域 -->
-                <div class="image-preview-container" id="imagePreview" style="display:none;"></div>
-
-                <div class="form-group" id="inputGroup2" style="display:none;">
-                    <label id="inputLabel2">会员类型</label>
-                    <input type="number" id="settingInput2" placeholder="0-普通 1-SVIP 2-年费SVIP" min="0" value="0">
-                </div>
-
-                <div class="query-mode">
+                <div class="setting-mode">
                     <label class="radio-label">
                         <input type="radio" name="settingMode" value="single" checked>
                         <span>单次设置</span>
@@ -169,18 +156,33 @@
                     </label>
                 </div>
 
-                <div class="form-group batch-range" style="display:none;">
-                    <div class="range-inputs">
-                        <div class="range-item">
-                            <label>起始ID</label>
-                            <input type="number" id="batchStart" placeholder="1" min="1">
-                        </div>
-                        <span class="range-separator">-</span>
-                        <div class="range-item">
-                            <label>结束ID</label>
-                            <input type="number" id="batchEnd" placeholder="100" min="1">
+                <div class="setting-inputs">
+                    <div class="form-group single-input" id="inputGroup1">
+                        <label id="inputLabel1">ID</label>
+                        <input type="number" id="settingInput1" placeholder="输入ID" min="0">
+                    </div>
+
+                    <div class="form-group batch-input batch-range">
+                        <div class="range-inputs">
+                            <div class="range-item">
+                                <label>起始ID</label>
+                                <input type="number" id="batchStart" placeholder="1" min="1">
+                            </div>
+                            <span class="range-separator">-</span>
+                            <div class="range-item">
+                                <label>结束ID</label>
+                                <input type="number" id="batchEnd" placeholder="100" min="1">
+                            </div>
                         </div>
                     </div>
+                </div>
+
+                <!-- 图片预览区域 -->
+                <div class="image-preview-container" id="imagePreview" style="display:none;"></div>
+
+                <div class="form-group" id="inputGroup2" style="display:none;">
+                    <label id="inputLabel2">会员类型</label>
+                    <input type="number" id="settingInput2" placeholder="0-普通 1-SVIP 2-年费SVIP" min="0" value="0">
                 </div>
 
                 <div class="btn-group">
