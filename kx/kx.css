@@ -157,6 +157,16 @@ main>p.desc {
     line-height: 1.7
 }
 
+.input-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: var(--bg-paper);
+    border: 1px solid var(--border-gray);
+    border-radius: var(--radius-md)
+}
+
 .input-group {
     display: flex;
     flex-direction: column;
@@ -168,6 +178,37 @@ main>p.desc {
     color: var(--ink-light);
     font-weight: 500;
     padding-left: 2px
+}
+
+.input-row {
+    display: flex;
+    gap: var(--spacing-xs)
+}
+
+.input-row .manual-input-container {
+    flex: 1
+}
+
+.convert-btn {
+    width: 80px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, var(--seal-red) 0%, var(--seal-red-dark) 100%);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(184, 59, 59, 0.25);
+    transition: all var(--transition-fast)
+}
+
+.convert-btn:active {
+    background: linear-gradient(135deg, var(--seal-red-dark) 0%, var(--seal-red-dark) 100%);
+    transform: translateY(1px);
+    box-shadow: 0 1px 4px rgba(184, 59, 59, 0.2)
 }
 
 .divider {
@@ -197,6 +238,14 @@ main>p.desc {
     flex-direction: column;
     align-items: center;
     gap: var(--spacing-xs)
+}
+
+.result-label {
+    align-self: flex-start;
+    font-size: 0.85rem;
+    color: var(--ink-light);
+    font-weight: 500;
+    padding-left: 2px
 }
 
 .copy-btn-inline {
@@ -404,6 +453,7 @@ main>p.desc {
 }
 
 .result {
+    width: 100%;
     min-height: 120px;
     display: flex;
     align-items: center;
@@ -524,6 +574,12 @@ button:active::after {
 
 /* ============ Hover效果 - 集中管理 ============ */
 @media (hover:hover) {
+    .convert-btn:hover {
+        background: linear-gradient(135deg, var(--seal-red-light) 0%, var(--seal-red) 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(184, 59, 59, 0.35)
+    }
+
     #randomBtn:hover {
         background: linear-gradient(135deg, #4a7299 0%, var(--indigo-blue) 100%);
         transform: translateY(-2px);
@@ -783,6 +839,11 @@ footer p::before {
     #manualInput,
     .select2-container--default .select2-selection--single {
         -webkit-tap-highlight-color: transparent
+    }
+
+    .convert-btn {
+        width: 72px;
+        font-size: 0.9rem
     }
 
     .alert-box {

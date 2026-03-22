@@ -16,25 +16,31 @@
     </header>
     
     <main>
-      <p class="desc">将汉字转换为康熙部首细体字，可用于 QQ 昵称、签名等场景。支持 214 个康熙部首及其常见变体。</p>
+      <p class="desc">将汉字转换为康熙部首细体字，可用于 QQ 昵称、签名等场景。<br>支持 214 个康熙部首及其常见变体。</p>
 
-      <div class="input-group">
-        <label class="input-label">从部首列表选择</label>
-        <select id="radicalSelect" aria-label="选择部首"></select>
-      </div>
+      <div class="input-section">
+        <div class="input-group">
+          <label class="input-label">方式一：从列表选择部首</label>
+          <select id="radicalSelect" aria-label="选择部首"></select>
+        </div>
 
-      <div class="divider"><span>或</span></div>
+        <div class="divider"><span>或</span></div>
 
-      <div class="input-group">
-        <label class="input-label">直接输入汉字</label>
-        <div class="manual-input-container">
-          <input type="text" id="manualInput" placeholder="输入一个汉字即可转换" maxlength="1">
+        <div class="input-group">
+          <label class="input-label">方式二：输入汉字转换</label>
+          <div class="input-row">
+            <div class="manual-input-container">
+              <input type="text" id="manualInput" placeholder="输入汉字，如：心、水、火" maxlength="1">
+            </div>
+            <button id="convertBtn" class="convert-btn">转换</button>
+          </div>
         </div>
       </div>
 
       <div class="result-area">
+        <label class="result-label">转换结果</label>
         <div class="result" id="resultLabel" title="点击可选中文字"></div>
-        <button id="copyBtn" class="copy-btn-inline" aria-label="复制结果">复制</button>
+        <button id="copyBtn" class="copy-btn-inline" aria-label="复制结果">复制结果</button>
       </div>
 
       <div class="buttons">
