@@ -554,6 +554,7 @@ button:active::after {
 }
 
 #exampleBtn {
+    padding: 0 28px;
     background: var(--bg-paper);
     color: var(--ink-black);
     border: 2px solid var(--border-gray);
