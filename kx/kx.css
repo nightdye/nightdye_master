@@ -148,12 +148,105 @@ main {
     gap: var(--spacing-md)
 }
 
-main>p {
+main>p.desc {
     text-align: center;
     color: var(--ink-light);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     padding-bottom: var(--spacing-sm);
-    border-bottom: 1px dashed var(--border-gray)
+    border-bottom: 1px dashed var(--border-gray);
+    line-height: 1.7
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px
+}
+
+.input-label {
+    font-size: 0.85rem;
+    color: var(--ink-light);
+    font-weight: 500;
+    padding-left: 2px
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin: 2px 0
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-gray)
+}
+
+.divider span {
+    font-size: 0.8rem;
+    color: var(--ink-light);
+    opacity: 0.6
+}
+
+.result-area {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs)
+}
+
+.copy-btn-inline {
+    height: 32px;
+    padding: 0 20px;
+    background: var(--bg-paper);
+    color: var(--ink-light);
+    border: 1px solid var(--border-gray);
+    border-radius: 16px;
+    font-family: var(--font-serif);
+    font-size: 0.8rem;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: all var(--transition-fast)
+}
+
+.copy-btn-inline::before {
+    content: '\f0c5';
+    font-family: "Font Awesome 7 Free";
+    font-weight: 400;
+    margin-right: 6px
+}
+
+.copy-btn-inline:hover {
+    border-color: var(--indigo-blue);
+    color: var(--indigo-blue);
+    background: rgba(58, 95, 133, 0.05)
+}
+
+.toast {
+    position: fixed;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 24px;
+    background: var(--ink-black);
+    color: white;
+    border-radius: 20px;
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    z-index: 2000;
+    opacity: 0;
+    transition: all 0.3s ease;
+    white-space: nowrap
+}
+
+.toast.show {
+    bottom: 40px;
+    opacity: 1
 }
 
 .select2-container {
@@ -391,34 +484,7 @@ button:active::after {
     height: 200px
 }
 
-#convertBtn,
-#generateBtn {
-    background: linear-gradient(135deg, var(--seal-red) 0%, var(--seal-red-dark) 100%);
-    color: white;
-    box-shadow: 0 3px 8px rgba(184, 59, 59, 0.25)
-}
-
-#convertBtn::before {
-    content: '\f0ec';
-    font-family: "Font Awesome 7 Free";
-    font-weight: 900
-}
-
-#generateBtn::before {
-    content: '\f00c';
-    font-family: "Font Awesome 7 Free";
-    font-weight: 900
-}
-
-#convertBtn:active,
-#generateBtn:active {
-    background: linear-gradient(135deg, var(--seal-red-dark) 0%, var(--seal-red-dark) 100%);
-    transform: translateY(1px);
-    box-shadow: 0 1px 4px rgba(184, 59, 59, 0.2)
-}
-
-#randomBtn,
-#copyBtn {
+#randomBtn {
     background: linear-gradient(135deg, var(--indigo-blue) 0%, var(--indigo-dark) 100%);
     color: white;
     box-shadow: 0 3px 8px rgba(58, 95, 133, 0.25)
@@ -430,14 +496,7 @@ button:active::after {
     font-weight: 900
 }
 
-#copyBtn::before {
-    content: '\f0c5';
-    font-family: "Font Awesome 7 Free";
-    font-weight: 400
-}
-
-#randomBtn:active,
-#copyBtn:active {
+#randomBtn:active {
     background: linear-gradient(135deg, var(--indigo-dark) 0%, var(--indigo-dark) 100%);
     transform: translateY(1px);
     box-shadow: 0 1px 4px rgba(58, 95, 133, 0.2)
@@ -465,15 +524,7 @@ button:active::after {
 
 /* ============ Hover效果 - 集中管理 ============ */
 @media (hover:hover) {
-    #convertBtn:hover,
-    #generateBtn:hover {
-        background: linear-gradient(135deg, var(--seal-red-light) 0%, var(--seal-red) 100%);
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(184, 59, 59, 0.35)
-    }
-
-    #randomBtn:hover,
-    #copyBtn:hover {
+    #randomBtn:hover {
         background: linear-gradient(135deg, #4a7299 0%, var(--indigo-blue) 100%);
         transform: translateY(-2px);
         box-shadow: 0 5px 15px rgba(58, 95, 133, 0.35)

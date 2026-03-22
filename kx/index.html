@@ -16,22 +16,30 @@
     </header>
     
     <main>
-      <p>选择一个汉字部首，或手动输入单个汉字进行转换。</p>
-      
-      <select id="radicalSelect" aria-label="选择部首"></select>
-      
-      <div class="manual-input-container">
-        <input type="text" id="manualInput" placeholder="在此处手动输入单个汉字" maxlength="1">
+      <p class="desc">将汉字转换为康熙部首细体字，可用于 QQ 昵称、签名等场景。支持 214 个康熙部首及其常见变体。</p>
+
+      <div class="input-group">
+        <label class="input-label">从部首列表选择</label>
+        <select id="radicalSelect" aria-label="选择部首"></select>
       </div>
-      
-      <div class="result" id="resultLabel" title="点击可选中"></div>
-      
+
+      <div class="divider"><span>或</span></div>
+
+      <div class="input-group">
+        <label class="input-label">直接输入汉字</label>
+        <div class="manual-input-container">
+          <input type="text" id="manualInput" placeholder="输入一个汉字，按回车转换" maxlength="1">
+        </div>
+      </div>
+
+      <div class="result-area">
+        <div class="result" id="resultLabel" title="点击可选中文字"></div>
+        <button id="copyBtn" class="copy-btn-inline" aria-label="复制结果">复制</button>
+      </div>
+
       <div class="buttons">
-        <button id="convertBtn">转换</button>
-        <button id="generateBtn">选择生成</button>
-        <button id="randomBtn">随机</button>
-        <button id="copyBtn" class="copy-btn">复制</button>
-        <button id="exampleBtn" class="example-btn">查看示例图片</button>
+        <button id="randomBtn">随机一个</button>
+        <button id="exampleBtn" class="example-btn">查看示例</button>
       </div>
     </main>
   </div>
