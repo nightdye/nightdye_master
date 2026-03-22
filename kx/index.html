@@ -21,7 +21,10 @@
       <div class="input-section">
         <div class="input-group">
           <label class="input-label">方式一：从列表选择部首</label>
-          <select id="radicalSelect" aria-label="选择部首"></select>
+          <div class="input-row">
+            <select id="radicalSelect" aria-label="选择部首"></select>
+            <button id="randomBtn" class="action-btn action-btn--primary">随机</button>
+          </div>
         </div>
 
         <div class="divider"><span>或</span></div>
@@ -32,7 +35,7 @@
             <div class="manual-input-container">
               <input type="text" id="manualInput" placeholder="输入汉字，如：心、水、火" maxlength="1">
             </div>
-            <button id="convertBtn" class="convert-btn">转换</button>
+            <button id="convertBtn" class="action-btn action-btn--primary">转换</button>
           </div>
         </div>
       </div>
@@ -44,7 +47,6 @@
       </div>
 
       <div class="buttons">
-        <button id="randomBtn">随机一个</button>
         <button id="exampleBtn" class="example-btn">查看示例</button>
       </div>
     </main>

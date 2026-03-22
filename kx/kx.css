@@ -189,25 +189,45 @@ main>p.desc {
     flex: 1
 }
 
-.convert-btn {
+.input-row .select2-container {
+    flex: 1 !important
+}
+
+.input-row > select {
+    flex: 1
+}
+
+.action-btn {
     width: 80px;
     flex-shrink: 0;
-    background: linear-gradient(135deg, var(--seal-red) 0%, var(--seal-red-dark) 100%);
-    color: white;
-    border: none;
+    background: var(--bg-paper);
+    color: var(--ink-black);
+    border: 2px solid var(--border-gray);
     border-radius: var(--radius-md);
     font-family: var(--font-serif);
     font-size: 1rem;
     font-weight: 600;
     letter-spacing: 0.1em;
     cursor: pointer;
-    box-shadow: 0 3px 8px rgba(184, 59, 59, 0.25);
+    box-shadow: none;
     transition: all var(--transition-fast)
 }
 
-.convert-btn:active {
+.action-btn:active {
+    background: var(--bg-paper-light);
+    border-color: var(--border-dark);
+    transform: translateY(1px)
+}
+
+.action-btn--primary {
+    background: linear-gradient(135deg, var(--seal-red) 0%, var(--seal-red-dark) 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 3px 8px rgba(184, 59, 59, 0.25)
+}
+
+.action-btn--primary:active {
     background: linear-gradient(135deg, var(--seal-red-dark) 0%, var(--seal-red-dark) 100%);
-    transform: translateY(1px);
     box-shadow: 0 1px 4px rgba(184, 59, 59, 0.2)
 }
 
@@ -494,9 +514,8 @@ main>p.desc {
 }
 
 .buttons {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-sm)
+    display: flex;
+    justify-content: center
 }
 
 button {
@@ -534,26 +553,7 @@ button:active::after {
     height: 200px
 }
 
-#randomBtn {
-    background: linear-gradient(135deg, var(--indigo-blue) 0%, var(--indigo-dark) 100%);
-    color: white;
-    box-shadow: 0 3px 8px rgba(58, 95, 133, 0.25)
-}
-
-#randomBtn::before {
-    content: '\f074';
-    font-family: "Font Awesome 7 Free";
-    font-weight: 900
-}
-
-#randomBtn:active {
-    background: linear-gradient(135deg, var(--indigo-dark) 0%, var(--indigo-dark) 100%);
-    transform: translateY(1px);
-    box-shadow: 0 1px 4px rgba(58, 95, 133, 0.2)
-}
-
 #exampleBtn {
-    grid-column: 1 / -1;
     background: var(--bg-paper);
     color: var(--ink-black);
     border: 2px solid var(--border-gray);
@@ -574,16 +574,18 @@ button:active::after {
 
 /* ============ Hover效果 - 集中管理 ============ */
 @media (hover:hover) {
-    .convert-btn:hover {
-        background: linear-gradient(135deg, var(--seal-red-light) 0%, var(--seal-red) 100%);
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(184, 59, 59, 0.35)
+    .action-btn:hover {
+        border-color: var(--indigo-blue);
+        color: var(--indigo-blue);
+        background: rgba(58, 95, 133, 0.05)
     }
 
-    #randomBtn:hover {
-        background: linear-gradient(135deg, #4a7299 0%, var(--indigo-blue) 100%);
+    .action-btn--primary:hover {
+        background: linear-gradient(135deg, var(--seal-red-light) 0%, var(--seal-red) 100%);
+        color: white;
+        border-color: transparent;
         transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(58, 95, 133, 0.35)
+        box-shadow: 0 5px 15px rgba(184, 59, 59, 0.35)
     }
 
     #exampleBtn:hover {
@@ -822,17 +824,9 @@ footer p::before {
         font-size: 3rem
     }
 
-    .buttons {
-        gap: var(--spacing-xs)
-    }
-
     button {
         height: 44px;
         font-size: 0.9rem
-    }
-
-    .buttons {
-        grid-template-columns: 1fr 1fr
     }
 
     button,
@@ -841,7 +835,7 @@ footer p::before {
         -webkit-tap-highlight-color: transparent
     }
 
-    .convert-btn {
+    .action-btn {
         width: 72px;
         font-size: 0.9rem
     }
@@ -862,14 +856,6 @@ footer p::before {
 }
 
 @media screen and (max-width:360px) {
-    .buttons {
-        grid-template-columns: 1fr
-    }
-
-    #exampleBtn {
-        grid-column: 1
-    }
-
     header h1 {
         font-size: 1.2rem
     }
