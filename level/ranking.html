@@ -21,7 +21,7 @@
     <a class="theme-switch">切换主题</a>
     <button id="toolsBtn" class="tools-btn">
       <i class="fa-solid fa-sliders"></i>
-      <span>筛选与添加</span>
+      <span>工具箱</span>
     </button>
     <a class="nav-link" href="index.html">返回等级计算</a>
   </div>
@@ -30,7 +30,7 @@
   <div class="tools-modal-overlay" id="toolsModalOverlay">
     <div class="tools-modal">
       <div class="tools-modal-header">
-        <h3><i class="fa-solid fa-sliders"></i> 筛选与添加</h3>
+        <h3><i class="fa-solid fa-sliders"></i> 工具箱</h3>
         <button class="tools-modal-close" id="toolsModalClose">
           <i class="fa-solid fa-xmark"></i>
         </button>
@@ -87,6 +87,41 @@
           <button id="filterConfirmBtn" class="filter-confirm-btn-modal">
             <i class="fa-solid fa-check"></i> 应用筛选
           </button>
+        </div>
+
+        <!-- 分隔线 -->
+        <div class="tools-divider"></div>
+
+        <!-- 显示样式部分 -->
+        <div class="tools-section">
+          <div class="tools-section-title">
+            <i class="fa-solid fa-palette"></i>
+            <span>显示样式</span>
+          </div>
+          <div class="style-row">
+            <div class="style-item">
+              <label for="levelTitle">等级称号</label>
+              <select id="levelTitle">
+                <option value="normal" data-image="https://tianquan.gtimg.cn/bigVipLevelBadge/item/1/cdn/275.png">普通等级称号</option>
+                <option value="dragon" data-image="https://tianquan.gtimg.cn/bigVipLevelBadge/item/2/cdn/275.png">龙年等级称号</option>
+                <option value="s1" data-image="https://tianquan.gtimg.cn/bigVipLevelBadge/item/4/cdn/275.png">S1等级称号</option>
+                <option value="x5" data-image="https://tianquan.gtimg.cn/bigVipLevelBadge/item/5/cdn/275.png">X5等级称号</option>
+                <option value="star" data-image="https://tianquan.gtimg.cn/bigVipLevelBadge/item/6/cdn/275.png">星等级称号</option>
+                <option value="b9" data-image="https://tianquan.gtimg.cn/bigVipLevelBadge/item/8/cdn/275.png">大会9等级称号</option>
+                <option value="newdragon" data-image="https://tianquan.gtimg.cn/bigVipLevelBadge/item/9/cdn/275.png">S5龙等级称号</option>
+                <option value="snake" data-image="https://tianquan.gtimg.cn/bigVipLevelBadge/item/10/cdn/275.png">蛇年等级称号</option>
+                <option value="dmg" data-image="https://tianquan.gtimg.cn/bigVipLevelBadge/item/12/cdn/275.png">大满贯等级称号</option>
+                <option value="syx" data-image="https://tianquan.gtimg.cn/bigVipLevelBadge/item/15/cdn/275.png">闪耀星等级称号</option>
+                <option value="fhcq" data-image="https://tianquan.gtimg.cn/bigVipLevelBadge/item/16/cdn/275.png">凤凰传奇等级称号</option>
+                <option value="mdcg" data-image="https://tianquan.gtimg.cn/bigVipLevelBadge/item/17/cdn/275.png">马到成功等级称号</option>
+              </select>
+            </div>
+            <div class="style-item">
+              <label for="iconStyle">图标样式</label>
+              <select id="iconStyle">
+              </select>
+            </div>
+          </div>
         </div>
       </div>
     </div>
