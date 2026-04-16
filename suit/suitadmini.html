@@ -100,13 +100,7 @@
                     </label>
                     <label>
                         间隔:
-                        <select id="batchDelay">
-                            <option value="200">200ms (快速)</option>
-                            <option value="500" selected>500ms (推荐)</option>
-                            <option value="1000">1秒</option>
-                            <option value="2000">2秒</option>
-                            <option value="3000">3秒 (安全)</option>
-                        </select>
+                        <input type="number" id="batchDelay" value="200" min="50" max="10000" style="width:80px"> ms
                     </label>
                 </div>
                 <div class="progress-bar" id="batchProgress" style="display:none">
