@@ -167,19 +167,22 @@
                         <p>2. 在手机QQ中打开链接</p>
                         <p>3. 复制跳转后的URL粘贴到下方</p>
                     </div>
-                    <button class="btn btn-primary" id="btnGenerateAuthUrl">
-                        <i class="fas fa-link"></i> 生成授权链接
-                    </button>
-                    <div class="auth-url-box" id="authUrlBox" style="display:none">
-                        <input type="text" id="authUrl" readonly>
-                        <button class="btn btn-secondary" id="copyAuthUrl">
-                            <i class="fas fa-copy"></i>
+                    <div class="btn-group" style="margin-bottom:12px">
+                        <button class="btn btn-primary" id="btnGenerateAuthUrl">
+                            <i class="fas fa-magic"></i> 生成授权链接
                         </button>
+                        <a class="btn btn-success" id="btnJumpToAuth" href="#" target="_blank" style="display:none;text-decoration:none">
+                            <i class="fas fa-external-link-alt"></i> 跳转授权
+                        </a>
                     </div>
-                    <textarea id="jumpUrlInput" placeholder="粘贴跳转后的URL..."></textarea>
-                    <button class="btn btn-success" id="btnParseJumpUrl">
-                        <i class="fas fa-check"></i> 解析Cookie
+                    <div class="form-group" style="margin-bottom:12px">
+                        <label>跳转后的URL</label>
+                        <input type="text" id="jumpUrlInput" placeholder="登录成功后，复制浏览器地址栏的URL粘贴到这里...">
+                    </div>
+                    <button class="btn btn-primary" id="btnParseJumpUrl" style="width:100%">
+                        <i class="fas fa-check"></i> 解析URL获取Cookie
                     </button>
+                    <div id="urlschemeStatus" class="urlscheme-status"></div>
                 </div>
             </div>
 
