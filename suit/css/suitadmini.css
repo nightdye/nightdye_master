@@ -404,6 +404,152 @@ textarea:focus {
     color: var(--text-primary)
 }
 
+/* 登录面板 */
+.login-panel {
+    margin-top: 16px;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    border: 1px solid var(--dark-border)
+}
+
+.mode-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px
+}
+
+.mode-tab {
+    flex: 1;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid var(--dark-border);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease
+}
+
+.mode-tab.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff
+}
+
+.mode-panel {
+    display: none
+}
+
+.mode-panel.active {
+    display: block
+}
+
+/* 二维码样式 */
+.qrcode-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 16px
+}
+
+.qrcode-box {
+    width: 180px;
+    height: 180px;
+    background: #fff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden
+}
+
+.qrcode-placeholder {
+    text-align: center;
+    color: #999
+}
+
+.qrcode-placeholder i {
+    font-size: 48px;
+    margin-bottom: 10px;
+    opacity: 0.5
+}
+
+.qrcode-placeholder p {
+    font-size: 12px;
+    margin: 0
+}
+
+.qrcode-content {
+    width: 100%;
+    height: 100%;
+    position: relative
+}
+
+.qrcode-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain
+}
+
+.qrcode-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500
+}
+
+.qrcode-status {
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-align: center
+}
+
+/* 跳转登录 */
+.jump-steps {
+    padding: 12px;
+    background: rgba(99, 102, 241, 0.08);
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.8
+}
+
+.jump-steps p {
+    margin: 0
+}
+
+.auth-url-box {
+    display: flex;
+    gap: 8px;
+    margin: 12px 0
+}
+
+.auth-url-box input {
+    flex: 1;
+    padding: 10px 12px;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--dark-border);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: 13px
+}
+
 .upload-zone {
     border: 2px dashed var(--dark-border);
     border-radius: 12px;
