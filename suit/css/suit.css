@@ -335,7 +335,9 @@ footer {
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.5);
-    animation: fadeIn 0.3s
+    animation: fadeIn 0.3s;
+    align-items: center;
+    justify-content: center
 }
 
 @keyframes fadeIn {
@@ -350,7 +352,7 @@ footer {
 
 .modal-content {
     background-color: var(--color-card-bg);
-    margin: 10% auto;
+    margin: 0;
     padding: 1.5rem;
     border-radius: 12px;
     width: 90%;
@@ -916,6 +918,30 @@ main {
 
 .detail-info .price.free {
     color: #4caf50;
+}
+
+.view-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding: 8px 16px;
+    background: var(--color-highlight);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.view-btn:hover {
+    background: var(--color-highlight-hover);
+    transform: translateY(-1px);
+}
+
+.view-btn:active {
+    transform: scale(0.97);
 }
 
 .detail-items h3 {
