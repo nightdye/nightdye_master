@@ -151,7 +151,7 @@ body::before {
 }
 
 .extra-btn:active {
-    transform: scale(0.95);
+    transform: scale(0.97);
     background: rgba(99, 102, 241, 0.25)
 }
 
@@ -391,7 +391,7 @@ textarea:focus {
     height: 100%;
     background: linear-gradient(90deg, var(--primary), var(--accent));
     border-radius: 12px;
-    transition: width 0.3s ease
+    transition: width 0.2s ease
 }
 
 .progress-text {
@@ -694,7 +694,7 @@ textarea:focus {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    transition: transform 0.15s ease, box-shadow 0.15s ease
+    transition: transform 0.2s ease, box-shadow 0.2s ease
 }
 
 .btn-primary {
@@ -1376,4 +1376,169 @@ textarea:focus {
     align-items: center;
     flex-wrap: wrap;
     gap: 8px
+}
+
+/* ============ Focus Visible ============ */
+:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px
+}
+
+/* ============ 移动端响应式 ============ */
+@media (max-width: 768px) {
+    .container {
+        padding: 16px 12px
+    }
+
+    .header {
+        padding: 20px 16px;
+        margin-bottom: 20px
+    }
+
+    .header h1 {
+        font-size: 20px
+    }
+
+    .card {
+        padding: 16px;
+        margin-bottom: 14px
+    }
+
+    .card-title {
+        font-size: 14px;
+        margin-bottom: 14px;
+        padding-bottom: 10px
+    }
+
+    .tabs {
+        gap: 0;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none
+    }
+
+    .tabs::-webkit-scrollbar {
+        display: none
+    }
+
+    .tab {
+        flex-shrink: 0;
+        padding: 8px 12px;
+        font-size: 12px
+    }
+
+    .stats-bar {
+        flex-wrap: wrap;
+        gap: 8px
+    }
+
+    .stat-item {
+        min-width: calc(50% - 4px);
+        flex: 1 1 calc(50% - 4px)
+    }
+
+    .input-row {
+        flex-direction: column;
+        gap: 8px
+    }
+
+    .input-row input,
+    .input-row select {
+        width: 100%
+    }
+
+    .btn-row {
+        flex-direction: column;
+        gap: 8px
+    }
+
+    .btn-row .btn {
+        width: 100%
+    }
+
+    .title-actions {
+        margin-left: 0;
+        margin-top: 8px;
+        width: 100%
+    }
+
+    .title-actions .extra-btn {
+        flex: 1;
+        justify-content: center
+    }
+
+    .result-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 8px
+    }
+
+    .upload-zone {
+        padding: 20px 12px
+    }
+
+    .auth-url-box {
+        flex-direction: column
+    }
+
+    .auth-url-box input {
+        width: 100%
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px 8px
+    }
+
+    .header {
+        padding: 16px 12px;
+        border-radius: 12px
+    }
+
+    .header h1 {
+        font-size: 18px;
+        gap: 8px
+    }
+
+    .header-logo img {
+        width: 60px;
+        height: 60px
+    }
+
+    .card {
+        padding: 12px;
+        border-radius: 10px
+    }
+
+    .tab {
+        padding: 6px 10px;
+        font-size: 11px
+    }
+
+    .stat-item {
+        min-width: 100%;
+        flex: 1 1 100%
+    }
+
+    .btn {
+        padding: 10px 16px;
+        font-size: 13px
+    }
+
+    .result-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 6px
+    }
+
+    .file-item {
+        padding: 8px 10px;
+        font-size: 12px
+    }
 }

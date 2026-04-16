@@ -50,7 +50,7 @@ body {
     font-family: "HarmonyOS Sans SC", "Arial", sans-serif;
     background: var(--bg-body);
     color: var(--color-font);
-    transition: background 0.3s, color 0.3s
+    transition: background 0.2s, color 0.2s
 }
 
 header {
@@ -62,7 +62,7 @@ header {
     letter-spacing: 1.5px;
     box-shadow: 0 2px 8px var(--color-shadow);
     font-weight: bold;
-    transition: background 0.3s
+    transition: background 0.2s
 }
 
 .header-content {
@@ -87,7 +87,7 @@ header {
     margin-right: 10px;
     box-shadow: -8px 5px 10px rgba(0, 0, 0, 0.36);
     cursor: pointer;
-    transition: transform 0.3s
+    transition: transform 0.2s
 }
 
 .title-and-button {
@@ -112,7 +112,7 @@ header {
     text-decoration: none;
     width: fit-content;
     box-shadow: 0 4px 8px var(--color-shadow);
-    transition: 0.3s
+    transition: 0.2s
 }
 
 .author-qq-button:active {
@@ -130,13 +130,13 @@ header {
     padding: 0.6rem 0.8rem;
     cursor: pointer;
     box-shadow: 0 2px 4px var(--color-shadow);
-    transition: background-color 0.3s, transform 0.3s;
+    transition: background-color 0.2s, transform 0.2s;
     flex-shrink: 0
 }
 
 #openFilterBtn:active {
     background-color: var(--color-highlight-hover);
-    transform: translateY(0)
+    transform: scale(0.97)
 }
 
 #openFilterBtn svg {
@@ -226,7 +226,7 @@ header {
     border-radius: 12px;
     box-shadow: 0 4px 8px var(--color-shadow);
     overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.2s, box-shadow 0.2s;
     border: 2px solid var(--color-border);
     position: relative
 }
@@ -234,7 +234,7 @@ header {
 .card img {
     width: 100%;
     object-fit: cover;
-    transition: transform 0.3s;
+    transition: transform 0.2s;
     cursor: pointer
 }
 
@@ -285,7 +285,7 @@ footer {
     border-radius: 8px;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s
+    transition: background-color 0.2s, transform 0.2s
 }
 
 #toggleViewBtn:active,
@@ -391,7 +391,7 @@ footer {
     font-size: 1.8rem;
     color: #999;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.2s;
     line-height: 1;
     padding: 0;
     background: none;
@@ -419,7 +419,7 @@ footer {
     background: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     outline: none;
-    transition: 0.3s
+    transition: 0.2s
 }
 
 .modal-controls select:focus,
@@ -535,12 +535,12 @@ footer {
     font-size: 1.5rem;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s, transform 0.3s
+    transition: background-color 0.2s, transform 0.2s
 }
 
 .float-buttons button:active {
     background-color: var(--color-highlight-hover);
-    transform: translateY(0)
+    transform: scale(0.97)
 }
 
 @media (max-width:360px) {
@@ -561,13 +561,13 @@ footer {
     border-radius: 25px;
     font-size: 1rem;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.2s;
     box-shadow: 0 4px 8px var(--color-shadow)
 }
 
 #loadMoreBtn:active {
     background: var(--color-highlight-hover);
-    transform: translateY(0)
+    transform: scale(0.97)
 }
 
 .load-more-wrapper {
@@ -586,7 +586,7 @@ footer {
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    transition: 0.3s;
+    transition: 0.2s;
     height: auto;
     padding: 0.6rem 1rem
 }
@@ -724,7 +724,7 @@ main {
     background: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     outline: none;
-    transition: 0.3s
+    transition: 0.2s
 }
 
 .search-wrapper #searchInput:focus {
@@ -744,13 +744,13 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s;
+    transition: all 0.2s;
     flex-shrink: 0
 }
 
 .search-btn:active {
     background: var(--color-highlight-hover);
-    transform: scale(0.95)
+    transform: scale(0.97)
 }
 
 .search-btn i {
@@ -777,7 +777,7 @@ main {
     padding: 0.6rem 0.8rem;
     cursor: pointer;
     box-shadow: 0 2px 4px var(--color-shadow);
-    transition: background-color 0.3s, transform 0.3s;
+    transition: background-color 0.2s, transform 0.2s;
     flex-shrink: 0;
     width: 42px;
     height: 42px;
@@ -938,6 +938,21 @@ main {
     border-radius: 8px;
     padding: 8px;
     text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.item-card.has-preview {
+    cursor: pointer;
+}
+
+.item-card.has-preview:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--color-shadow);
+    border-color: var(--color-highlight);
+}
+
+.item-card.has-preview:active {
+    transform: scale(0.97);
 }
 
 .item-card img {
@@ -987,4 +1002,104 @@ main {
     .items-grid {
         grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     }
+}
+
+/* ============ Focus Visible ============ */
+:focus-visible {
+    outline: 2px solid var(--color-highlight);
+    outline-offset: 2px;
+}
+
+button:focus-visible {
+    outline: 2px solid var(--color-highlight);
+    outline-offset: 2px;
+}
+
+/* ============ 子装扮大图预览 ============ */
+.item-preview-overlay {
+    display: none;
+    position: fixed;
+    z-index: 10001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.item-preview-overlay.active {
+    opacity: 1;
+}
+
+.item-preview-wrap {
+    background: var(--color-card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    max-width: 480px;
+    width: 90vw;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    transform: scale(0.9);
+    transition: transform 0.2s;
+}
+
+.item-preview-overlay.active .item-preview-wrap {
+    transform: scale(1);
+}
+
+.item-preview-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.item-preview-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-font);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.item-preview-close {
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: var(--color-card-text);
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.item-preview-close:hover {
+    color: var(--color-highlight-hover);
+}
+
+.item-preview-img-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    min-height: 200px;
+    overflow: auto;
+}
+
+.item-preview-img {
+    max-width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
+    border-radius: 8px;
 }
