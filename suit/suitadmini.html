@@ -46,9 +46,17 @@
             <div class="card-title">
                 <i class="fas fa-calendar-day"></i>
                 今日新增套装
-                <button class="extra-btn" id="refreshStats">
-                    <i class="fas fa-sync-alt"></i> 刷新
-                </button>
+                <div class="title-actions">
+                    <select id="listSortOrder">
+                        <option value="timeDesc">最新优先</option>
+                        <option value="timeAsc">最早优先</option>
+                        <option value="priceDesc">价格从高到低</option>
+                        <option value="priceAsc">价格从低到高</option>
+                    </select>
+                    <button class="extra-btn" id="refreshStats">
+                        <i class="fas fa-sync-alt"></i> 刷新
+                    </button>
+                </div>
             </div>
             <div id="todayList" class="today-list">
                 <p style="text-align:center;color:var(--text-secondary);padding:20px">加载中...</p>
@@ -91,7 +99,14 @@
                         跳过已存在
                     </label>
                     <label>
-                        间隔: <input type="number" id="batchDelay" value="500" min="100" max="5000" style="width:60px"> ms
+                        间隔:
+                        <select id="batchDelay">
+                            <option value="200">200ms (快速)</option>
+                            <option value="500" selected>500ms (推荐)</option>
+                            <option value="1000">1秒</option>
+                            <option value="2000">2秒</option>
+                            <option value="3000">3秒 (安全)</option>
+                        </select>
                     </label>
                 </div>
                 <div class="progress-bar" id="batchProgress" style="display:none">
