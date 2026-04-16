@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.nightdye.cn/login/auth.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://qq.nightdye.cn/qq/images/night.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/suitadmini.css">
+    <title>QQ装扮套装管理</title>
+</head>
+<body>
+    <div class="container" id="main-content" style="display: none;">
+        <div class="header">
+            <div class="header-logo">
+                <img src="https://nightdye.guokevr.cn/qq/images/night_logo_1.png" alt="Logo">
+            </div>
+            <h1><i class="fas fa-tshirt"></i> QQ装扮套装管理</h1>
+            <p>批量抓取和管理套装数据</p>
+        </div>
+
+        <!-- 统计信息 -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-value" id="statTotal">0</div>
+                <div class="stat-label"><i class="fas fa-database"></i> 套装总数</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="statToday">0</div>
+                <div class="stat-label"><i class="fas fa-calendar-plus"></i> 今日新增</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="statItems">0</div>
+                <div class="stat-label"><i class="fas fa-puzzle-piece"></i> 装扮项总数</div>
+            </div>
+        </div>
+
+        <!-- 选项卡 -->
+        <div class="tabs">
+            <button class="tab active" data-tab="overview"><i class="fas fa-chart-pie"></i> 概览</button>
+            <button class="tab" data-tab="fetch"><i class="fas fa-download"></i> 抓取</button>
+            <button class="tab" data-tab="cookie"><i class="fas fa-cookie"></i> Cookie</button>
+        </div>
+
+        <!-- 概览页 -->
+        <div class="card tab-panel active" id="panel-overview">
+            <div class="card-title">
+                <i class="fas fa-calendar-day"></i>
+                今日新增套装
+                <button class="extra-btn" id="refreshStats">
+                    <i class="fas fa-sync-alt"></i> 刷新
+                </button>
+            </div>
+            <div id="todayList" class="today-list">
+                <p style="text-align:center;color:var(--text-secondary);padding:20px">加载中...</p>
+            </div>
+        </div>
+
+        <!-- 抓取页 -->
+        <div class="card tab-panel" id="panel-fetch" style="display:none">
+            <div class="card-title">
+                <i class="fas fa-download"></i>
+                套装抓取
+            </div>
+
+            <!-- 单个抓取 -->
+            <div class="section">
+                <h3><i class="fas fa-hand-pointer"></i> 单个抓取</h3>
+                <div class="input-row">
+                    <input type="number" id="singleSuitId" placeholder="输入套装ID，如 380" min="1">
+                    <button class="btn btn-primary" id="fetchSingleBtn">
+                        <i class="fas fa-download"></i> 抓取
+                    </button>
+                </div>
+            </div>
+
+            <!-- 批量抓取 -->
+            <div class="section">
+                <h3><i class="fas fa-layer-group"></i> 批量抓取</h3>
+                <div class="input-row">
+                    <input type="text" id="batchSuitIds" placeholder="ID范围或列表，如 1-100 或 1,2,3,5,8">
+                    <button class="btn btn-primary" id="fetchBatchBtn">
+                        <i class="fas fa-play"></i> 开始
+                    </button>
+                    <button class="btn btn-danger" id="stopBatchBtn" style="display:none">
+                        <i class="fas fa-stop"></i> 停止
+                    </button>
+                </div>
+                <div class="batch-options">
+                    <label>
+                        <input type="checkbox" id="skipExisting" checked>
+                        跳过已存在
+                    </label>
+                    <label>
+                        间隔: <input type="number" id="batchDelay" value="500" min="100" max="5000" style="width:60px"> ms
+                    </label>
+                </div>
+                <div class="progress-bar" id="batchProgress" style="display:none">
+                    <div class="progress-fill" id="progressFill"></div>
+                    <span class="progress-text" id="progressText">0/0</span>
+                </div>
+            </div>
+
+            <!-- 抓取结果预览 -->
+            <div class="section" id="fetchResultSection" style="display:none">
+                <h3><i class="fas fa-eye"></i> 抓取结果</h3>
+                <div id="fetchResult" class="fetch-result"></div>
+            </div>
+        </div>
+
+        <!-- Cookie页 -->
+        <div class="card tab-panel" id="panel-cookie" style="display:none">
+            <div class="card-title">
+                <i class="fas fa-cookie"></i>
+                Cookie 管理
+            </div>
+            <p class="tip"><i class="fas fa-info-circle"></i> 抓取套装需要有效的QQ登录Cookie</p>
+
+            <!-- 登录方式 -->
+            <div class="login-section">
+                <button class="btn btn-primary" id="btnQrLogin">
+                    <i class="fas fa-qrcode"></i> 扫码登录
+                </button>
+            </div>
+
+            <!-- 登录面板 -->
+            <div class="login-panel" id="loginPanel" style="display:none">
+                <div class="mode-tabs">
+                    <button class="mode-tab active" data-mode="qrcode"><i class="fas fa-qrcode"></i> 扫码</button>
+                    <button class="mode-tab" data-mode="jump"><i class="fas fa-link"></i> 跳转</button>
+                </div>
+
+                <!-- 扫码登录 -->
+                <div class="mode-panel active" id="panel-qrcode">
+                    <div class="qr-container">
+                        <div id="qrCodeBox" class="qr-box">
+                            <p>点击下方按钮获取二维码</p>
+                        </div>
+                        <p id="qrStatus" class="qr-status"></p>
+                    </div>
+                    <button class="btn btn-primary" id="btnGetQrCode">
+                        <i class="fas fa-qrcode"></i> 获取二维码
+                    </button>
+                </div>
+
+                <!-- 跳转登录 -->
+                <div class="mode-panel" id="panel-jump" style="display:none">
+                    <div class="jump-steps">
+                        <p>1. 点击生成授权链接</p>
+                        <p>2. 在手机QQ中打开链接</p>
+                        <p>3. 复制跳转后的URL粘贴到下方</p>
+                    </div>
+                    <button class="btn btn-primary" id="btnGenerateAuthUrl">
+                        <i class="fas fa-link"></i> 生成授权链接
+                    </button>
+                    <div class="auth-url-box" id="authUrlBox" style="display:none">
+                        <input type="text" id="authUrl" readonly>
+                        <button class="btn btn-secondary" id="copyAuthUrl">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <textarea id="jumpUrlInput" placeholder="粘贴跳转后的URL..."></textarea>
+                    <button class="btn btn-success" id="btnParseJumpUrl">
+                        <i class="fas fa-check"></i> 解析Cookie
+                    </button>
+                </div>
+            </div>
+
+            <!-- Cookie状态 -->
+            <div class="cookie-status">
+                <h4><i class="fas fa-user-circle"></i> 当前状态</h4>
+                <div id="cookieInfo" class="cookie-info">
+                    <p>未登录</p>
+                </div>
+            </div>
+
+            <!-- 手动Cookie -->
+            <div class="manual-cookie">
+                <h4><i class="fas fa-edit"></i> 手动输入Cookie</h4>
+                <textarea id="cookieInput" placeholder="粘贴完整Cookie字符串..."></textarea>
+                <div class="btn-group">
+                    <button class="btn btn-primary" id="testCookieBtn">
+                        <i class="fas fa-vial"></i> 测试
+                    </button>
+                    <button class="btn btn-success" id="saveCookieBtn">
+                        <i class="fas fa-save"></i> 保存
+                    </button>
+                    <button class="btn btn-secondary" id="loadRemoteCookieBtn">
+                        <i class="fas fa-cloud-download-alt"></i> 加载远程
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 日志区域 -->
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-terminal"></i>
+                操作日志
+            </div>
+            <div class="log-container" id="logContainer">
+                <div class="log-entry">
+                    <span class="log-time">[系统]</span>
+                    <span class="log-info"><i class="fas fa-check-circle"></i> 准备就绪</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.nightdye.cn/loader.js"></script>
+    <script>
+        NightAuth.protectPage();
+        document.getElementById('main-content').style.display = 'block';
+    </script>
+</body>
+</html>
