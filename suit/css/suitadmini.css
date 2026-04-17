@@ -369,6 +369,23 @@ textarea:focus {
     accent-color: var(--primary)
 }
 
+.batch-options input[type="number"] {
+    padding: 4px 8px;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--dark-border);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.2s ease
+}
+
+.batch-options input[type="number"]:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px var(--primary-glow)
+}
+
 .batch-options select {
     padding: 6px 10px;
     background: rgba(0, 0, 0, 0.25);
