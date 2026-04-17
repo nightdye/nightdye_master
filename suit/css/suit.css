@@ -301,7 +301,7 @@ footer {
     background-color: #ff5252
 }
 
-.list-view .container {
+.container.list-view {
     display: flex;
     flex-direction: column;
     gap: 1rem
