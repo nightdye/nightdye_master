@@ -360,6 +360,8 @@ footer {
     border-radius: 12px;
     width: 90%;
     max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
     position: relative;
     animation: scaleUp 0.3s;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2)
@@ -383,7 +385,11 @@ footer {
     align-items: center;
     margin-bottom: 1rem;
     padding-bottom: 0.8rem;
-    border-bottom: 1px solid var(--color-border)
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--color-card-bg)
 }
 
 .modal-header h2 {
