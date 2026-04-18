@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.nightdye.cn/login/auth.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://qq.nightdye.cn/qq/images/night.ico" type="image/x-icon">
+<link rel="stylesheet" href="css/admin.css">
+    <title>NightDye 后台导航</title>
+</head>
+<body>
+    <div class="container" id="main-content" style="display:none;">
+        <div class="page-header">
+            <img src="https://qq.nightdye.cn/qq/images/night_logo_1.png" alt="NightDye Logo" class="site-logo">
+            <h1>NightDye 后台</h1>
+            <p>管理控制台导航</p>
+        </div>
+
+        <div class="section-title"><i class="fas fa-tools"></i> 数据管理</div>
+        <div class="nav-grid">
+            <a href="../gift/giftadmini.html" class="nav-card">
+                <div class="nav-icon"><i class="fas fa-gift"></i></div>
+                <div class="nav-info">
+                    <div class="nav-name">礼物管理</div>
+                    <div class="nav-desc">礼物数据导入与更新</div>
+                </div>
+                <i class="fas fa-chevron-right nav-arrow"></i>
+            </a>
+            <a href="../suit/suitadmini.html" class="nav-card">
+                <div class="nav-icon"><i class="fas fa-tshirt"></i></div>
+                <div class="nav-info">
+                    <div class="nav-name">套装管理</div>
+                    <div class="nav-desc">套装数据抓取与管理</div>
+                </div>
+                <i class="fas fa-chevron-right nav-arrow"></i>
+            </a>
+            <a href="../leveladmin/index.html" class="nav-card">
+                <div class="nav-icon"><i class="fas fa-chart-bar"></i></div>
+                <div class="nav-info">
+                    <div class="nav-name">等级管理</div>
+                    <div class="nav-desc">等级排行榜批量更新</div>
+                </div>
+                <i class="fas fa-chevron-right nav-arrow"></i>
+            </a>
+            <a href="../qq/qqadmini.html" class="nav-card">
+                <div class="nav-icon"><i class="fas fa-link"></i></div>
+                <div class="nav-info">
+                    <div class="nav-name">链接管理</div>
+                    <div class="nav-desc">QQ快捷链接分类管理</div>
+                </div>
+                <i class="fas fa-chevron-right nav-arrow"></i>
+            </a>
+        </div>
+
+        <div class="section-title"><i class="fas fa-server"></i> 系统监控</div>
+        <div class="nav-grid">
+            <a href="#" class="nav-card" id="btnViewLog">
+                <div class="nav-icon accent"><i class="fas fa-file-alt"></i></div>
+                <div class="nav-info">
+                    <div class="nav-name">应用日志</div>
+                    <div class="nav-desc">查看今日 API 请求日志</div>
+                </div>
+                <i class="fas fa-chevron-right nav-arrow"></i>
+            </a>
+            <a href="#" class="nav-card" id="btnViewSuspicious">
+                <div class="nav-icon warn"><i class="fas fa-exclamation-triangle"></i></div>
+                <div class="nav-info">
+                    <div class="nav-name">可疑请求</div>
+                    <div class="nav-desc">心跳漂移 / 异常访问</div>
+                </div>
+                <i class="fas fa-chevron-right nav-arrow"></i>
+            </a>
+        </div>
+
+        <div class="section-title"><i class="fas fa-users-cog"></i> 用户系统</div>
+        <div class="nav-grid">
+            <a href="#" class="nav-card" id="btnUserMgr">
+                <div class="nav-icon success"><i class="fas fa-users"></i></div>
+                <div class="nav-info">
+                    <div class="nav-name">用户管理</div>
+                    <div class="nav-desc">账号列表与权限控制</div>
+                </div>
+                <i class="fas fa-chevron-right nav-arrow"></i>
+            </a>
+            <a href="#" class="nav-card" id="btnInviteMgr">
+                <div class="nav-icon success"><i class="fas fa-ticket-alt"></i></div>
+                <div class="nav-info">
+                    <div class="nav-name">邀请码管理</div>
+                    <div class="nav-desc">生成与查看邀请码</div>
+                </div>
+                <i class="fas fa-chevron-right nav-arrow"></i>
+            </a>
+        </div>
+
+        <!-- 日志弹窗 -->
+        <div class="modal-overlay" id="logModal">
+            <div class="modal">
+                <div class="modal-header">
+                    <span id="logModalTitle"><i class="fas fa-file-alt"></i> 应用日志</span>
+                    <button class="modal-close" id="closeLogModal"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="modal-body">
+                    <pre id="logContent">加载中...</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- 用户管理弹窗 -->
+        <div class="modal-overlay" id="userModal">
+            <div class="modal">
+                <div class="modal-header">
+                    <span><i class="fas fa-users"></i> 用户管理</span>
+                    <button class="modal-close" id="closeUserModal"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="modal-body">
+                    <div id="userList">加载中...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 邀请码弹窗 -->
+        <div class="modal-overlay" id="inviteModal">
+            <div class="modal">
+                <div class="modal-header">
+                    <span><i class="fas fa-ticket-alt"></i> 邀请码管理</span>
+                    <button class="modal-close" id="closeInviteModal"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="modal-body">
+                    <div class="invite-actions">
+                        <button class="btn btn-primary" id="btnGenInvite"><i class="fas fa-plus"></i> 生成邀请码</button>
+                    </div>
+                    <div id="inviteList">加载中...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>
