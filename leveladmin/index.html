@@ -166,12 +166,85 @@
             <div class="card-title">
                 <i class="fas fa-key"></i>
                 会员Cookie管理
-                <button class="extra-btn" id="btnQrLogin">
-                    <i class="fa-solid fa-palette"></i> 获取Cookie
-                </button>
             </div>
 
             <div class="cookie-section">
+                <!-- 登录获取Cookie区域 -->
+                <div class="qrlogin-section">
+                    <div class="qrlogin-header">
+                        <span><i class="fas fa-sign-in-alt"></i> 获取Cookie</span>
+                    </div>
+
+                    <!-- 登录方式切换 -->
+                    <div class="login-mode-tabs">
+                        <button class="login-mode-btn active" data-mode="qrcode">
+                            <i class="fas fa-qrcode"></i> 扫码登录
+                        </button>
+                        <button class="login-mode-btn" data-mode="urlscheme">
+                            <i class="fas fa-link"></i> 跳转登录
+                        </button>
+                    </div>
+
+                    <!-- 扫码模式 -->
+                    <div class="login-mode-panel" id="qrcodePanel">
+                        <div class="qrlogin-actions">
+                            <button class="btn btn-sm btn-primary qr-btn" id="btnGetQrCode"><i class="fas fa-sync-alt"></i> 获取二维码</button>
+                        </div>
+                        <div class="qrlogin-content" id="qrloginContent" style="display:none;">
+                            <div class="qrcode-wrapper">
+                                <img id="qrcodeImg" src="" alt="QQ扫码登录">
+                                <div class="qrcode-mask" id="qrcodeMask" style="display:none;">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span id="qrcodeMaskText">已扫码</span>
+                                </div>
+                            </div>
+                            <div class="qrlogin-status" id="qrloginStatus">请使用QQ扫描二维码</div>
+                        </div>
+                    </div>
+
+                    <!-- URL Scheme 模式 -->
+                    <div class="login-mode-panel" id="urlschemePanel" style="display:none;">
+                        <div class="urlscheme-steps">
+                            <div class="step-row"><span class="step-num">1</span> 点击生成链接，然后跳转授权</div>
+                            <div class="step-row"><span class="step-num">2</span> QQ确认登录后，复制跳转的URL</div>
+                            <div class="step-row"><span class="step-num">3</span> 粘贴到下方获取Cookie</div>
+                        </div>
+                        <div class="urlscheme-generate">
+                            <button class="btn btn-sm btn-primary" id="btnGenerateAuthUrl"><i class="fas fa-link"></i> 生成授权链接</button>
+                            <a class="btn btn-sm btn-success jump-btn" id="btnJumpToAuth" style="display:none;"><i class="fas fa-external-link-alt"></i> 点击跳转授权</a>
+                        </div>
+                        <div class="jump-url-input">
+                            <textarea id="jumpUrlInput" placeholder="授权成功后，复制浏览器地址栏的URL粘贴到这里..."></textarea>
+                            <button class="btn btn-sm btn-success" id="btnParseJumpUrl"><i class="fas fa-sign-in-alt"></i> 获取Cookie</button>
+                        </div>
+                        <div class="urlscheme-status" id="urlschemeStatus"></div>
+                    </div>
+                </div>
+
+                <div class="divider"><span>或 手动输入</span></div>
+
+                <div class="info-row">
+                    <span class="info-label"><i class="fas fa-clock"></i> 更新时间</span>
+                    <span class="info-value" id="cookieTime">-</span>
+                </div>
+
+                <div class="form-group">
+                    <label>会员Cookie</label>
+                    <textarea id="cookieInput" rows="4" placeholder="粘贴会员Cookie，必须包含p_skey..."></textarea>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-primary" id="testCookieBtn">
+                        <i class="fas fa-vial"></i> 测试Cookie
+                    </button>
+                    <button class="btn btn-success" id="saveCookieBtn">
+                        <i class="fas fa-save"></i> 保存Cookie
+                    </button>
+                    <button class="btn btn-orange" id="loadRemoteCookieBtn">
+                        <i class="fas fa-cloud-download-alt"></i> 加载远程
+                    </button>
+                </div>
+
                 <!-- 用户信息卡片 -->
                 <div class="user-card" id="userCard">
                     <div class="user-card-avatar">
@@ -192,83 +265,6 @@
                             </span>
                         </div>
                     </div>
-                    <div class="user-card-time" id="cookieTime">-</div>
-                </div>
-
-                <!-- 登录面板 -->
-                <div id="qrloginContainer" class="qrlogin-container">
-                    <div class="mode-tabs">
-                        <button class="mode-tab active" data-mode="qrcode"><i class="fas fa-qrcode"></i> 扫码登录</button>
-                        <button class="mode-tab" data-mode="urlscheme"><i class="fas fa-link"></i> 跳转登录</button>
-                    </div>
-
-                    <!-- 扫码登录 -->
-                    <div id="qrcodeMode" class="login-mode">
-                        <div class="qrcode-wrapper">
-                            <div id="qrcodeContent" class="qrcode-content" style="display:none">
-                                <img id="qrcodeImg" src="" alt="QR Code">
-                                <div id="qrcodeMask" class="qrcode-mask" style="display:none">
-                                    <span id="qrcodeMaskText">已扫码</span>
-                                </div>
-                            </div>
-                            <div class="qrcode-placeholder" id="qrcodePlaceholder">
-                                <i class="fas fa-qrcode"></i>
-                                <span>点击下方按钮获取二维码</span>
-                            </div>
-                        </div>
-                        <div class="qrcode-btn-wrapper">
-                            <button class="btn btn-primary" id="btnGetQrCode" style="flex:1">
-                                <i class="fas fa-sync-alt"></i> 获取二维码
-                            </button>
-                        </div>
-                        <div id="qrloginStatus" class="qrlogin-status">请先获取二维码</div>
-                    </div>
-
-                    <!-- 跳转登录 -->
-                    <div id="urlschemeMode" class="login-mode" style="display:none">
-                        <div class="format-hint" style="margin-bottom:12px">
-                            <strong><i class="fas fa-info-circle"></i> 使用说明：</strong>
-                            1. 点击"生成授权链接" → 2. 点击"跳转授权"在QQ中登录 → 3. 复制跳转后的URL粘贴解析
-                        </div>
-                        <div class="btn-group" style="margin-bottom:12px">
-                            <button class="btn btn-primary" id="btnGenerateAuthUrl">
-                                <i class="fas fa-magic"></i> 生成授权链接
-                            </button>
-                            <a class="btn btn-success" id="btnJumpToAuth" href="#" target="_blank" style="display:none;text-decoration:none">
-                                <i class="fas fa-external-link-alt"></i> 跳转授权
-                            </a>
-                        </div>
-                        <div class="form-group" style="margin-bottom:12px">
-                            <label>跳转后的URL</label>
-                            <input type="text" id="jumpUrlInput" placeholder="登录成功后，复制浏览器地址栏的URL粘贴到这里...">
-                        </div>
-                        <button class="btn btn-primary" id="btnParseJumpUrl" style="width:100%">
-                            <i class="fas fa-check"></i> 解析URL获取Cookie
-                        </button>
-                        <div id="urlschemeStatus" class="urlscheme-status"></div>
-                    </div>
-                </div>
-
-                <div class="format-hint">
-                    <strong><i class="fas fa-info-circle"></i> 说明：</strong>
-                    批量更新功能需要有效的会员Cookie才能查询等级信息。可以扫码登录或手动粘贴Cookie。
-                </div>
-
-                <div class="form-group">
-                    <label>会员Cookie</label>
-                    <textarea id="cookieInput" rows="4" placeholder="粘贴会员Cookie，必须包含p_skey..."></textarea>
-                </div>
-
-                <div class="btn-group">
-                    <button class="btn btn-primary" id="testCookieBtn">
-                        <i class="fas fa-vial"></i> 测试Cookie
-                    </button>
-                    <button class="btn btn-success" id="saveCookieBtn">
-                        <i class="fas fa-save"></i> 保存Cookie
-                    </button>
-                    <button class="btn btn-orange" id="loadRemoteCookieBtn">
-                        <i class="fas fa-cloud-download-alt"></i> 加载远程
-                    </button>
                 </div>
             </div>
         </div>

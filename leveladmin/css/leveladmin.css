@@ -710,133 +710,6 @@ body::after {
     color: var(--warning-color);
 }
 
-/* 二维码登录 */
-.qrlogin-container {
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid var(--dark-border);
-    border-radius: 8px;
-    padding: 20px;
-}
-
-.mode-tabs {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.mode-tab {
-    flex: 1;
-    padding: 10px 15px;
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--dark-border);
-    border-radius: 6px;
-    color: var(--text-secondary);
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-}
-
-.mode-tab:active {
-    transform: scale(0.98);
-}
-
-.mode-tab.active {
-    background: rgba(0, 255, 242, 0.1);
-    border-color: var(--cyan-primary);
-    color: var(--cyan-primary);
-}
-
-.login-mode {
-    text-align: center;
-}
-
-.qrcode-wrapper {
-    width: 200px;
-    height: 200px;
-    margin: 0 auto 20px;
-    position: relative;
-    background: rgba(0, 0, 0, 0.3);
-    border: 2px solid var(--dark-border);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.qrcode-content {
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-
-.qrcode-content img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 6px;
-}
-
-.qrcode-mask {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.85);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-    color: var(--cyan-primary);
-    font-weight: 600;
-}
-
-.qrcode-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    color: var(--text-secondary);
-}
-
-.qrcode-placeholder i {
-    font-size: 48px;
-    opacity: 0.3;
-}
-
-.qrcode-placeholder span {
-    font-size: 12px;
-}
-
-.qrcode-btn-wrapper {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.qrlogin-status {
-    font-size: 13px;
-    color: var(--text-secondary);
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
-}
-
-.urlscheme-status {
-    margin-top: 15px;
-    font-size: 13px;
-    color: var(--text-secondary);
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
-    min-height: 40px;
-}
-
 /* 滚动条 */
 ::-webkit-scrollbar {
     width: 8px;
@@ -903,11 +776,6 @@ body::after {
     .btn-orange:hover {
         box-shadow: 0 0 20px rgba(255, 153, 51, 0.3);
         transform: translateY(-2px);
-    }
-
-    .mode-tab:hover {
-        border-color: var(--cyan-dark);
-        color: var(--cyan-primary);
     }
 
     ::-webkit-scrollbar-thumb:hover {
@@ -1053,14 +921,6 @@ body::after {
         height: 180px;
     }
 
-    .mode-tabs {
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .qrcode-btn-wrapper {
-        flex-direction: column;
-    }
 }
 
 /* ==================== 响应式 - 手机 ==================== */
@@ -1157,8 +1017,131 @@ body::after {
         width: 160px;
         height: 160px;
     }
-
-    .qrcode-placeholder i {
-        font-size: 36px;
-    }
 }
+
+/* ============ Cookie 统一布局 ============ */
+.qrlogin-section {
+    margin-bottom: 20px;
+    padding: 18px;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--dark-border);
+    border-radius: 10px;
+}
+.qrlogin-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+.qrlogin-header span {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 14px;
+}
+.qrlogin-header span i { color: var(--primary); margin-right: 10px; }
+.qrlogin-actions { margin-top: 12px; }
+.qrlogin-content {
+    text-align: center;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--dark-border);
+}
+.qrlogin-status { color: var(--text-secondary); font-size: 14px; }
+.qrlogin-status.success { color: var(--success-color); }
+.qrlogin-status.error { color: var(--error-color); }
+.login-mode-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+.login-mode-btn {
+    flex: 1;
+    padding: 10px 14px;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--dark-border);
+    border-radius: 6px;
+    color: var(--text-secondary);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.login-mode-btn:hover:not(.active) { border-color: var(--primary); color: var(--primary); }
+.login-mode-btn.active {
+    background: var(--primary-glow, rgba(0,255,242,0.1));
+    border-color: var(--primary);
+    color: var(--primary);
+}
+.login-mode-panel { animation: fadeIn 0.3s ease; }
+.urlscheme-steps {
+    margin-bottom: 16px;
+    padding: 12px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 6px;
+}
+.step-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+.step-num {
+    width: 20px;
+    height: 20px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+.urlscheme-generate { display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+.urlscheme-generate .jump-btn { text-decoration: none; display: inline-flex; }
+.jump-url-input { margin-bottom: 12px; }
+.jump-url-input textarea {
+    width: 100%;
+    min-height: 70px;
+    padding: 12px;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--dark-border);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: 12px;
+    font-family: 'Consolas', monospace;
+    resize: vertical;
+    margin-bottom: 10px;
+    transition: all 0.2s ease;
+}
+.jump-url-input textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-glow, rgba(0,255,242,0.1));
+}
+.jump-url-input textarea::placeholder { color: var(--text-secondary); opacity: 0.6; }
+.urlscheme-status { font-size: 13px; padding: 10px 12px; border-radius: 6px; margin-top: 10px; }
+.urlscheme-status.success { background: rgba(16,185,129,0.1); color: var(--success-color); }
+.urlscheme-status.error { background: rgba(239,68,68,0.1); color: var(--error-color); }
+.urlscheme-status.info { background: var(--primary-glow, rgba(0,255,242,0.1)); color: var(--primary); }
+.divider { display: flex; align-items: center; margin: 24px 0; }
+.divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--dark-border), transparent);
+}
+.divider span { padding: 0 18px; color: var(--text-secondary); font-size: 12px; letter-spacing: 1px; }
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+}
+.info-row:last-of-type { margin-bottom: 20px; }
+.info-label { display: flex; align-items: center; gap: 10px; color: var(--text-secondary); font-size: 13px; }
+.info-label i { color: var(--primary); }
+.info-value { color: var(--text-primary); font-size: 13px; }
